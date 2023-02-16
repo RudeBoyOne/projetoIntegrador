@@ -1,24 +1,57 @@
 package com.backendprojetointegrador.lajeDev.repository;
 
-import com.backendprojetointegrador.lajeDev.model.Categoria;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import com.backendprojetointegrador.lajeDev.domain.model.Categorias;
+import com.backendprojetointegrador.lajeDev.domain.repository.ICategoriasRepository;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 @DataJpaTest
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(OrderAnnotation.class)
 public class CategoriaRepositoryTest {
     @Autowired
-    private ICategoriaRepository categoriaRepository;
+    private ICategoriasRepository categoriaRepository;
+    private Categorias categoria;
+    private Categorias categoriaSalvo;
 
-    private Categoria categoria;
-    private Categoria categoriaSalvo
+    @BeforeAll
+    void arrangeCategoria() {
+        categoria = new Categorias();
+        categoria.setQualificacao("SUV");
+        categoria.setDescricao("veículo de alto padrão, por isso maior e com características mais sofisticadas em" +
+                "comparação com um carro sedan");
+        categoria.setUrlImagem("https://img.olhardigital.com.br/wp-content/uploads/2022/06/polestar3-1.jpg");
+        categoriaSalvo = categoriaRepository.save(categoria);
+    }
 
     @Test
-    public void criarCategoria(){
-        this.categoria = new Categoria("SUV");
-        categoriaSalvo = categoriaRepository.save(categoria);
-        Assertions.assertNotNull(this.categoriaSalvo.getIdCategoria());
-        Assertions.assertEquals(this.categoria.getNome(), this.categoriaSalvo.getNome());
+    @Order(1)
+    void searchCategoriaById() {
+        assertTrue(categoriaRepository.findById(categoriaSalvo.getId()).isPresent());
+    }
+
+    @Test
+    @Order(2)
+    void updateCategoria() {
+        categoria.setQualificacao("Conversivel");
+        categoria.setDescricao("veículo esportivo, com estilo agressivo, tem menor espaço interno em comparação com " +
+                "uma SUV, mas tem um motor mais potente e melhor desempenho em retas");
+        categoria.setUrlImagem("https://blog.catarinacarros.com.br/wp-content/uploads/2020/02/bmw-zseries-z4-conversivel-1024x576.jpg");
+        categoriaSalvo = categoriaRepository.saveAndFlush(categoria);
+        assertNotNull(categoriaSalvo.getId());
+        assertEquals(categoria.getQualificacao(), categoriaSalvo.getQualificacao());
+        assertEquals(categoria.getDescricao(), categoriaSalvo.getDescricao());
+        assertEquals(categoria.getUrlImagem(), categoriaSalvo.getUrlImagem());
+    }
+
+    @Test
+    @Order(3)
+    void deleteCategoria() {
+        categoriaRepository.deleteById(categoriaSalvo.getId());
+        assertFalse(categoriaRepository.existsById(categoriaSalvo.getId()));
     }
 }
