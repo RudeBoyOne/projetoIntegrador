@@ -1,4 +1,4 @@
-package backend.projeto.integrador.demo;
+package backend.projeto.integrador.lajeDev;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
