@@ -14,11 +14,7 @@ public class Categorias {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NonNull
     private String qualificacao;
-
     private String descricao;
-
     private String urlImagem;
 }
