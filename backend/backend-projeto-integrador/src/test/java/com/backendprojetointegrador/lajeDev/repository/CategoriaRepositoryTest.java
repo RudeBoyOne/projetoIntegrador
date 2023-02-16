@@ -1,6 +1,6 @@
-package repository;
+package com.backendprojetointegrador.lajeDev.repository;
 
-import model.Categoria;
+import com.backendprojetointegrador.lajeDev.model.Categoria;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

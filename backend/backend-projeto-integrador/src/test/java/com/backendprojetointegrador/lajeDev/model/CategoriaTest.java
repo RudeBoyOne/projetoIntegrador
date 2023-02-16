@@ -1,4 +1,4 @@
-package model;
+package com.backendprojetointegrador.lajeDev.model;
 
 
 import org.junit.jupiter.api.BeforeEach;

@@ -1,7 +1,7 @@
-package service;
+package com.backendprojetointegrador.lajeDev.service;
 
 
-import model.Categoria;
+import com.backendprojetointegrador.lajeDev.model.Categoria;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
