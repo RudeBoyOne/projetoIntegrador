@@ -13,8 +13,7 @@ public class CategoriaTest {
 
     @BeforeEach
     public void iniciaCategoria(){
-        categoria = new Categorias();
-        categoria.setQualificacao("Sedan");
+        categoria = new Categorias("Sedan");
         categoria.setDescricao("veículo utilitário com quatro portas, maior espaço interno que um carro hatch, " +
                 "e bagageiro espaçoso");
         categoria.setUrlImagem("https://uploads-ssl.webflow.com/5de0424183c9d7b00dd43bca/5f9071bf9bbc9f70d25745af_carros-sedan-mais-vendidos.jpg");
