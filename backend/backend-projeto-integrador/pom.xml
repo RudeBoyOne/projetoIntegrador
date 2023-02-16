@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>backend.projeto.integrador</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>lajeDev-locadora</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Projeto Integrador</name>
-	<description>Demo project for Spring Boot</description>
+	<description>API desenvolvida para soluções em aluguéis de carro</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
