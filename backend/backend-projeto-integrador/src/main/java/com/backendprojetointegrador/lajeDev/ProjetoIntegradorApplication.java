@@ -1,4 +1,4 @@
-package backend.projeto.integrador.lajeDev;
+package com.backendprojetointegrador.lajeDev;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
