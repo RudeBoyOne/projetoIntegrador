@@ -14,8 +14,8 @@ public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
     private Long id;
+    @EqualsAndHashCode.Include
     private String qualificacao;
     private String descricao;
     private String urlImagem;
