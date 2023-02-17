@@ -1,6 +1,6 @@
 package com.backendprojetointegrador.lajeDev.repository;
 
-import com.backendprojetointegrador.lajeDev.domain.model.Categorias;
+import com.backendprojetointegrador.lajeDev.domain.model.Categoria;
 import com.backendprojetointegrador.lajeDev.domain.repository.ICategoriasRepository;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,12 +15,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 public class CategoriaRepositoryTest {
     @Autowired
     private ICategoriasRepository categoriaRepository;
-    private Categorias categoria;
-    private Categorias categoriaSalvo;
+    private Categoria categoria;
+    private Categoria categoriaSalvo;
 
     @BeforeAll
     void arrangeCategoria() {
-        categoria = new Categorias();
+        categoria = new Categoria();
         categoria.setQualificacao("SUV");
         categoria.setDescricao("veículo de alto padrão, por isso maior e com características mais sofisticadas em" +
                 "comparação com um carro sedan");

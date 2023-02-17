@@ -1,7 +1,7 @@
 package com.backendprojetointegrador.lajeDev.model;
 
 
-import com.backendprojetointegrador.lajeDev.domain.model.Categorias;
+import com.backendprojetointegrador.lajeDev.domain.model.Categoria;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class CategoriaTest {
-    Categorias categoria;
+    Categoria categoria;
 
     @BeforeEach
     public void iniciaCategoria(){
-        categoria = new Categorias();
+        categoria = new Categoria();
         categoria.setQualificacao("Sedan");
         categoria.setDescricao("veículo utilitário com quatro portas, maior espaço interno que um carro hatch, " +
                 "e bagageiro espaçoso");
