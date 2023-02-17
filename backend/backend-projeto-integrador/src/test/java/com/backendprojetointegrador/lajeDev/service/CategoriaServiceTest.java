@@ -1,60 +1,84 @@
 package com.backendprojetointegrador.lajeDev.service;
 
 
-import com.backendprojetointegrador.lajeDev.model.Categoria;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.backendprojetointegrador.lajeDev.domain.model.Categoria;
+import com.backendprojetointegrador.lajeDev.domain.service.CategoriaService;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+
+import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
+@TestMethodOrder(OrderAnnotation.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CategoriaServiceTest {
 
     @Autowired
     CategoriaService categoriaService;
     Categoria categoria;
-    CategoriaDTOOutput categoriaDTOOutput;
+    Categoria categoriaSalvo;
 
-    @BeforeEach
-    public void instanciaObjetoParaTestes(){
-        categoria = new Categoria("Esportivo");
+    @BeforeAll
+    void arrageCategoria(){
+        categoria = new Categoria();
+        categoria.setQualificacao("SUV");
+        categoria.setDescricao("veículo de alto padrão, por isso maior e com características mais sofisticadas em" +
+                "comparação com um carro sedan");
+        categoria.setUrlImagem("https://img.olhardigital.com.br/wp-content/uploads/2022/06/polestar3-1.jpg");
+        categoriaSalvo = categoriaService.criarCategoria(categoria);
     }
 
     @Test
-    public void criarCategoria(){
-        categoria =categoriaService.criarCategoria(categoria);
-        Assertions.assertEquals("Esportivo", categoriaDTOOutput.getNome());
+    @Order(1)
+    void checkCreationCategoria(){
+        assertNotNull(categoriaSalvo.getId());
+        assertEquals(categoria.getQualificacao(), categoriaSalvo.getQualificacao());
+        assertEquals(categoria.getDescricao(), categoriaSalvo.getDescricao());
+        assertEquals(categoria.getUrlImagem(), categoriaSalvo.getUrlImagem());
     }
 
     @Test
-    public void buscarCategoriaByIdTest(){
-        categoriaService.criarCategoria(categoria);
-        categoria = categoriaService.buscarCategoriaById(categoria.getIdCategoria());
-        Assertions.assertNotNull(categoriaDTOOutput);
-        Assertions.assertEquals("Esportivo", categoriaDTOOutput.getNome());
-    }
-    @Test
-    public void listarTodasCategoriasTest(){
-        categoriaService.criarCategoria(categoria);
-        categoria = new Categoria("SUV");
-
-        categoriaService.criarCategoria(categoria);
-        categoria = new Categoria("Esportivo");
-
-        categoriaService.criarCategoria(categoria);
-        categoria = new Categoria("Sedan");
-
-        categoriaService.criarCategoria(categoria);
-        categoria = new Categoria("Popular");
-
-        Assertions.assertEquals(4, categoriaService.listarTodasCategorias().size());
+    @Order(2)
+    void searchCategoriaByIdTest(){
+        Categoria categoriaBuscada;
+        categoriaBuscada = categoriaService.buscarCategoriaById(categoriaSalvo.getId());
+        assertNotNull(categoriaBuscada);
     }
 
     @Test
+    @Order(3)
+    void updateCategoria() {
+        categoria.setQualificacao("Sedan");
+        categoria.setDescricao("veículo utilitário com quatro portas, maior espaço interno que um carro hatch, " +
+                "e bagageiro espaçoso");
+        categoria.setUrlImagem("https://uploads-ssl.webflow.com/5de0424183c9d7b00dd43bca/5f9071bf9bbc9f70d25745af_carros-sedan-mais-vendidos.jpg");
+        categoria.setId(categoriaSalvo.getId());
+        categoriaSalvo = categoriaService.criarCategoria(categoria);
+        assertNotNull(categoriaSalvo.getId());
+        assertEquals(categoria.getQualificacao(), categoriaSalvo.getQualificacao());
+        assertEquals(categoria.getDescricao(), categoriaSalvo.getDescricao());
+        assertEquals(categoria.getUrlImagem(), categoriaSalvo.getUrlImagem());
+    }
+
+    @Test
+    @Order(4)
+    void listarTodasCategoriasTest(){
+        Categoria categoriaTemp = new Categoria();
+        categoriaTemp.setQualificacao("Conversivel");
+        categoriaTemp.setDescricao("veículo esportivo, com estilo agressivo, tem menor espaço interno em comparação com " +
+                "uma SUV, mas tem um motor mais potente e melhor desempenho em retas");
+        categoriaTemp.setUrlImagem("https://blog.catarinacarros.com.br/wp-content/uploads/2020/02/bmw-zseries-z4-conversivel-1024x576.jpg");
+        categoriaService.criarCategoria(categoriaTemp);
+
+        assertEquals(2, categoriaService.listarCategoria().size());
+    }
+
+    @Test
+    @Order(5)
     public void deletarCategoriaByIdTest(){
-        categoriaService.criarCategoria(categoria);
-        categoriaService.deletarCategoriaById(categoria.getIdCategoria());
-        Assertions.assertFalse(categoriaService.existeCategoriaById(categoria.getIdCategoria()));
+        categoriaService.excluirCategoria(categoriaSalvo.getId());
+        assertFalse(categoriaService.existeCategoriaById(categoriaSalvo.getId()));
     }
 }
