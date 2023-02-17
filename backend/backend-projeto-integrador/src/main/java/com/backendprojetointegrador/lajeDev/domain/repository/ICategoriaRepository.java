@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 @Transactional
-public interface ICategoriasRepository extends JpaRepository<Categoria, Long> {
+public interface ICategoriaRepository extends JpaRepository<Categoria, Long> {
     Optional<Categoria> findByQualificacao(String qualficacao);
 }

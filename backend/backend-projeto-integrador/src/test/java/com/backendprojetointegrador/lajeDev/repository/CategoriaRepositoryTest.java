@@ -1,7 +1,7 @@
 package com.backendprojetointegrador.lajeDev.repository;
 
 import com.backendprojetointegrador.lajeDev.domain.model.Categoria;
-import com.backendprojetointegrador.lajeDev.domain.repository.ICategoriasRepository;
+import com.backendprojetointegrador.lajeDev.domain.repository.ICategoriaRepository;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.*;
@@ -14,7 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CategoriaRepositoryTest {
     @Autowired
-    private ICategoriasRepository categoriaRepository;
+    private ICategoriaRepository categoriaRepository;
     private Categoria categoria;
     private Categoria categoriaSalvo;
 
