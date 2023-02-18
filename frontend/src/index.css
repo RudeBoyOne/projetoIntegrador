@@ -1,0 +1,133 @@
+
+:root {
+    --header-height: 3.5rem;
+
+    --title-color:#0D141C;
+    --text-color: #0B141E;
+    --text-color-light-cyan: #C2E3FF;
+    --text-color-dark-cyan: #0C456E;
+    --body-color: #fff;
+    --white-color: #fff;
+    --dark-color: #0B141E;
+    --bg-light-cyan: #F0F9FF;
+    --bg-dark-cyan: #002742;
+
+    --body-font: 'Poppins', sans-serif;
+    --h1-font-size: 2rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: 0.875rem;
+    --smaller-font-size: 0.750rem;
+
+    --font-regular: 300;
+    --font-medium: 400;
+    --font-semibold: 600;
+
+    --z-fixed:10;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    background-color: var(--body-color);
+    color: var(--text-color);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+  }
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+h1, h2, h3 {
+    font-weight: var(--font-semibold);
+}
+
+
+/*=============== BUTTON ===============*/
+.button {
+    display: inline-block;
+    background-color: var(--bg-light-cyan);
+    color: var(--text-color-dark-cyan);
+    padding: 1rem 2rem;
+    border-radius: .25rem;
+    font-size: var(--normal-font-size);
+    transition: .3s ease-in-out;
+  }
+
+.button:hover {
+    background-color: var(--bg-dark-cyan);
+    color: var(--white-color);
+  }
+
+.button-dark {
+    display: inline-block;
+    background-color: var(--bg-dark-cyan);
+    color: var(--white-color);
+    padding: 1rem 2rem;
+    border-radius: .25rem;
+    font-size: var(--normal-font-size);
+    transition: .3s ease-in-out;
+  }
+
+.button-dark:hover {
+    background-color: var(--bg-light-cyan);
+    color: var(--text-color-dark-cyan);
+  }
+
+
+/*=============== SCROLL BAR ===============*/
+::-webkit-scrollbar {
+    width: .6rem;
+    background-color: var(--bg-dark-cyan);
+    border-radius: 1rem;
+  }
+
+::-webkit-scrollbar-thumb{
+    background-color: #0C456E;
+    border-radius: 1rem;
+  }
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #165B8D;
+  }
+
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 320px) {
+    
+}
+
+
+/* For medium devices */
+@media screen and (min-width: 576px) {
+   
+}
+
+@media screen and (min-width: 767px) {
+        
+}
+
+/* For large devices */
+@media screen and (min-width: 1040px) {
+   
+}
