@@ -17,13 +17,14 @@ public class CategoriaService {
         boolean categoriaExiste = categoriasRepository.findByQualificacao(categoria.getQualificacao()).stream()
                 .anyMatch(categoriaExistente -> !categoriaExistente.equals(categoria));
         if(categoriaExiste) {
-            System.out.println("Existe, tente outra vez");
+            //Implementar aqui a exception responsável!
         }
         return categoriasRepository.save(categoria);
     }
 
     public Categoria buscarCategoriaById(Long idCategoria) {
         return categoriasRepository.findById(idCategoria).get();
+        //Implementar aqui a exception responsável!
     }
 
     public List<Categoria> listarCategoria() {
@@ -32,7 +33,7 @@ public class CategoriaService {
 
     public void excluirCategoria(Long idCategoria) {
         if (!categoriasRepository.existsById(idCategoria)){
-            System.out.println("Categoria inexistente!");
+            //Implementar aqui a exception responsável!
         }
         categoriasRepository.deleteById(idCategoria);
     }
