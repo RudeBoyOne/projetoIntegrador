@@ -45,7 +45,7 @@ body {
 }
 
 ul {
-    list-style: none;
+    list-style-type: none;
 }
 
 a {
@@ -64,7 +64,7 @@ h1, h2, h3 {
 
 /*=============== BUTTON ===============*/
 .button {
-    display: inline-block;
+    display:inline-block ;
     background-color: var(--bg-light-cyan);
     color: var(--text-color-dark-cyan);
     padding: 1rem 2rem;
@@ -82,7 +82,7 @@ h1, h2, h3 {
     display: inline-block;
     background-color: var(--bg-dark-cyan);
     color: var(--white-color);
-    padding: 1rem 2rem;
+    padding: 0.875rem 1.5rem;
     border-radius: .25rem;
     font-size: var(--normal-font-size);
     transition: .3s ease-in-out;
