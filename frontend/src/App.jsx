@@ -1,11 +1,12 @@
 import { useState } from 'react';
 
 import './index.css';
+import Home from './pages/home/Home';
 
 function App() {
   return (
     <div className="App">
-      <h1>Rent a Car</h1>
+      <Home />
     </div>
   );
 }
