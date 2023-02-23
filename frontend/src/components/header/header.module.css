@@ -8,6 +8,7 @@
     background-color: var(--white-color);
     box-shadow: 3px 3px 10px rgba(0,0,0,0.1 )
 }
+
 nav {
     height: var(--header-height);
     display: flex;
@@ -16,6 +17,7 @@ nav {
     /* max-width: 1240px; */
     margin: 1rem 1.5rem;
   }
+
   .navLogo{
     padding-left: 1.5rem;
   }
@@ -25,7 +27,6 @@ nav {
     flex-direction: row;
     align-items: center;
     gap: 2rem;
-  
   }
 
   .navLink{ 

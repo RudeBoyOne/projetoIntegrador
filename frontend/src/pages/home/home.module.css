@@ -1,0 +1,43 @@
+/* For small devices */
+@media screen and (max-width: 576px) {
+    .cards {
+        margin: 2rem 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+/* For medium devices */
+@media screen and (min-width: 576px) {
+    .cards {
+        margin: 2rem 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+
+.cards {
+    margin: 2rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cardContainer {
+    max-width: 1440px;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 5rem;
+    color: var(--text-color-dark-cyan);
+}
+
+.cardTitle {
+    font-size: var(--h2-font-size);
+    font-weight: var(--font-medium);
+    padding-left: 1rem;
+}
