@@ -11,7 +11,7 @@ const Header = () => {
           <ul className={styles.navList}>
             <li className={styles.navItem}><a className={styles.navLink} href="#">Login</a></li>
             <li className={styles.navItem_button}><a className={styles.navLink_button} href="#">Cadastrar</a></li>
-            <li className="toggle"> <a href="#"><span class="bars"></span></a></li>
+            <li className="toggle"> <a href="#"><span className="bars"></span></a></li>
           </ul>
         </div>
       </nav>

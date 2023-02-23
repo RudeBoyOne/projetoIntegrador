@@ -7,6 +7,7 @@
     --text-color-light-cyan: #C2E3FF;
     --text-color-dark-cyan: #0C456E;
     --body-color: #fff;
+    --border-color: #C2E3FF;
     --white-color: #fff;
     --dark-color: #0B141E;
     --bg-light-cyan: #F0F9FF;
@@ -113,7 +114,7 @@ h1, h2, h3 {
 
 /*=============== BREAKPOINTS ===============*/
 /* For small devices */
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 576px) {
     
 }
 
