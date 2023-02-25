@@ -11,8 +11,10 @@ const SearchBar = () => {
       <div className={styles.boxSearch}>
         <form onSubmit={handleSubmit} className={styles.search}>
           <input type="search" className={styles.searchInput} placeholder="Digite o local de retirada"/>
-          <input className={styles.searchInputData} type="date" placeholder="Retirada"/>
-          <input className={styles.searchInputData} type="date" placeholder="Entrega"/>
+          <input className={styles.searchInputData} type="text" onFocus={(e) => (e.target.type = "date")}
+        onBlur={(e) => (e.target.type = "text")} placeholder="Data de Retirada"/>
+          <input className={styles.searchInputData} type="text" onFocus={(e) => (e.target.type = "date")}
+        onBlur={(e) => (e.target.type = "text")} placeholder="Data de Entrega"/>
           <button className={styles.searchBtn}>
           <FiSearch />
           </button>

@@ -1,0 +1,84 @@
+.category {
+  max-width: 1440px;
+  margin: 2rem auto;
+}
+
+.categoryTitle {
+  display: flex;
+  align-items: center;
+  font-size: var(--h3-font-size);
+  color: var(--text-color-dark-cyan);
+}
+
+.categoryTitleIcon {
+  margin: 0 0.5rem;
+}
+
+.categoryCard {
+  display: flex;
+  max-width: 1440px;
+  position: relative;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardContainer {
+  max-width: 1440px;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 1rem;
+  color: var(--text-color-dark-cyan);
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  font-size: var(--h3-font-size);
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 576px) {
+  .cards {
+    margin: 2rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .categoryCard {
+    display: flex;
+    max-width: 1440px;
+    position: relative;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* For medium devices */
+@media screen and (min-width: 576px) {
+  .cards {
+    margin: 2rem 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1040px) {
+  .cards {
+    /* margin: 2rem 1rem; */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 2.5rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

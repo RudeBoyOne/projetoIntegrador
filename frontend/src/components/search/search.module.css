@@ -1,47 +1,32 @@
-.boxSearch {
-  display: flex;
-  align-items: center;
-  
-  width: 60rem;
-  height: 7rem;
-  margin: auto;
-  padding: 20px;
-  background-color: var(--bg-dark-cyan);
-  border-radius: 0px  0px 10px 10px;
-}
 
 .search {
   display: flex;
-  gap: 1.5rem;  
+  gap: 1.5rem;
   justify-content: space-between;
-  margin: auto;
-  
+  margin-top: 1rem;
+  font-family: 'Poppins';
 }
 
 .searchInput {
-  width: 25rem;
   height: 3rem;
   border-radius: 5px;
-  padding: .5rem;
+  padding: 0.5rem;
   font-size: var(--normal-font-size);
-  font-family: 'Poppins';
   outline: none;
 }
 
 .searchInputData {
   height: 3rem;
   border-radius: 5px;
-  padding: .5rem;
+  padding: 0.5rem;
   font-size: var(--normal-font-size);
   font-family: 'Poppins';
   outline: none;
-
 }
-
 
 .searchBtn {
   display: flex;
-  padding:  0 1rem;
+  padding: 0 1rem;
   margin: 1px 0;
   font-size: var(--h3-font-size);
   border-radius: 5px;
@@ -51,12 +36,12 @@
   cursor: pointer;
   border: none;
   outline: none;
-
+  transition: all 0.2s ease-in-out;
 }
 
-
-
-
+.searchBtn:hover {
+  background-color: var(--bg-light-cyan);
+}
 
 .boxList {
   display: flex;
@@ -66,4 +51,85 @@
 
 .list {
   width: 100%;
+}
+
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 575px) {
+  .boxSearch {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin: 2rem auto 0;
+    padding: 2rem 1rem;
+    background-color: var(--bg-dark-cyan);
+    border-radius: 0px 0px 10px 10px;
+  }
+
+  .search {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    margin: 0 0.75rem;
+    font-family: 'Poppins';
+  }
+
+  .searchInput,
+  .searchInputData {
+    max-width: 100%;
+  }
+
+  .searchBtn {
+    padding: 0.75rem 1rem;
+    margin: 1px 0;
+    justify-content: center;
+    max-width: 60px;
+    align-self: flex-end;
+  }
+}
+
+
+@media screen and (min-width: 765px) {
+  .boxSearch {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin: 2rem auto 0;
+    padding: 2rem 1rem;
+    background-color: var(--bg-dark-cyan);
+    border-radius: 0px 0px 10px 10px;
+  }
+
+  .searchInput {
+    width: 70%;
+  }
+
+  .searchInputData {
+    width: 50%;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1040px) {
+  .boxSearch {
+    display: flex;
+    align-items: center;
+
+    max-width: 1440px;
+    height: 8rem;
+    padding: 20px;
+
+    background-color: var(--bg-dark-cyan);
+    border-radius: 0px 0px 10px 10px;
+  }
+
+  .searchInput {
+    width: 400px;
+  }
+
+  .searchInputData {
+    width: 200px;
+  }
 }
