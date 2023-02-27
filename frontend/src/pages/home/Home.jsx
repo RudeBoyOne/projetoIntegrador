@@ -1,8 +1,6 @@
 import Header from '../../components/header/Header';
 import Card from '../../components/card/Card';
-
 import styles from './home.module.css';
-
 import { carros } from '../../utils/carros.json';
 
 const Home = () => {
