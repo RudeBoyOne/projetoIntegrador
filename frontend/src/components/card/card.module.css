@@ -1,13 +1,73 @@
 
-.cardItem:nth-child(3) {
-    grid-area: b;
+/* For small devices */
+@media screen and (max-width: 575px) {
+    .card {
+        max-width: 350px;
+        max-height: 550px;
+        border-radius: 1rem;
+        background-color: var(--bg-light-cyan);
+        margin: 2rem 0;
+        border: 1px solid var(--border-color);
+    }
+
+    .image {
+        width: 200px;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        margin: 1rem auto;
+        transition: all 0.3s ease-out;
+    }
 }
+
+/* For medium devices */
+@media screen and (min-width: 576px) {
+    .card {
+        width: 450px;
+        max-height: 550px;
+        border-radius: 1rem;
+        background-color: var(--bg-light-cyan);
+        margin: 2rem 0.5rem;
+        border: 1px solid var(--border-color);
+    }
+
+    .image {
+        width: 350px;
+        height: auto;
+        position: relative;
+        margin: 1rem auto;
+        transition: all 0.3s ease-out;
+    }
+}
+
+/* For large devices */
+@media screen and (min-width: 1040px) {
+    .card {
+        width: 350px;
+        max-height: 550px;
+        border-radius: 1rem;
+        background-color: var(--bg-light-cyan);
+        margin: 2rem;
+        border: 1px solid var(--border-color);
+        
+    }
+
+    .image {
+        width: 350px;
+        height: auto;
+        position: relative;
+        margin: 1rem auto;
+        transition: all 0.3s ease-out;
+    }
+}
+
 
 .title {
     font-size: var(--h3-font-size);
-    color: var(--text-color-dark-cyan);
     padding-left: 2rem;
-    margin-bottom: 2rem;
+    color: var(--text-color-dark-cyan);
 }
 
 .subtitle {
@@ -37,12 +97,12 @@
 
 .btn {
     display: flex;
-    align-items:flex-end;
-    justify-content:right
-    
+    align-items: end;
+    justify-content: end;
 }
 
 .btnCard {
+    display: inline-block;
     background-color: var(--bg-dark-cyan);
     color: var(--white-color);
     padding: 2rem 2rem;
@@ -50,6 +110,9 @@
     border: none;
     outline: none;
     padding: .75rem 2rem;
+    position: relative;
+    right: 0;
+    bottom: 0;
     border-radius: 1rem 0 1rem 0;
     cursor: pointer;
     transition: .3s;
