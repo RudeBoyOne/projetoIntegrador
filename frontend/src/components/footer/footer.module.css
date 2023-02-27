@@ -8,9 +8,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 1.5rem;
   color: var(--white-color);
-  padding: 2rem 0;
+  padding: 3rem;
 }
 
 .copy {
@@ -21,6 +20,7 @@
   display: flex;
   align-items: center;
   gap: 2rem;
+  order: 2;
 }
 
 .linkIcon {
@@ -30,6 +30,23 @@
 }
 
 .linkIcon:hover {
-  transform: scale(1.5);
+  transform: translateY(-0.5rem);
+}
 
+/*=============== BREAKPOINTS ===============*/
+/* For medium devices */
+@media screen and (max-width: 576px) {
+  .nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-around;
+    gap: 2rem;
+    color: var(--white-color);
+    padding: 2rem 0;
+  }
+
+  .copy {
+    order: 1;
+  }
 }

@@ -1,55 +1,96 @@
-
-.header{
-    width: 100%;
-    position:fixed;
-    top:0;
-    left:0;
-    z-index: var(--z-fixed);
-    background-color: var(--white-color);
-    box-shadow: 3px 3px 10px rgba(0,0,0,0.1 )
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-fixed);
+  background-color: var(--white-color);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 }
 
-nav {
-    height: var(--header-height);
+.navLogo {
+  padding-left: 1.5rem;
+  font-size: var(--h1-font-size);
+  font-weight: var(--font-semibold);
+  color: var(--title-color);
+}
+
+.navList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navLink {
+  color: var(--text-color);
+  font-size: 1rem;
+}
+.navLink:hover {
+  color: var(--text-color-dark-cyan);
+}
+
+.navLink_button {
+  display: inline-block;
+  background-color: var(--bg-dark-cyan);
+  color: var(--white-color);
+  padding: 0.875rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: var(--normal-font-size);
+  transition: 0.3s ease-in-out;
+}
+
+.navLink_button:hover {
+  background-color: var(--text-color-dark-cyan);
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 576px) {
+  .navHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* max-width: 1240px; */
-    margin: 1rem 1.5rem;
+    height: var(--header-height);
+    margin: 1rem 2rem;
   }
 
-  .navLogo{
-    padding-left: 1.5rem;
+  .navLogo {
+    padding-left: 1rem;
+    font-size: var(--h2-font-size);
   }
-  
-  .navList{
+
+  .navSearch {
+    margin-top: 5rem;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .navHeader {
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    gap: 2rem;
+    height: var(--header-height);
+    margin: 1rem;
   }
 
-  .navLink{ 
-   color: var(--text-color);
-   font-size: 1rem;
+  .navSearch {
+    margin-top: 5rem;
   }
-   .navLink:hover{
-     color: var(--text-color-dark-cyan)
-   }
+}
 
-  .navLink_button {
-    display: inline-block;
-    background-color: var(--bg-dark-cyan);
-    color: var(--white-color);
-    padding: 0.875rem 1.5rem;
-    border-radius: .5rem;
-    font-size: var(--normal-font-size);
-    transition: .3s ease-in-out;
+/* For large devices */
+@media screen and (min-width: 1040px) {
+  .navHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--header-height);
+    margin: 1rem;
   }
 
-  .navLink_button:hover {
-   background-color: var(--text-color-dark-cyan);
-   
+  .navSearch {
+    margin-top: 5rem;
   }
   
   

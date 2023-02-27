@@ -1,14 +1,38 @@
 import Header from '../../components/header/Header';
+import Footer from '../../components/footer/Footer';
+import Category from '../../components/category/Category';
 import Card from '../../components/card/Card';
-import styles from './home.module.css';
-import { carros } from '../../utils/carros.json';
 
-const Home = () => {
+import { category } from '../../utils/cateogory.json';
+import { carros } from '../../utils/carros.json';
+import styles from './home.module.css';
+import { FiArrowRight } from 'react-icons/fi';
+
+function Home() {
   return (
     <div>
       <Header />
+
+      <div className={styles.category}>
+
+        <h3 className={styles.categoryTitle}><FiArrowRight className={styles.categoryTitleIcon} /> Pesquise por Categoria</h3>
+
+        <div className={styles.categoryCard}>
+          {category.map((category) => {
+            return (
+              <Category
+                key={category._id}
+                qualification={category.qualification}
+                description={category.description}
+                url={category.url}
+              />
+            );
+          })}
+        </div>
+      </div>
+
       <div className={styles.cardContainer}>
-        <h2 className={styles.cardTitle}>Nossa Frota</h2>
+        <h3 className={styles.cardTitle}><FiArrowRight className={styles.categoryTitleIcon} /> Conheça a Nossa Frota</h3>
         <div className={styles.cards}>
           {carros.map((carro) => {
             return (
@@ -23,8 +47,9 @@ const Home = () => {
           })}
         </div>
       </div>
+      <Footer />
     </div>
   );
-};
+}
 
 export default Home;
