@@ -1,4 +1,6 @@
 import { FiFacebook, FiInstagram, FiTwitter, FiYoutube } from "react-icons/fi";
+
+
 import styles from "./footer.module.css";
 
 const Footer = () => {

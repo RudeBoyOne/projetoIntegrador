@@ -3,16 +3,31 @@
   position: fixed;
   top: 0;
   left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--header-height);
+  padding: 2rem 2rem;
   z-index: var(--z-fixed);
   background-color: var(--white-color);
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 }
 
-.navLogo {
-  padding-left: 1.5rem;
-  font-size: var(--h1-font-size);
+.headerLogo {
+  font-size: var(--h2-font-size);
   font-weight: var(--font-semibold);
   color: var(--title-color);
+}
+
+.logo,
+.loginLink {
+  color: var(--title-color);
+  transition: all 0.3s ease;
+}
+
+.logo:hover,
+.loginLink:hover {
+  color: var(--text-color-dark-cyan);
 }
 
 .navList {
@@ -44,53 +59,117 @@
   background-color: var(--text-color-dark-cyan);
 }
 
+.navContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 1440px;
+}
+
+.navMenuList {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: var(--header-height);
+}
+
+.navMenuList ul {
+  display: flex;
+  justify-self: end;
+  gap: 2rem;
+  align-items: center;
+}
+
 /*=============== BREAKPOINTS ===============*/
 /* For small devices */
 @media screen and (max-width: 576px) {
-  .navHeader {
+  .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: var(--header-height);
-    margin: 1rem 2rem;
   }
 
-  .navLogo {
-    padding-left: 1rem;
-    font-size: var(--h2-font-size);
+  .headerLogo {
+    margin-left: 1rem;
   }
 
-  .navSearch {
-    margin-top: 5rem;
+  .navContainer {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
   }
+
+  .navMenuList {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .navMenuList ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
 }
 
-@media screen and (min-width: 767px) {
-  .navHeader {
+@media screen and (max-width: 1039px) {
+  .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: var(--header-height);
-    margin: 1rem;
   }
 
-  .navSearch {
-    margin-top: 5rem;
+  .headerLogo {
+    margin-left: 1rem;
+  }
+
+  .navContainer {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .navMenuList {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .navMenuList ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
 /* For large devices */
 @media screen and (min-width: 1040px) {
-  .navHeader {
+  .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: var(--header-height);
-    margin: 1rem;
+  }
+
+  .navContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: space-around;
+    margin: 0 auto;
+    width: 1440px;
   }
 
   .navSearch {
-    margin-top: 5rem;
+    width: 100%;
   }
-  
-  
+
+}

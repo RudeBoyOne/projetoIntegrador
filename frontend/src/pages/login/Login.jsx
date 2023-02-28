@@ -1,7 +1,11 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import styles from './login.module.css';
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { Link } from 'react-router-dom';
+
+import Header from '../../components/header/Header';
+import Footer from '../../components/footer/Footer';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -38,7 +42,7 @@ function LoginPage() {
       return;
     }
     // Se as informações estiverem corretas, redirecionar o usuário para a página principal
-    window.location.href = '/Home';
+    window.location.href = '/';
 
 
   };
@@ -49,6 +53,8 @@ function LoginPage() {
 
 
   return (
+    <>
+    <Header />
     <div className={styles.loginPage}>
       <div className={styles.container}>
         <form onSubmit={handleSubmit}>
@@ -104,6 +110,8 @@ function LoginPage() {
 
       </div>
     </div>
+    <Footer />
+    </>
   );
 }
 
