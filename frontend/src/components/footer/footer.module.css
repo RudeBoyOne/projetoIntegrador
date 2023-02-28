@@ -1,0 +1,52 @@
+.footer {
+  width: 100%;
+  background-color: var(--bg-dark-cyan);
+  
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--white-color);
+  padding: 3rem;
+}
+
+.copy {
+  font-size: var(--smaller-font-size);
+}
+
+.listMidias {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  order: 2;
+}
+
+.linkIcon {
+  font-size: var(--h3-font-size);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.linkIcon:hover {
+  transform: translateY(-0.5rem);
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For medium devices */
+@media screen and (max-width: 576px) {
+  .nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-around;
+    gap: 2rem;
+    color: var(--white-color);
+    padding: 2rem 0;
+  }
+
+  .copy {
+    order: 1;
+  }
+}

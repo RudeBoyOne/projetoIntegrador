@@ -1,0 +1,36 @@
+
+.categoryCard {
+    max-width: 350px;
+    height: 350px;
+    border-radius: 1rem;
+    background-color: var(--bg-light-cyan);
+    margin: 2rem 0;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+}
+
+.categoryTitle {
+    font-size: var(--h3-font-size);
+    color: var(--text-color-dark-cyan);
+}
+
+.categoryImageBox {
+    height: 175px;
+    margin: 1rem;
+}
+
+.categoryImage {
+    max-height: 180px;
+    transition: all 0.3s ease-out;
+}
+
+.categoryImage:hover {
+    transform: translateY(-0.5rem);
+}
+
+.categoryDescription {
+    font-size: var(--normal-font-size);
+    color: var(--text-color-dark-cyan);
+    padding-top: 1rem;
+}
+
