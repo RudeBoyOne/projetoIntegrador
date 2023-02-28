@@ -8,7 +8,9 @@ import Footer from './components/footer/Footer';
 import SearchBar from './components/search/Search.jsx';
 import './index.css';
 
+
 function App() {
+
   return (
 
     <div className="App">
