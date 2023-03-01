@@ -8,7 +8,7 @@
   align-items: center;
   height: var(--header-height);
   padding: 2rem 2rem;
-  /* z-index: var(--z-fixed); */
+  z-index: var(--z-fixed);
   background-color: var(--white-color);
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 }
