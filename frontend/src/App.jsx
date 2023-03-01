@@ -6,7 +6,9 @@ import Register from './pages/register/Register';
 
 import './index.css';
 
+
 function App() {
+
   return (
 
     <div className="App">

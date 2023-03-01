@@ -150,6 +150,7 @@ input::placeholder {
   color: var(--text-color-dark-cyan);
 }
 
+
 /*=============== SCROLL BAR ===============*/
 ::-webkit-scrollbar {
   width: 0.7rem;
