@@ -1,12 +1,10 @@
-
-
 .loginPage {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: auto;
   font-size: var(--normal-font-size);
-  margin: 3% 0 3% 0 ;
+  /* margin: 3% 0 3% 0 ; */
+  margin: 12rem auto;
 }
 
 .textLogin {
@@ -15,11 +13,13 @@
 }
 
 .container {
-  background-color: #fff;
+  align-self: center;
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 600px;
+  background-color: var(--bg-light-cyan);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }
 
 .formGroup {
@@ -48,7 +48,6 @@ input {
 }
 
 .btnLogin {
-
   background-color: var(--bg-dark-cyan);
   border: none;
   color: #fff;
@@ -58,8 +57,7 @@ input {
   cursor: pointer;
   margin-top: 20px;
   text-align: center;
-
-
+  transition: background-color 0.2s ease-in-out;
 }
 
 .btnLogin:hover {
@@ -80,7 +78,6 @@ input {
   margin-right: 10px;
 }
 
-
 .registerLink {
   text-align: center;
   margin-top: 20px;
@@ -91,7 +88,6 @@ input {
   color: red;
 }
 
-
 .checkbox{
   display: flex;
   text-align: right;
@@ -99,31 +95,31 @@ input {
   font-size: 14px;
 }
 
-@media (max-width:768px) {
-
- /* Estilos do formulário */
- .loginPage {
-   width: auto; /* Ajusta a largura do formulário à tela */
- }
- .container{
-  width:auto;
- }
-
- /* Estilos dos campos */
- .campo input,
- .campo select,
- .campo textarea {
-   font-size: larger; /* Aumenta o tamanho da fonte dos campos */
- }
-
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 575px) {
+  .loginPage {
+  margin: 2rem;
+  height: 100%;
 }
-
-@media (max-width:600px) {
   .container{
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      width: 45%;
-    }
+   padding: 1rem;
+  }
 }
+
+/* For medium devices */
+@media screen and (min-width: 576px) {
+  .loginPage {
+    margin: 4rem;
+    height: 57vh;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1040px) {
+  .loginPage {
+    margin: 12rem auto 5rem;
+  }
+}
+
+

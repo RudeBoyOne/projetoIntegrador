@@ -1,43 +1,51 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import styles from './header.module.css';
 import SearchBar from '../search/Search';
 
+import styles from './header.module.css';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 const Header = () => {
+  const [isActive, setIsActive] = useState(false);
 
   return (
     <>
       <div className={styles.header}>
-        <nav className={styles.navHeader}>
-          <a href="#" className={styles.navLogo}>
-            Laje Dev
-          </a>
-          <div className={styles.navMenu}>
-            <ul className={styles.navList}>
-              <li className={styles.navItem}>
-                <a className={styles.navLink} href="#">
-                  Login
-                </a>
-              </li>
-              <li className={styles.navItem_button}>
-                <a className={styles.navLink_button} href="#">
-                  Cadastrar
-                </a>
-              </li>
-              <li className="toggle">
-                {' '}
-                <a href="#">
-                  <span className="bars"></span>
-                </a>
-              </li>
-            </ul>
+        <div className={styles.headerLogo}>
+          <Link to="/" className={styles.logo}>
+            <p>Laje Dev</p>
+          </Link>
+        </div>
+
+        <nav className={isActive ? 'navMenu showMenu' : 'navMenu'}>
+          <FaTimes
+            className="navClose"
+            onClick={() => setIsActive(!isActive)}
+          />
+          <div className={styles.navContainer}>
+            <div className={styles.navMenuList}>
+              <ul className="">
+                <li>
+                  <Link to="/Login" className={styles.loginLink}>
+                    <p>Login</p>
+                  </Link>
+                </li>
+                <li className={styles.navItem_button}>
+                  <Link to="/Register" className={styles.navLink_button}>
+                    Criar conta
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="navSearch">
+            <SearchBar />
           </div>
         </nav>
-      </div>
-        <div className={styles.navSearch}>
-          <SearchBar />
+        <div className="btnToggle" onClick={() => setIsActive(!isActive)}>
+          <FaBars />
         </div>
+      </div>
     </>
   );
 };
