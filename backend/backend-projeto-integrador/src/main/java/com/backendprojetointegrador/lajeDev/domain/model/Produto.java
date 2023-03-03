@@ -1,11 +1,10 @@
 package com.backendprojetointegrador.lajeDev.domain.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -18,4 +17,10 @@ public class Produto {
     private Long id;
     private String nome;
     private String descricao;
+
+    @ManyToMany
+    @JoinTable(name = "produto_has_caracteristicas", joinColumns = @JoinColumn(name = "produto_id",
+            referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "caracteristica_id",
+            referencedColumnName = "id"))
+    private List<Caracteristica> caracteristicas;
 }
