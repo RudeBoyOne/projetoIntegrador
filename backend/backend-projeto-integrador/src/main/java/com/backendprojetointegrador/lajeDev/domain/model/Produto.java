@@ -23,4 +23,8 @@ public class Produto {
             referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "caracteristica_id",
             referencedColumnName = "id"))
     private List<Caracteristica> caracteristicas;
+
+    @OneToMany
+    @JoinColumn(name = "imagem_id")
+    private List<Imagem> imagens;
 }
