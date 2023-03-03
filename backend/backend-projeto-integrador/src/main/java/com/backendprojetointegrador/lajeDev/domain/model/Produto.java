@@ -10,13 +10,12 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Categoria {
+public class Produto {
 
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String qualificacao;
+    private String nome;
     private String descricao;
-    private String urlImagem;
 }
