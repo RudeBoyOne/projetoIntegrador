@@ -27,4 +27,8 @@ public class Produto {
     @OneToMany
     @JoinColumn(name = "imagem_id")
     private List<Imagem> imagens;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
 }
