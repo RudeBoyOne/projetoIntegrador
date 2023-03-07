@@ -10,10 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +33,7 @@ public class ProdutoController {
         BeanUtils.copyProperties(produto, produtoToSave);
 
         produtoToSave.setCaracteristicas(caracteristicaService.
-                listarDeterminandasCaracteristicas(produto.getCaracteristicas()));
+                listarDeterminandasCaracteristicasLong(produto.getCaracteristicas()));
 
         Categoria categoria = categoriaService.buscarCategoriaById(produto.getCategoria());
         produtoToSave.setCategoria(categoria);
@@ -50,7 +47,7 @@ public class ProdutoController {
         BeanUtils.copyProperties(produtoJaSalvo, produtoOutput);
 
         List<CaracteristicaOutput> caracteristicaOutputs = caracteristicaService
-                .listarDeterminadasCaracteristicasOutput(produto.getCaracteristicas());
+                .listarDeterminadasCaracteristicasOutputOne(produto.getCaracteristicas());
         produtoOutput.setCaracteristicas(caracteristicaOutputs);
 
         List<ImagemOutput> imagens = imagemService.criaImagens(produto.getImagens(), produtoJaSalvo);
@@ -65,5 +62,33 @@ public class ProdutoController {
         produtoOutput.setCidade(cidadeOutput);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(produtoOutput);
+    }
+
+    @GetMapping
+    public List<ProdutoOutput> listar() {
+        return produtoService.listarProduto().stream()
+                .map(produto -> {
+                    ProdutoOutput produtoOutput = new ProdutoOutput();
+                    BeanUtils.copyProperties(produto, produtoOutput);
+                    List<CaracteristicaOutput> caracteristicaOutputs = caracteristicaService
+                            .listarDeterminadasCaracteristicasOutputTwo(produto.getCaracteristicas());
+                    produtoOutput.setCaracteristicas(caracteristicaOutputs);
+
+                    List<ImagemOutput> imagens = imagemService.listarImagernsParaProdutos(produto.getImagens());
+                    produtoOutput.setImagens(imagens);
+
+                    Categoria categoria = categoriaService.buscarCategoriaById(produto.getCategoria().getId());
+
+                    Cidade cidade = cidadeService.buscarCidadeById(produto.getCidade().getId());
+
+                    CategoriaOutput categoriaOutput = new CategoriaOutput();
+                    BeanUtils.copyProperties(categoria, categoriaOutput);
+                    produtoOutput.setCategoria(categoriaOutput);
+
+                    CidadeOutput cidadeOutput = new CidadeOutput();
+                    BeanUtils.copyProperties(cidade, cidadeOutput);
+                    produtoOutput.setCidade(cidadeOutput);
+                    return produtoOutput;
+                }).collect(Collectors.toList());
     }
 }

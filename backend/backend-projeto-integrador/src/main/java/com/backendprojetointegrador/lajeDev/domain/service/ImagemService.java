@@ -31,4 +31,16 @@ public class ImagemService {
 
         return imagensOutput;
     }
+
+    public List<ImagemOutput> listarImagernsParaProdutos(List<Imagem> imagens) {
+        List<ImagemOutput> imagensOutput = imagens.stream().map(imagem -> {
+            ImagemOutput imagemOutput = new ImagemOutput();
+            BeanUtils.copyProperties(imagemRepository.findById(imagem.getId()).get(), imagemOutput);
+            imagemOutput.setProduto(imagem.getProduto().getId());
+            return imagemOutput;
+        }).collect(Collectors.toList());
+        return imagensOutput;
+    }
+
+
 }
