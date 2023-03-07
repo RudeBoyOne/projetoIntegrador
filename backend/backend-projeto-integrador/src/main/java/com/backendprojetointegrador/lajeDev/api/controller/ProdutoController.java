@@ -1,17 +1,11 @@
 package com.backendprojetointegrador.lajeDev.api.controller;
 
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.ProdutoInput;
-import com.backendprojetointegrador.lajeDev.api.dtos.outputs.CategoriaOutput;
-import com.backendprojetointegrador.lajeDev.api.dtos.outputs.CidadeOutput;
-import com.backendprojetointegrador.lajeDev.api.dtos.outputs.ImagemOutput;
-import com.backendprojetointegrador.lajeDev.api.dtos.outputs.ProdutoOutput;
+import com.backendprojetointegrador.lajeDev.api.dtos.outputs.*;
 import com.backendprojetointegrador.lajeDev.domain.model.*;
 import com.backendprojetointegrador.lajeDev.domain.repository.ICaracteristicasRepository;
 import com.backendprojetointegrador.lajeDev.domain.repository.IImagemRepository;
-import com.backendprojetointegrador.lajeDev.domain.service.CategoriaService;
-import com.backendprojetointegrador.lajeDev.domain.service.CidadeService;
-import com.backendprojetointegrador.lajeDev.domain.service.ImagemService;
-import com.backendprojetointegrador.lajeDev.domain.service.ProdutoService;
+import com.backendprojetointegrador.lajeDev.domain.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
@@ -31,7 +25,7 @@ import java.util.stream.Collectors;
 public class ProdutoController {
 
     private final ProdutoService produtoService;
-    private final ICaracteristicasRepository caracteristicasRepository;
+    private final CaracteristicaService caracteristicaService;
     private final ImagemService imagemService;
     private final CategoriaService categoriaService;
     private final CidadeService cidadeService;
@@ -41,14 +35,8 @@ public class ProdutoController {
         Produto produtoToSave = new Produto();
         BeanUtils.copyProperties(produto, produtoToSave);
 
-/*        List<Caracteristica> caracteristicas = produto.getCaracteristicas().stream()
-                .map((idCaracteristica) -> {
-                    Caracteristica caracteristica = new Caracteristica();
-                    BeanUtils.copyProperties(caracteristicasRepository.findById(idCaracteristica).get(), caracteristica);
-                    return caracteristica;
-                }).collect(Collectors.toList());
-        produtoToSave.setCaracteristicas(caracteristicas);*/
-
+        produtoToSave.setCaracteristicas(caracteristicaService.
+                listarDeterminandasCaracteristicas(produto.getCaracteristicas()));
 
         Categoria categoria = categoriaService.buscarCategoriaById(produto.getCategoria());
         produtoToSave.setCategoria(categoria);
@@ -60,6 +48,10 @@ public class ProdutoController {
 
         ProdutoOutput produtoOutput = new ProdutoOutput();
         BeanUtils.copyProperties(produtoJaSalvo, produtoOutput);
+
+        List<CaracteristicaOutput> caracteristicaOutputs = caracteristicaService
+                .listarDeterminadasCaracteristicasOutput(produto.getCaracteristicas());
+        produtoOutput.setCaracteristicas(caracteristicaOutputs);
 
         List<ImagemOutput> imagens = imagemService.criaImagens(produto.getImagens(), produtoJaSalvo);
         produtoOutput.setImagens(imagens);
