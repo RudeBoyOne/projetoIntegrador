@@ -24,7 +24,7 @@ public class Produto {
             referencedColumnName = "id"))
     private List<Caracteristica> caracteristicas;
 
-    @OneToMany(mappedBy = "produto")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto")
     private List<Imagem> imagens;
 
     @ManyToOne
