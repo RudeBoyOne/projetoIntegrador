@@ -22,10 +22,10 @@ public class ImagemService {
         List<ImagemOutput> imagensOutput = imagensInput.stream().map(imagemInput -> {
             Imagem imagemEntity = new Imagem();
             BeanUtils.copyProperties(imagemInput, imagemEntity);
-            imagemEntity.setProduto(produto);
+            //imagemEntity.setProduto(produto);
             ImagemOutput imagemOutput = new ImagemOutput();
             BeanUtils.copyProperties(imagemRepository.save(imagemEntity), imagemOutput);
-            imagemOutput.setProduto(imagemEntity.getProduto().getId());
+            //imagemOutput.setProduto(imagemEntity.getProduto().getId());
             return imagemOutput;
         }).collect(Collectors.toList());
 
@@ -36,7 +36,7 @@ public class ImagemService {
         List<ImagemOutput> imagensOutput = imagens.stream().map(imagem -> {
             ImagemOutput imagemOutput = new ImagemOutput();
             BeanUtils.copyProperties(imagemRepository.findById(imagem.getId()).get(), imagemOutput);
-            imagemOutput.setProduto(imagem.getProduto().getId());
+            //imagemOutput.setProduto(imagem.getProduto().getId());
             return imagemOutput;
         }).collect(Collectors.toList());
         return imagensOutput;

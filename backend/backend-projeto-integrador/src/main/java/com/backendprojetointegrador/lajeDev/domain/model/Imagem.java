@@ -16,8 +16,4 @@ public class Imagem {
     private Long id;
     private String titulo;
     private String url;
-
-    @ManyToOne
-    @JoinColumn(name = "produto_id")
-    private Produto produto;
 }
