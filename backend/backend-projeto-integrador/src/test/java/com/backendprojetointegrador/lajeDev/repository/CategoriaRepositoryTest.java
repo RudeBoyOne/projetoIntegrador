@@ -2,18 +2,15 @@ package com.backendprojetointegrador.lajeDev.repository;
 
 import com.backendprojetointegrador.lajeDev.domain.model.Categoria;
 import com.backendprojetointegrador.lajeDev.domain.repository.ICategoriaRepository;
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
-//@RunWith(SpringRunner.class)
+import static org.junit.jupiter.api.Assertions.*;
+
 @DataJpaTest
 @ActiveProfiles("test")
 @TestMethodOrder(OrderAnnotation.class)
