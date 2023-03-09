@@ -2,19 +2,20 @@ import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import Category from '../../components/category/Category';
 import Card from '../../components/card/Card';
-
 import { category } from '../../utils/cateogory.json';
 import { carros } from '../../utils/carros.json';
 import styles from './home.module.css';
 import { FiArrowRight } from 'react-icons/fi';
 
+
 function Home() {
   return (
     <div>
       <Header />
-
+     
       <div className={styles.category}>
-
+       
+       
         <h3 className={styles.categoryTitle}><FiArrowRight className={styles.categoryTitleIcon} /> Pesquise por Categoria</h3>
 
         <div className={styles.categoryCard}>
