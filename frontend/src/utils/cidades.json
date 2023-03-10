@@ -1,0 +1,29 @@
+{
+    "cidades": [
+        {
+            "_id": 1,
+            "cidade": "São Paulo"
+        },
+        {
+            "_id": 2,
+            "cidade": "Mogi das Cruzes"
+        },
+        {
+            "_id": 3,
+            "cidade": "São Bernardo"
+        },
+        {
+            "_id": 4,
+            "cidade": "Curitiba"
+        },
+        {
+            "_id": 6,
+            "cidade": "Americana"
+        },
+        {
+            "_id": 7,
+            "cidade": "Pouso Alegre"
+        }
+
+    ]
+}

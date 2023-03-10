@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { FiArrowRight } from 'react-icons/fi';
 import styles from './card.module.css';
@@ -18,9 +18,9 @@ const Card = ({ _id, category, name, image, description }) => {
           <p className={styles.description}>{description}</p>
         </div>
         <div className={`${styles.cardItem} ${styles.btn}`}>
-          <button className={styles.btnCard}>
+          <Link to={`/product/${_id}`} className={styles.btnCard}>
             <FiArrowRight className={styles.btnCardIcon} />
-          </button>
+          </Link>
         </div>
       </div>
     </>

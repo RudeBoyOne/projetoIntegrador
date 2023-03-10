@@ -11,18 +11,17 @@ const Header = () => {
   return (
     <>
       <div className={styles.header}>
-        <div className={styles.headerLogo}>
-          <Link to="/" className={styles.logo}>
-            <p>Laje Dev</p>
-          </Link>
-        </div>
-
         <nav className={isActive ? 'navMenu showMenu' : 'navMenu'}>
           <FaTimes
             className="navClose"
             onClick={() => setIsActive(!isActive)}
           />
           <div className={styles.navContainer}>
+          <div className={styles.headerLogo}>
+          <Link to="/" className={styles.logo}>
+            <p>Laje Dev</p>
+          </Link>
+          </div>
             <div className={styles.navMenuList}>
               <ul className="">
                 <li>
