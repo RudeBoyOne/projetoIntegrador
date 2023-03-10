@@ -20,7 +20,7 @@ public class CategoriaRepositoryTest {
     @Autowired
     private ICategoriaRepository categoriaRepository;
     private Categoria categoria;
-    private Categoria categoriaSalvo;
+    private Categoria categoriaSave;
 
     @BeforeAll
     void arrangeCategoria() {
@@ -29,33 +29,33 @@ public class CategoriaRepositoryTest {
         categoria.setDescricao("veículo de alto padrão, por isso maior e com características mais sofisticadas em" +
                 "comparação com um carro sedan");
         categoria.setUrlImagem("https://img.olhardigital.com.br/wp-content/uploads/2022/06/polestar3-1.jpg");
-        categoriaSalvo = categoriaRepository.save(categoria);
+        categoriaSave = categoriaRepository.save(categoria);
     }
 
     @Test
     @Order(1)
-    void searchCategoriaById() {
-        assertTrue(categoriaRepository.findById(categoriaSalvo.getId()).isPresent());
+    void searchCategoriaByIdTest() {
+        assertTrue(categoriaRepository.findById(categoriaSave.getId()).isPresent());
     }
 
     @Test
     @Order(2)
-    void updateCategoria() {
+    void updateCategoriaTest() {
         categoria.setQualificacao("Conversivel");
         categoria.setDescricao("veículo esportivo, com estilo agressivo, tem menor espaço interno em comparação com " +
                 "uma SUV, mas tem um motor mais potente e melhor desempenho em retas");
         categoria.setUrlImagem("https://blog.catarinacarros.com.br/wp-content/uploads/2020/02/bmw-zseries-z4-conversivel-1024x576.jpg");
-        categoriaSalvo = categoriaRepository.saveAndFlush(categoria);
-        assertNotNull(categoriaSalvo.getId());
-        assertEquals(categoria.getQualificacao(), categoriaSalvo.getQualificacao());
-        assertEquals(categoria.getDescricao(), categoriaSalvo.getDescricao());
-        assertEquals(categoria.getUrlImagem(), categoriaSalvo.getUrlImagem());
+        categoriaSave = categoriaRepository.saveAndFlush(categoria);
+        assertNotNull(categoriaSave.getId());
+        assertEquals(categoria.getQualificacao(), categoriaSave.getQualificacao());
+        assertEquals(categoria.getDescricao(), categoriaSave.getDescricao());
+        assertEquals(categoria.getUrlImagem(), categoriaSave.getUrlImagem());
     }
 
     @Test
     @Order(3)
-    void deleteCategoria() {
-        categoriaRepository.deleteById(categoriaSalvo.getId());
-        assertFalse(categoriaRepository.existsById(categoriaSalvo.getId()));
+    void deleteCategoriaTest() {
+        categoriaRepository.deleteById(categoriaSave.getId());
+        assertFalse(categoriaRepository.existsById(categoriaSave.getId()));
     }
 }

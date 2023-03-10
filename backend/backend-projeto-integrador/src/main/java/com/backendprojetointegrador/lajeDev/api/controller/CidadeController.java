@@ -5,7 +5,6 @@ import com.backendprojetointegrador.lajeDev.api.dtos.outputs.CidadeOutput;
 import com.backendprojetointegrador.lajeDev.domain.model.Cidade;
 import com.backendprojetointegrador.lajeDev.domain.service.CidadeService;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

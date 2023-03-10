@@ -34,7 +34,7 @@ public class ProdutoController {
         produtoToSave.setCaracteristicas(caracteristicaService.
                 listarDeterminandasCaracteristicasLong(produto.getCaracteristicas()));
 
-        Categoria categoria = categoriaService.buscarCategoriaById(produto.getCategoria());
+        Categoria categoria = categoriaService.buscarCategoria(produto.getCategoria());
         produtoToSave.setCategoria(categoria);
 
         Cidade cidade = cidadeService.buscarCidadeById(produto.getCidade());
@@ -76,7 +76,7 @@ public class ProdutoController {
                     List<ImagemOutput> imagens = imagemService.listarImagernsParaProdutos(produto.getImagens());
                     produtoOutput.setImagens(imagens);
 
-                    Categoria categoria = categoriaService.buscarCategoriaById(produto.getCategoria().getId());
+                    Categoria categoria = categoriaService.buscarCategoria(produto.getCategoria().getId());
 
                     Cidade cidade = cidadeService.buscarCidadeById(produto.getCidade().getId());
 
@@ -104,7 +104,7 @@ public class ProdutoController {
         List<ImagemOutput> imagens = imagemService.listarImagernsParaProdutos(produto.getImagens());
         produtoOutput.setImagens(imagens);
 
-        Categoria categoria = categoriaService.buscarCategoriaById(produto.getCategoria().getId());
+        Categoria categoria = categoriaService.buscarCategoria(produto.getCategoria().getId());
 
         Cidade cidade = cidadeService.buscarCidadeById(produto.getCidade().getId());
 

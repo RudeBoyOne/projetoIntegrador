@@ -1,7 +1,5 @@
 package com.backendprojetointegrador.lajeDev.api.dtos.outputs;
 
-import com.backendprojetointegrador.lajeDev.domain.model.Caracteristica;
-import com.backendprojetointegrador.lajeDev.domain.model.Imagem;
 import lombok.Getter;
 import lombok.Setter;
 

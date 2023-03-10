@@ -5,11 +5,11 @@ import com.backendprojetointegrador.lajeDev.domain.model.Categoria;
 import com.backendprojetointegrador.lajeDev.domain.service.CategoriaService;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-
-import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -23,7 +23,7 @@ public class CategoriaServiceTest {
     Categoria categoriaSalvo;
 
     @BeforeAll
-    void arrageCategoria(){
+    void arrageCategoria() {
         categoria = new Categoria();
         categoria.setQualificacao("SUV");
         categoria.setDescricao("veículo de alto padrão, por isso maior e com características mais sofisticadas em" +
@@ -34,7 +34,7 @@ public class CategoriaServiceTest {
 
     @Test
     @Order(1)
-    void checkCreationCategoria(){
+    void checkCreationCategoriaTest() {
         assertNotNull(categoriaSalvo.getId());
         assertEquals(categoria.getQualificacao(), categoriaSalvo.getQualificacao());
         assertEquals(categoria.getDescricao(), categoriaSalvo.getDescricao());
@@ -43,15 +43,15 @@ public class CategoriaServiceTest {
 
     @Test
     @Order(2)
-    void searchCategoriaByIdTest(){
+    void searchCategoriaByIdTest() {
         Categoria categoriaBuscada;
-        categoriaBuscada = categoriaService.buscarCategoriaById(categoriaSalvo.getId());
+        categoriaBuscada = categoriaService.buscarCategoria(categoriaSalvo.getId());
         assertNotNull(categoriaBuscada);
     }
 
     @Test
     @Order(3)
-    void updateCategoria() {
+    void updateCategoriaTest() {
         categoria.setQualificacao("Sedan");
         categoria.setDescricao("veículo utilitário com quatro portas, maior espaço interno que um carro hatch, " +
                 "e bagageiro espaçoso");
@@ -66,7 +66,7 @@ public class CategoriaServiceTest {
 
     @Test
     @Order(4)
-    void listarTodasCategoriasTest(){
+    void listarTodasCategoriasTest() {
         Categoria categoriaTemp = new Categoria();
         categoriaTemp.setQualificacao("Conversivel");
         categoriaTemp.setDescricao("veículo esportivo, com estilo agressivo, tem menor espaço interno em comparação com " +
@@ -74,13 +74,16 @@ public class CategoriaServiceTest {
         categoriaTemp.setUrlImagem("https://blog.catarinacarros.com.br/wp-content/uploads/2020/02/bmw-zseries-z4-conversivel-1024x576.jpg");
         categoriaService.criarCategoria(categoriaTemp);
 
-        assertEquals(2, categoriaService.listarCategoria().size());
+        assertEquals(2, categoriaService.listarCategorias().size());
+        categoriaService.excluirCategoria(categoriaTemp.getId());
     }
 
     @Test
     @Order(5)
-    public void deletarCategoriaByIdTest(){
+    public void deletarCategoriaByIdTest() {
         categoriaService.excluirCategoria(categoriaSalvo.getId());
-        assertFalse(categoriaService.existeCategoriaById(categoriaSalvo.getId()));
+        assertFalse(categoriaService.existeCategoria(categoriaSalvo.getId()));
+
+        assertEquals(0, categoriaService.listarCategorias().size());
     }
 }

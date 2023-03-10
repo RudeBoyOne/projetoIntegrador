@@ -32,8 +32,8 @@ public class CategoriaController {
 
     @PutMapping("/{idCategoria}")
     public ResponseEntity<CategoriaOutput> atualizar(@PathVariable Long idCategoria, @RequestBody CategoriaInput categoria) {
-        if (categoriaService.existeCategoriaById(idCategoria)) {
-            Categoria categoriaToUpdate = categoriaService.buscarCategoriaById(idCategoria);
+        if (categoriaService.existeCategoria(idCategoria)) {
+            Categoria categoriaToUpdate = categoriaService.buscarCategoria(idCategoria);
             BeanUtils.copyProperties(categoria, categoriaToUpdate, "id");
             CategoriaOutput categoriaOutput = new CategoriaOutput();
             BeanUtils.copyProperties(categoriaService.criarCategoria(categoriaToUpdate), categoriaOutput);
@@ -44,7 +44,7 @@ public class CategoriaController {
 
     @GetMapping
     public List<CategoriaOutput> listar() {
-        return categoriaService.listarCategoria().stream().map(categoria -> {
+        return categoriaService.listarCategorias().stream().map(categoria -> {
             CategoriaOutput categoriaOutput = new CategoriaOutput();
             BeanUtils.copyProperties(categoria, categoriaOutput);
             return categoriaOutput;
@@ -53,9 +53,9 @@ public class CategoriaController {
 
     @GetMapping("/{idCategoria}")
     public ResponseEntity<CategoriaOutput> buscarById(@PathVariable Long idCategoria) {
-        if (categoriaService.existeCategoriaById(idCategoria)) {
+        if (categoriaService.existeCategoria(idCategoria)) {
             CategoriaOutput categoriaOutput = new CategoriaOutput();
-            BeanUtils.copyProperties(categoriaService.buscarCategoriaById(idCategoria), categoriaOutput);
+            BeanUtils.copyProperties(categoriaService.buscarCategoria(idCategoria), categoriaOutput);
             return ResponseEntity.ok(categoriaOutput);
         }
         return ResponseEntity.notFound().build();
@@ -63,7 +63,7 @@ public class CategoriaController {
 
     @DeleteMapping("/{idCategoria}")
     public ResponseEntity<Void> deletar(@PathVariable Long idCategoria) {
-        if (categoriaService.existeCategoriaById(idCategoria)) {
+        if (categoriaService.existeCategoria(idCategoria)) {
             categoriaService.excluirCategoria(idCategoria);
             return ResponseEntity.noContent().build();
         }
