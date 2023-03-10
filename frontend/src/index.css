@@ -76,48 +76,6 @@ input::placeholder {
   display: none;
 }
 
-/* .navAc {
-  padding: 5px 15px;
-  margin: 0;
-  border: unset;
-  background: var(--bg-dark-cyan);
-  font-size: 1.5rem;
-  color: var(--bg-light-cyan);
-  line-height: 2;
-  height: 50px;
-  font-weight: bold;
-  z-index: 1000;
-} */
-
-/* .toggleNavigation {
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  overflow: hidden;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  visibility: visible;
-}
-
-.menuOpen {
-  visibility: hidden;
-}
-
-.toggleContainer {
-  position: absolute;
-  left: 0px;
-  top: 5.15rem;
-  width: 100%;
-  height: 100%;
-  background-color: var(--bg-light-cyan);
-  will-change: transform;
-  transform: translateX(-100%);
-  transition: 0.5s ease all;
-  z-index: 10;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-} */
 
 /*=============== BUTTON ===============*/
 .button {
@@ -254,7 +212,6 @@ input::placeholder {
     flex-direction: column;
     height: var(--header-height);
     margin: 0 auto;
-    padding-right: 6rem;
   }
 
   .navMenuList {

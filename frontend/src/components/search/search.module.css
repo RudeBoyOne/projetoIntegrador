@@ -22,6 +22,14 @@
   outline: none;
 }
 
+.optionHide{
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
 .searchInputData {
   height: 3rem;
   border-radius: 5px;
