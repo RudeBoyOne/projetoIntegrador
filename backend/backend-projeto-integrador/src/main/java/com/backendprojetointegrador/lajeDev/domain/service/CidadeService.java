@@ -1,7 +1,7 @@
 package com.backendprojetointegrador.lajeDev.domain.service;
 
-import com.backendprojetointegrador.lajeDev.domain.exception.EntidadeNaoEncontrada;
 import com.backendprojetointegrador.lajeDev.domain.exception.RecursoJaExistenteException;
+import com.backendprojetointegrador.lajeDev.domain.exception.RecursoNaoEncontrado;
 import com.backendprojetointegrador.lajeDev.domain.model.Cidade;
 import com.backendprojetointegrador.lajeDev.domain.repository.ICidadeRepository;
 import lombok.AllArgsConstructor;
@@ -28,7 +28,7 @@ public class CidadeService {
 
     public Cidade buscarCidadeById(Long idCidade) {
         return cidadeRepository.findById(idCidade)
-                .orElseThrow(() -> new EntidadeNaoEncontrada("Cidade de id: "+ idCidade +
+                .orElseThrow(() -> new RecursoNaoEncontrado("Cidade de id: "+ idCidade +
                         " não encontrada ou inexistente!"));
     }
 
@@ -38,6 +38,9 @@ public class CidadeService {
 
 
     public void excluirCidadeById(Long idCidade) {
+        if (!existeCidadeById(idCidade)) {
+            throw new RecursoNaoEncontrado("Cidade de id: "+ idCidade + " não existe!");
+        }
         cidadeRepository.deleteById(idCidade);
     }
 

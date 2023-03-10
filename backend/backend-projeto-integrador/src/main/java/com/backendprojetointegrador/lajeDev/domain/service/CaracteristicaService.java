@@ -1,8 +1,7 @@
 package com.backendprojetointegrador.lajeDev.domain.service;
 
-import com.backendprojetointegrador.lajeDev.api.dtos.outputs.CaracteristicaOutput;
-import com.backendprojetointegrador.lajeDev.domain.exception.EntidadeNaoEncontrada;
 import com.backendprojetointegrador.lajeDev.domain.exception.RecursoJaExistenteException;
+import com.backendprojetointegrador.lajeDev.domain.exception.RecursoNaoEncontrado;
 import com.backendprojetointegrador.lajeDev.domain.model.Caracteristica;
 import com.backendprojetointegrador.lajeDev.domain.repository.ICaracteristicasRepository;
 import lombok.AllArgsConstructor;
@@ -34,13 +33,27 @@ public class CaracteristicaService {
         return caracteristicasRepository.findAll();
     }
 
+    public List<Caracteristica> listarDeterminandasCaracteristicas(List<Long> idCaracteristicas){
+        List<Caracteristica> caracteristicas = idCaracteristicas.stream()
+                .map((idCaracteristica) -> {
+                    Caracteristica caracteristica = new Caracteristica();
+                    BeanUtils.copyProperties(caracteristicasRepository.findById(idCaracteristica).get(), caracteristica);
+                    return caracteristica;
+                }).collect(Collectors.toList());
+        return caracteristicas;
+    }
+
     public Caracteristica buscarCaracteristica(Long idCaracteristica) {
         return caracteristicasRepository.findById(idCaracteristica)
-                .orElseThrow(() -> new EntidadeNaoEncontrada("Caracteristica de id: " + idCaracteristica +
-                        " não encontrada ou inexistente!"));
+                .orElseThrow(() -> new RecursoNaoEncontrado("Caracteristica de id: " + idCaracteristica +
+                        " não existe!"));
     }
 
     public void excluirCaracteristica(Long idCaracteristica) {
+        if (!existeCaracteristica(idCaracteristica)) {
+            throw new RecursoNaoEncontrado("Caracteristica de id: " + idCaracteristica +
+                    " não existe!");
+        }
         caracteristicasRepository.deleteById(idCaracteristica);
     }
 
@@ -48,48 +61,4 @@ public class CaracteristicaService {
         return caracteristicasRepository.existsById(idCaracteristica);
     }
 
-    public List<Caracteristica> listarDeterminandasCaracteristicasLong(List<Long> idCaracteristicas){
-        List<Caracteristica> caracteristicas = idCaracteristicas.stream()
-                .map((idCaracteristica) -> {
-                    Caracteristica caracteristica = new Caracteristica();
-                    BeanUtils.copyProperties(caracteristicasRepository.findById(idCaracteristica).get(), caracteristica);
-                    return caracteristica;
-                }).collect(Collectors.toList());
-
-        return caracteristicas;
-    }
-
-
-    public List<Caracteristica> listarDeterminandasCaracteristicasEntity(List<Caracteristica> caracteristicas) {
-        List<Caracteristica> caracteristicasReturn = caracteristicas.stream()
-                .map((caracteristica) -> {
-                    Caracteristica caracteristicaEntity = new Caracteristica();
-                    BeanUtils.copyProperties(caracteristicasRepository.findById(caracteristica.getId()).get(), caracteristicaEntity);
-                    return caracteristicaEntity;
-                }).collect(Collectors.toList());
-        return caracteristicasReturn;
-    }
-
-    // aqui temporariamente
-    public List<CaracteristicaOutput> listarDeterminadasCaracteristicasOutputOne(List<Long> idCaracterisiticas) {
-        List<CaracteristicaOutput> caracteristicaOutputs = listarDeterminandasCaracteristicasLong(idCaracterisiticas).stream()
-                .map(caracteristica -> {
-                    CaracteristicaOutput caracteristicaOutput = new CaracteristicaOutput();
-                    BeanUtils.copyProperties(buscarCaracteristica(caracteristica.getId()),
-                            caracteristicaOutput);
-                    return caracteristicaOutput;
-                }).collect(Collectors.toList());
-        return caracteristicaOutputs;
-    }
-
-    public List<CaracteristicaOutput> listarDeterminadasCaracteristicasOutputTwo(List<Caracteristica> caracterisiticas) {
-        List<CaracteristicaOutput> caracteristicaOutputs = listarDeterminandasCaracteristicasEntity(caracterisiticas).stream()
-                .map(caracteristica -> {
-                    CaracteristicaOutput caracteristicaOutput = new CaracteristicaOutput();
-                    BeanUtils.copyProperties(buscarCaracteristica(caracteristica.getId()),
-                            caracteristicaOutput);
-                    return caracteristicaOutput;
-                }).collect(Collectors.toList());
-        return caracteristicaOutputs;
-    }
 }
