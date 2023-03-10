@@ -1,6 +1,7 @@
 package com.backendprojetointegrador.lajeDev.domain.service;
 
 import com.backendprojetointegrador.lajeDev.domain.exception.RecursoJaExistenteException;
+import com.backendprojetointegrador.lajeDev.domain.exception.RecursoNaoEncontrado;
 import com.backendprojetointegrador.lajeDev.domain.model.Produto;
 import com.backendprojetointegrador.lajeDev.domain.repository.IProdutoRepository;
 import lombok.AllArgsConstructor;
@@ -25,15 +26,20 @@ public class ProdutoService {
         return produtoRepository.save(produto);
     }
 
-    public Produto buscarProdutoById(Long idProduto) {
-        return produtoRepository.findById(idProduto).get();
+    public Produto buscarProduto(Long idProduto) {
+        return produtoRepository.findById(idProduto)
+                .orElseThrow(() -> new RecursoNaoEncontrado("Produto com o id: "+ idProduto +
+                        " não existe!"));
     }
 
-    public List<Produto> listarProduto() {
+    public List<Produto> listarProdutos() {
         return produtoRepository.findAll();
     }
 
     public void excluirProduto(Long idProduto) {
+        if (!existeProduto(idProduto)) {
+            throw new RecursoNaoEncontrado("Produto com o id: "+ idProduto +" não existe!");
+        }
         produtoRepository.deleteById(idProduto);
     }
 

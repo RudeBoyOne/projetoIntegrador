@@ -1,6 +1,5 @@
 package com.backendprojetointegrador.lajeDev.api.dtos.inputs;
 
-import com.backendprojetointegrador.lajeDev.domain.model.Imagem;
 import lombok.Getter;
 import lombok.Setter;
 

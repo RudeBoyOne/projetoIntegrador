@@ -1,9 +1,9 @@
 package com.backendprojetointegrador.lajeDev.domain.exception;
 
-public class EntidadeNaoEncontrada extends RuntimeException {
+public class RecursoNaoEncontrado extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
-    public EntidadeNaoEncontrada(String mensagem) {
+    public RecursoNaoEncontrado(String mensagem) {
         super(mensagem);
     }
 }
