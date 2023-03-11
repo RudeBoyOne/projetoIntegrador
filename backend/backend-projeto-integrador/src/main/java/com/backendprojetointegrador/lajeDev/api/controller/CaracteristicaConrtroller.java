@@ -3,7 +3,6 @@ package com.backendprojetointegrador.lajeDev.api.controller;
 import com.backendprojetointegrador.lajeDev.api.assembler.CaracteristicaAssembler;
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.CaracteristicaInput;
 import com.backendprojetointegrador.lajeDev.api.dtos.outputs.CaracteristicaOutput;
-import com.backendprojetointegrador.lajeDev.api.dtos.outputs.CategoriaOutput;
 import com.backendprojetointegrador.lajeDev.domain.model.Caracteristica;
 import com.backendprojetointegrador.lajeDev.domain.service.CaracteristicaService;
 import lombok.AllArgsConstructor;

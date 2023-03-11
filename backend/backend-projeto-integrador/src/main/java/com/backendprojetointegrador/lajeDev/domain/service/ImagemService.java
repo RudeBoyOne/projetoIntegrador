@@ -3,7 +3,6 @@ package com.backendprojetointegrador.lajeDev.domain.service;
 import com.backendprojetointegrador.lajeDev.api.assembler.ImagemAssembler;
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.ImagemInput;
 import com.backendprojetointegrador.lajeDev.domain.model.Imagem;
-import com.backendprojetointegrador.lajeDev.domain.repository.IImagemRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

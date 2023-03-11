@@ -2,6 +2,8 @@ package com.backendprojetointegrador.lajeDev.domain.service;
 
 import com.backendprojetointegrador.lajeDev.domain.exception.RecursoJaExistenteException;
 import com.backendprojetointegrador.lajeDev.domain.exception.RecursoNaoEncontrado;
+import com.backendprojetointegrador.lajeDev.domain.model.Categoria;
+import com.backendprojetointegrador.lajeDev.domain.model.Cidade;
 import com.backendprojetointegrador.lajeDev.domain.model.Produto;
 import com.backendprojetointegrador.lajeDev.domain.repository.IProdutoRepository;
 import lombok.AllArgsConstructor;
@@ -36,6 +38,14 @@ public class ProdutoService {
         return produtoRepository.findAll();
     }
 
+    public List<Produto> listarByCategoria(Categoria categoria) {
+        return produtoRepository.findByCategoria(categoria);
+    }
+
+    public List<Produto> listarByCidade(Cidade cidade) {
+        return produtoRepository.findByCidade(cidade);
+    }
+
     public void excluirProduto(Long idProduto) {
         if (!existeProduto(idProduto)) {
             throw new RecursoNaoEncontrado("Produto com o id: "+ idProduto +" não existe!");
@@ -46,4 +56,5 @@ public class ProdutoService {
     public boolean existeProduto(Long idProduto) {
         return produtoRepository.existsById(idProduto);
     }
+
 }
