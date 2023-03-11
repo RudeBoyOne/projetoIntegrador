@@ -3,18 +3,14 @@ package com.backendprojetointegrador.lajeDev.api.controller;
 import com.backendprojetointegrador.lajeDev.api.assembler.CategoriaAssembler;
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.CategoriaInput;
 import com.backendprojetointegrador.lajeDev.api.dtos.outputs.CategoriaOutput;
-import com.backendprojetointegrador.lajeDev.domain.model.Caracteristica;
 import com.backendprojetointegrador.lajeDev.domain.model.Categoria;
 import com.backendprojetointegrador.lajeDev.domain.service.CategoriaService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @RestController

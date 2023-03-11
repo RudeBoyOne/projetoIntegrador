@@ -1,6 +1,5 @@
 package com.backendprojetointegrador.lajeDev.api.controller;
 
-import com.backendprojetointegrador.lajeDev.api.assembler.CaracteristicaAssembler;
 import com.backendprojetointegrador.lajeDev.api.assembler.ImagemAssembler;
 import com.backendprojetointegrador.lajeDev.api.assembler.ProdutoAssembler;
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.ProdutoInput;
@@ -61,6 +60,22 @@ public class ProdutoController {
         Produto produtoEntity = produtoService.buscarProduto(idProduto);
         ProdutoOutput produtoOutput = produtoAssembler.toOutput(produtoEntity);
         return ResponseEntity.ok(produtoOutput);
+    }
+
+    @GetMapping("/listarPorCategoria")
+    public ResponseEntity<List<ProdutoOutput>> listarPorCategoria(@RequestParam("categoria") Long idCategoria) {
+        Categoria categoria = categoriaService.buscarCategoria(idCategoria);
+        List<Produto> produtosEntitys = produtoService.listarByCategoria(categoria);
+        List<ProdutoOutput> produtoOutputs = produtoAssembler.toCollectionOutput(produtosEntitys);
+        return ResponseEntity.ok(produtoOutputs);
+    }
+
+    @GetMapping("/listarPorCidade")
+    public List<ProdutoOutput> listarPorCidade(@RequestParam("cidade") Long idCidade) {
+        Cidade cidade = cidadeService.buscarCidadeById(idCidade);
+        List<Produto> produtosEntitys = produtoService.listarByCidade(cidade);
+        List<ProdutoOutput> produtoOutputs = produtoAssembler.toCollectionOutput(produtosEntitys);
+        return produtoOutputs;
     }
 
     @DeleteMapping("/{idProduto}")
