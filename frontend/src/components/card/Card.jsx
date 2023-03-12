@@ -18,7 +18,9 @@ const Card = ({ _id, category, name, image, description }) => {
           <p className={styles.description}>{description}</p>
         </div>
         <div className={`${styles.cardItem} ${styles.btn}`}>
-          <Link to={`/product/${_id}`} className={styles.btnCard}>
+          {/* Teste para visualização da pdp
+        <Link to={`/product/${_id}`} className={styles.btnCard}> */}
+          <Link to={`/product`} className={styles.btnCard}>
             <FiArrowRight className={styles.btnCardIcon} />
           </Link>
         </div>
