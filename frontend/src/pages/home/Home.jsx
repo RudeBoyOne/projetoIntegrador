@@ -2,12 +2,8 @@ import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import Category from '../../components/category/Category';
 import Card from '../../components/card/Card';
-<<<<<<< HEAD
 
 import { category } from '../../utils/category.json';
-=======
-import { category } from '../../utils/cateogory.json';
->>>>>>> 0f1cd6c3c79ac6761efe9f91d5212a3aad7dbfac
 import { carros } from '../../utils/carros.json';
 import styles from './home.module.css';
 import { FiArrowRight } from 'react-icons/fi';
