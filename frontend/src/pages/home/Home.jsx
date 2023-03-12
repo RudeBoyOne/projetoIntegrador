@@ -2,6 +2,7 @@ import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import Category from '../../components/category/Category';
 import Card from '../../components/card/Card';
+
 import { category } from '../../utils/category.json';
 import { carros } from '../../utils/carros.json';
 import styles from './home.module.css';
