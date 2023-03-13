@@ -1,4 +1,4 @@
-package com.backendprojetointegrador.lajeDev.repository;
+package com.backendprojetointegrador.lajeDev.repository.testsIntegration;
 
 import com.backendprojetointegrador.lajeDev.domain.model.Categoria;
 import com.backendprojetointegrador.lajeDev.domain.model.Cidade;
@@ -19,7 +19,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-@ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
