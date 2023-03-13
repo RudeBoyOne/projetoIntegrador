@@ -6,7 +6,11 @@ import Pdp_local from '../../components/pdp_local/pdp_local';
 import Pdp_gallery from '../../components/pdp_gallery/pdp_gallery';
 
 // importar os componentes criados
-
+import Description from '../../components/description/Description';
+import Characteristics from '../../components/characteristics/Characteristics';
+import AppPolicy from '../../components/policy/Policy';
+import Header from '../../components/header/Header';
+import Footer from '../../components/footer/Footer';
 import styles from './product.module.css';
 
 const Product = () => {
@@ -18,8 +22,14 @@ const Product = () => {
                 <Pdp_header />
                 <Pdp_local />
                 <Pdp_gallery />
+                <Description />
+                <Characteristics />
+                <AppPolicy />
+
             </div> 
-            <Footer /> 
+            <Footer />         
+         
+            
         </>
     );
 };
