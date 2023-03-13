@@ -1,0 +1,30 @@
+.pdp_header_c {
+    margin-top: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--bg-light-cyan);    
+}
+
+.pdp_header_left {
+    display: flex;
+    flex-direction: column;
+}
+
+.pdp_header_title {
+    font-size: var(--normal-font-size);
+    color: var(--text-color-dark-cyan);    
+}
+
+.pdp_header_category{
+    font-size: var(--h3-font-size);
+    color: var(--text-color-dark-cyan);
+}
+
+@media screen and (max-width: 1049px) {
+    .pdp_header_c {
+        margin-top: 5rem;           
+    }
+}
+
