@@ -4,7 +4,6 @@ import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import Pdp_local from '../../components/pdp_local/pdp_local';
 import Pdp_gallery from '../../components/pdp_gallery/pdp_gallery';
-
 // importar os componentes criados
 import Description from '../../components/description/Description';
 import Characteristics from '../../components/characteristics/Characteristics';
