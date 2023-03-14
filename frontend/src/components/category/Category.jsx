@@ -1,15 +1,19 @@
 import styles from './category.module.css';
 
-const Category = ({ _id, qualification, description, url }) => {
+const CardCategory = (props) => {
   return (
-    <div className={styles.categoryCard}>
-      <h2 className={styles.categoryTitle}>{qualification}</h2>
+    <div key={props.id} className={styles.categoryCard}>
+      <h2 className={styles.categoryTitle}>{props.qualificacao}</h2>
       <div className={styles.categoryImageBox}>
-        <img src={url} alt={qualification} className={styles.categoryImage} />
+        <img
+          src={props.urlImagem}
+          alt={props.qualificacao}
+          className={styles.categoryImage}
+        />
       </div>
-      <p className={styles.categoryDescription}>{description}</p>
+      <p className={styles.categoryDescription}>{props.descricao}</p>
     </div>
   );
 };
 
-export default Category;
+export default CardCategory;

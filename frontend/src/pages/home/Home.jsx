@@ -1,58 +1,145 @@
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
-import Category from '../../components/category/Category';
-import Card from '../../components/card/Card';
-<<<<<<< HEAD
+import SearchBar from '../../components/search/Search';
 
-import { category } from '../../utils/category.json';
-=======
-import { category } from '../../utils/cateogory.json';
->>>>>>> 0f1cd6c3c79ac6761efe9f91d5212a3aad7dbfac
-import { carros } from '../../utils/carros.json';
+import CategorieList from '../../components/category/categoriesList';
+import Card from '../../components/card/Card';
+import CardList from '../../components/card/cardList';
+
+import api from '../../services/api';
 import styles from './home.module.css';
 import { FiArrowRight } from 'react-icons/fi';
 
 
 function Home() {
+  const [cidades, setCidades] = useState([]);
+  const [categorias, setCategorias] = useState([]);
+  const [carros, setCarros] = useState([]);
+  const [carrosFiltrados, setCarrosFiltrados] = useState([]);
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState('');
+  const [cidadeSelecionada, setCidadeSelecionada] = useState('');
+
+  useEffect(() => {
+    getCidades();
+    getCarros();
+    getCategorias();
+  }, []);
+
+  async function getCidades() {
+    try {
+      const response = await api.get('/cidades');
+      setCidades(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function getCarros() {
+    try {
+      const response = await api.get('/produtos');
+      setCarros(response.data);
+      setCarrosFiltrados(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function getCategorias() {
+    try {
+      const response = await api.get('/categorias');
+      setCategorias(response.data);
+      setCategoriaSelecionada(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function filtroPorCidades(id) {
+    try {
+      if (id) {
+        const response = await api.get(
+          `/produtos/listarPorCidade?cidade=${id}`
+        );
+        setCarrosFiltrados(response.data);
+      } else {
+        setCarrosFiltrados(carros);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function filtroPorCategorias(id) {
+    try {
+      if (id) {
+        const response = await api.get(
+          `/produtos/listarPorCategoria?categoria=${id}`
+        );
+        setCarrosFiltrados(response.data);
+      } else {
+        setCarrosFiltrados(carros);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // const filteredCarros = carrosFiltrados
+  //   ? carros.filter(
+  //       (product) => product.categoria === carrosFiltrados.categoria
+  //     )
+  //   : carros;
+
+  console.log(carrosFiltrados);
   return (
     <div>
       <Header />
-     
-      <div className={styles.category}>
-       
-       
-        <h3 className={styles.categoryTitle}><FiArrowRight className={styles.categoryTitleIcon} /> Pesquise por Categoria</h3>
+      <div className="navSearch">
+        <SearchBar cidades={cidades} filtroPorCidades={filtroPorCidades} />
+      </div>
 
+      <div className={styles.category}>
+        <h3>
+          <Link to="/categorias" className={styles.categoryTitle}>
+            <FiArrowRight className={styles.categoryTitleIcon} /> Pesquise por
+            Categoria
+          </Link>
+        </h3>
+
+        <CategorieList
+          categorias={categorias}
+          filtroPorCategorias={filtroPorCategorias}
+        />
         <div className={styles.categoryCard}>
-          {category.map((category) => {
-            return (
-              <Category
-                key={category._id}
-                qualification={category.qualification}
-                description={category.description}
-                url={category.url}
-              />
-            );
-          })}
+         
         </div>
       </div>
+
+      {/* <div>
+        <CardList carros={filteredCarros} />
+      </div> */}
 
       <div className={styles.cardContainer}>
-        <h3 className={styles.cardTitle}><FiArrowRight className={styles.categoryTitleIcon} /> Conheça a Nossa Frota</h3>
+        <h3 className={styles.cardTitle}>
+          <FiArrowRight className={styles.categoryTitleIcon} /> Conheça a Nossa
+          Frota
+        </h3>
         <div className={styles.cards}>
-          {carros.map((carro) => {
-            return (
-              <Card
-                key={carro._id}
-                category={carro.category}
-                name={carro.name}
-                image={carro.image}
-                description={carro.description}
-              />
-            );
-          })}
+          {carrosFiltrados.map((carro) => (
+            <Card
+              key={carro?.id}
+              qualificacao={carro?.qualificacao}
+              nome={carro?.nome}
+              urlImagem={carro?.image}
+              descricao={carro?.descricao}
+            />
+          ))}
         </div>
       </div>
+
       <Footer />
     </div>
   );

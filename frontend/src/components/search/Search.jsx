@@ -1,41 +1,39 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { cidades } from '../../utils/cidades.json';
+import api from '../../services/api';
+
 import styles from './search.module.css';
 import { FiSearch } from 'react-icons/fi';
 
-const SearchBar = () => {
-  const [searchCidade, setSearchCidade] = useState([]);
 
-  console.log(searchCidade);
-
+const SearchBar = ({ cidades, filtroPorCidades }) => {
+  
   const handleSubmit = (event) => {
     event.preventDefault();
   };
 
   return (
     <div className={styles.boxSearch}>
-      <form onSubmit={handleSubmit} className={styles.search}>
+      <form className={styles.search}>
         <select
           name="cidades"
-          id="cidades"
-          value={searchCidade._id}
+          // value={cidades}
           onChange={(event) => {
-            setSearchCidade(event.target.value);
+            filtroPorCidades(event.target.value);
           }}
+          
           className={styles.searchInput}
-          placeholder="Digite o local de retirada"
         >
           <option value="" disable="true" className={styles.optionHide}>
             Onde vai retirar o carro?
           </option>
-          {cidades.map((cidade) => {
-            return (
-              <option key={cidade._id} value={cidade.cidade}>
-                {cidade.cidade}
+          {cidades.map((cidade) => (
+              <option key={cidade.id} value={cidade.id}>
+                {cidade.nome}
               </option>
-            );
-          })}
+            )
+          )}
         </select>
 
         <input
