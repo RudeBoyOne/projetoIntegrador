@@ -230,5 +230,6 @@ input::placeholder {
 
   .navSearch {
     width: 1440px;
+    margin: var(--header-height) auto;
   }
 }
