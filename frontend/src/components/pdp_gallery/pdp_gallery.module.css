@@ -97,3 +97,10 @@
     }
 }
 
+@media screen and (min-width: 1915px) {
+    .modal-content {
+        width: 40%;
+          
+    }
+}
+

@@ -9,8 +9,6 @@ import Pdp_gallery from '../../components/pdp_gallery/pdp_gallery';
 import Description from '../../components/description/Description';
 import Characteristics from '../../components/characteristics/Characteristics';
 import AppPolicy from '../../components/policy/Policy';
-import Header from '../../components/header/Header';
-import Footer from '../../components/footer/Footer';
 import styles from './product.module.css';
 
 const Product = () => {
