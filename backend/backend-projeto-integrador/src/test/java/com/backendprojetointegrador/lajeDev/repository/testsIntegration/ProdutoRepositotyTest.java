@@ -1,4 +1,4 @@
-package com.backendprojetointegrador.lajeDev.repository;
+package com.backendprojetointegrador.lajeDev.repository.testsIntegration;
 
 import com.backendprojetointegrador.lajeDev.domain.model.Categoria;
 import com.backendprojetointegrador.lajeDev.domain.model.Cidade;
@@ -11,7 +11,6 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +18,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-@ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
