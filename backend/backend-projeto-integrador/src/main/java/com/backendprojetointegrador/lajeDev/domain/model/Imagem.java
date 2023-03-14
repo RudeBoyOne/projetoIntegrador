@@ -1,9 +1,11 @@
 package com.backendprojetointegrador.lajeDev.domain.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -16,8 +18,4 @@ public class Imagem {
     private Long id;
     private String titulo;
     private String url;
-
-    @ManyToOne
-    @JoinColumn(name = "produto_id")
-    private Produto produto;
 }

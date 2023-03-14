@@ -1,0 +1,14 @@
+.pdp_local_c {
+    background-color: #eeeef1;
+    padding: 20px;
+}
+
+.pdp_local_left {
+    display: flex;
+    flex-direction: column;
+}
+
+.pdp_local_cidade {
+    font-size: var(--h3-font-size);
+    font-weight: bold;
+}

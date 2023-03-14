@@ -1,19 +1,17 @@
 package com.backendprojetointegrador.lajeDev.api.controller;
 
+import com.backendprojetointegrador.lajeDev.api.assembler.ImagemAssembler;
+import com.backendprojetointegrador.lajeDev.api.assembler.ProdutoAssembler;
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.ProdutoInput;
-import com.backendprojetointegrador.lajeDev.api.dtos.outputs.*;
-import com.backendprojetointegrador.lajeDev.domain.model.Categoria;
-import com.backendprojetointegrador.lajeDev.domain.model.Cidade;
-import com.backendprojetointegrador.lajeDev.domain.model.Produto;
+import com.backendprojetointegrador.lajeDev.api.dtos.outputs.ProdutoOutput;
+import com.backendprojetointegrador.lajeDev.domain.model.*;
 import com.backendprojetointegrador.lajeDev.domain.service.*;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @RestController
@@ -21,101 +19,68 @@ import java.util.stream.Collectors;
 public class ProdutoController {
 
     private final ProdutoService produtoService;
+    private final ProdutoAssembler produtoAssembler;
     private final CaracteristicaService caracteristicaService;
     private final ImagemService imagemService;
+    private final ImagemAssembler imagemAssembler;
     private final CategoriaService categoriaService;
     private final CidadeService cidadeService;
 
     @PostMapping
     public ResponseEntity<ProdutoOutput> criar(@RequestBody ProdutoInput produto) {
-        Produto produtoToSave = new Produto();
-        BeanUtils.copyProperties(produto, produtoToSave);
+        Produto produtoToSave = produtoAssembler.toEntity(produto);
 
-        produtoToSave.setCaracteristicas(caracteristicaService.
-                listarDeterminandasCaracteristicasLong(produto.getCaracteristicas()));
+        List<Caracteristica> caracteristicas = caracteristicaService
+                .listarDeterminandasCaracteristicas(produto.getCaracteristicas());
+        produtoToSave.setCaracteristicas(caracteristicas);
 
-        Categoria categoria = categoriaService.buscarCategoriaById(produto.getCategoria());
+        List<Imagem> imagens = imagemService.criaObjetosImagens(produto.getImagens(), imagemAssembler);
+        produtoToSave.setImagens(imagens);
+
+        Categoria categoria = categoriaService.buscarCategoria(produto.getCategoria());
         produtoToSave.setCategoria(categoria);
 
         Cidade cidade = cidadeService.buscarCidadeById(produto.getCidade());
         produtoToSave.setCidade(cidade);
 
-        Produto produtoJaSalvo = produtoService.criarProduto(produtoToSave);
-
-        ProdutoOutput produtoOutput = new ProdutoOutput();
-        BeanUtils.copyProperties(produtoJaSalvo, produtoOutput);
-
-        List<CaracteristicaOutput> caracteristicaOutputs = caracteristicaService
-                .listarDeterminadasCaracteristicasOutputOne(produto.getCaracteristicas());
-        produtoOutput.setCaracteristicas(caracteristicaOutputs);
-
-        List<ImagemOutput> imagens = imagemService.criaImagens(produto.getImagens(), produtoJaSalvo);
-        produtoOutput.setImagens(imagens);
-
-        CategoriaOutput categoriaOutput = new CategoriaOutput();
-        BeanUtils.copyProperties(categoria, categoriaOutput);
-        produtoOutput.setCategoria(categoriaOutput);
-
-        CidadeOutput cidadeOutput = new CidadeOutput();
-        BeanUtils.copyProperties(cidade, cidadeOutput);
-        produtoOutput.setCidade(cidadeOutput);
+        ProdutoOutput produtoOutput = produtoAssembler.toOutput(produtoService.criarProduto(produtoToSave));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(produtoOutput);
     }
 
     @GetMapping
     public List<ProdutoOutput> listar() {
-        return produtoService.listarProduto().stream()
-                .map(produto -> {
-                    ProdutoOutput produtoOutput = new ProdutoOutput();
-                    BeanUtils.copyProperties(produto, produtoOutput);
-                    List<CaracteristicaOutput> caracteristicaOutputs = caracteristicaService
-                            .listarDeterminadasCaracteristicasOutputTwo(produto.getCaracteristicas());
-                    produtoOutput.setCaracteristicas(caracteristicaOutputs);
-
-                    List<ImagemOutput> imagens = imagemService.listarImagernsParaProdutos(produto.getImagens());
-                    produtoOutput.setImagens(imagens);
-
-                    Categoria categoria = categoriaService.buscarCategoriaById(produto.getCategoria().getId());
-
-                    Cidade cidade = cidadeService.buscarCidadeById(produto.getCidade().getId());
-
-                    CategoriaOutput categoriaOutput = new CategoriaOutput();
-                    BeanUtils.copyProperties(categoria, categoriaOutput);
-                    produtoOutput.setCategoria(categoriaOutput);
-
-                    CidadeOutput cidadeOutput = new CidadeOutput();
-                    BeanUtils.copyProperties(cidade, cidadeOutput);
-                    produtoOutput.setCidade(cidadeOutput);
-                    return produtoOutput;
-                }).collect(Collectors.toList());
+        List<Produto> produtosEntity = produtoService.listarProdutos();
+        List<ProdutoOutput> produtoOutputs = produtoAssembler.toCollectionOutput(produtosEntity);
+        return produtoOutputs;
     }
 
     @GetMapping("/{idProduto}")
-    public ProdutoOutput buscar(@PathVariable Long idProduto) {
-        ProdutoOutput produtoOutput = new ProdutoOutput();
-        Produto produto = produtoService.buscarProdutoById(idProduto);
-        BeanUtils.copyProperties(produto, produtoOutput);
+    public ResponseEntity<ProdutoOutput> buscarById(@PathVariable Long idProduto) {
+        Produto produtoEntity = produtoService.buscarProduto(idProduto);
+        ProdutoOutput produtoOutput = produtoAssembler.toOutput(produtoEntity);
+        return ResponseEntity.ok(produtoOutput);
+    }
 
-        List<CaracteristicaOutput> caracteristicaOutputs = caracteristicaService
-                .listarDeterminadasCaracteristicasOutputTwo(produto.getCaracteristicas());
-        produtoOutput.setCaracteristicas(caracteristicaOutputs);
+    @GetMapping("/listarPorCategoria")
+    public ResponseEntity<List<ProdutoOutput>> listarPorCategoria(@RequestParam("categoria") Long idCategoria) {
+        Categoria categoria = categoriaService.buscarCategoria(idCategoria);
+        List<Produto> produtosEntitys = produtoService.listarByCategoria(categoria);
+        List<ProdutoOutput> produtoOutputs = produtoAssembler.toCollectionOutput(produtosEntitys);
+        return ResponseEntity.ok(produtoOutputs);
+    }
 
-        List<ImagemOutput> imagens = imagemService.listarImagernsParaProdutos(produto.getImagens());
-        produtoOutput.setImagens(imagens);
+    @GetMapping("/listarPorCidade")
+    public List<ProdutoOutput> listarPorCidade(@RequestParam("cidade") Long idCidade) {
+        Cidade cidade = cidadeService.buscarCidadeById(idCidade);
+        List<Produto> produtosEntitys = produtoService.listarByCidade(cidade);
+        List<ProdutoOutput> produtoOutputs = produtoAssembler.toCollectionOutput(produtosEntitys);
+        return produtoOutputs;
+    }
 
-        Categoria categoria = categoriaService.buscarCategoriaById(produto.getCategoria().getId());
-
-        Cidade cidade = cidadeService.buscarCidadeById(produto.getCidade().getId());
-
-        CategoriaOutput categoriaOutput = new CategoriaOutput();
-        BeanUtils.copyProperties(categoria, categoriaOutput);
-        produtoOutput.setCategoria(categoriaOutput);
-
-        CidadeOutput cidadeOutput = new CidadeOutput();
-        BeanUtils.copyProperties(cidade, cidadeOutput);
-        produtoOutput.setCidade(cidadeOutput);
-
-        return produtoOutput;
+    @DeleteMapping("/{idProduto}")
+    public ResponseEntity<Void> deletar(@PathVariable Long idProduto) {
+        produtoService.excluirProduto(idProduto);
+        return ResponseEntity.noContent().build();
     }
 }

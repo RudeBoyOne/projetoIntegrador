@@ -10,5 +10,4 @@ public class ImagemOutput {
     private Long id;
     private String titulo;
     private String url;
-    private Long produto;
 }

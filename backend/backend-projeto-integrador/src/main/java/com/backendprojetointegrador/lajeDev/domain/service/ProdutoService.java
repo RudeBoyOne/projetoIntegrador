@@ -1,6 +1,9 @@
 package com.backendprojetointegrador.lajeDev.domain.service;
 
 import com.backendprojetointegrador.lajeDev.domain.exception.RecursoJaExistenteException;
+import com.backendprojetointegrador.lajeDev.domain.exception.RecursoNaoEncontrado;
+import com.backendprojetointegrador.lajeDev.domain.model.Categoria;
+import com.backendprojetointegrador.lajeDev.domain.model.Cidade;
 import com.backendprojetointegrador.lajeDev.domain.model.Produto;
 import com.backendprojetointegrador.lajeDev.domain.repository.IProdutoRepository;
 import lombok.AllArgsConstructor;
@@ -25,19 +28,33 @@ public class ProdutoService {
         return produtoRepository.save(produto);
     }
 
-    public Produto buscarProdutoById(Long idProduto) {
-        return produtoRepository.findById(idProduto).get();
+    public Produto buscarProduto(Long idProduto) {
+        return produtoRepository.findById(idProduto)
+                .orElseThrow(() -> new RecursoNaoEncontrado("Produto com o id: "+ idProduto +
+                        " não existe!"));
     }
 
-    public List<Produto> listarProduto() {
+    public List<Produto> listarProdutos() {
         return produtoRepository.findAll();
     }
 
+    public List<Produto> listarByCategoria(Categoria categoria) {
+        return produtoRepository.findByCategoria(categoria);
+    }
+
+    public List<Produto> listarByCidade(Cidade cidade) {
+        return produtoRepository.findByCidade(cidade);
+    }
+
     public void excluirProduto(Long idProduto) {
+        if (!existeProduto(idProduto)) {
+            throw new RecursoNaoEncontrado("Produto com o id: "+ idProduto +" não existe!");
+        }
         produtoRepository.deleteById(idProduto);
     }
 
     public boolean existeProduto(Long idProduto) {
         return produtoRepository.existsById(idProduto);
     }
+
 }
