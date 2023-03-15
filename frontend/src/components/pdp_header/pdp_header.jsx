@@ -7,7 +7,7 @@ export default function Pdp_header({ titulo, categoria }) {
     <div className={styles.pdp_header_c}>
       <div className={styles.pdp_header_left}>
         <span className={styles.pdp_header_title}>{titulo}</span>
-        <span className={styles.pdp_header_category}>{categoria?.nome}</span>
+        <span className={styles.pdp_header_category}>{categoria?.qualificacao}</span>
       </div>
       <div className={styles.pdp_header_right}>
         <Back_button />

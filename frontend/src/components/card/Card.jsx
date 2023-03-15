@@ -6,7 +6,7 @@ import styles from './card.module.css';
 
 const Card = (props) => {
   const { id, qualificacao, nome, descricao, urlImagem } = props;
-  console.log(id);
+  //console.log(id);
   const navigate = useNavigate();
 
   function navigateToDetails(id) {
@@ -14,7 +14,7 @@ const Card = (props) => {
   }
 
   useEffect(() => {
-    console.log(props.id);
+    //console.log(props.id);
   }, []);
 
   return (

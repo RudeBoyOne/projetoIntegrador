@@ -10,15 +10,12 @@ import Characteristics from '../../components/characteristics/Characteristics';
 import Booking from '../../components/booking/Booking';
 import AppPolicy from '../../components/policy/Policy';
 
-import Card from '../../components/card/Card';
 
 import api from '../../services/api';
 
 import styles from './product.module.css';
 
 const Product = () => {
-  const [caracteristicas, setCaracteristicas] = useState([]);
-  const [local, setLocal] = useState([]);
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
   const { id } = useParams();
 
@@ -26,7 +23,6 @@ const Product = () => {
     try {
       const response = await api.get(`/produtos/${id}`);
       setProdutoSelecionado(response.data);
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -39,15 +35,17 @@ const Product = () => {
   return (
     <>
       <Header />
-      <div className={styles.productContainer}>
+      <div className={ styles.productContainer }>
         <Pdp_header
-          titulo={produtoSelecionado?.nome}
-          categoria={produtoSelecionado?.categoria}
+          titulo={ produtoSelecionado?.nome }
+          categoria={ produtoSelecionado?.categoria }
         />
-        <Pdp_local local={produtoSelecionado?.cidade} />
-        <Pdp_gallery />
-        <Description />
-        <Characteristics caracteristicas={produtoSelecionado?.caracteristicas} />
+        <Pdp_local local={ produtoSelecionado?.cidade } />
+        <Pdp_gallery imagens={ produtoSelecionado?.imagens }/>
+        <Description  descricao={ produtoSelecionado?.descricao } 
+                      nomeCarro={ produtoSelecionado?.nome }
+        />
+        <Characteristics caracteristicas={ produtoSelecionado?.caracteristicas } />
         <Booking />
         <AppPolicy />
       </div>

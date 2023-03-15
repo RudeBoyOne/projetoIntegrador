@@ -3,7 +3,8 @@ import Modal from "react-modal";
 import Pdp_gallery_modal from "../pdp_gallery_modal/pdp_gallery_modal";
 import styles from "./pdp_gallery.module.css";
 Modal.setAppElement("#root");
-function Pdp_gallery() {
+
+function Pdp_gallery({ imagens }) {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function abrirModal() {
@@ -19,31 +20,17 @@ function Pdp_gallery() {
   return (
     <div className={styles.pdp_gallery_c}>
       <div className={styles.pdp_gallery_grid}>
-        <img
-          src="https://i.postimg.cc/J4VTsPsg/208-01.jpg"
-          alt=""
-          className={styles.pdp_grid_img_1}
-        />
-        <img
-          src="https://i.postimg.cc/fW02W6Rm/208-02.jpg"
-          alt=""
-          className={styles.pdp_grid_img_2}
-        />
-        <img
-          src="https://i.postimg.cc/3NpnLDcn/208-03.jpg"
-          alt=""
-          className={styles.pdp_grid_img_3}
-        />
-        <img
-          src="https://i.postimg.cc/YCtb30fz/208-04.jpg"
-          alt=""
-          className={styles.pdp_grid_img_4}
-        />
-        <img
-          src="https://i.postimg.cc/5NBsLLvt/208-05.jpg"
-          alt=""
-          className={styles.pdp_grid_img_5}
-        />
+
+        { imagens != undefined ? imagens.map((imagem) => (
+          <img 
+            key={ imagem?.id }
+            src={ imagem?.url }
+            alt={ imagem?.titulo }
+            className={styles.pdp_grid_img_1}
+          />
+        )) :
+          <span>Carregando...</span> }
+
       </div>
       <div className={styles.btn_ver_mais_c}>
         <button className={styles.btn_ver_mais} onClick={openModal}>

@@ -122,7 +122,7 @@ function Home() {
           Frota
         </h3>
         <div className={styles.cards}>
-          {carrosFiltrados.map((carro) => (
+          {carros.map((carro) => (
             <Card
               key={carro?.id}
               id={carro?.id}
