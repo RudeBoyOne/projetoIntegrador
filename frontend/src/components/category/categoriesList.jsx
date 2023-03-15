@@ -2,7 +2,6 @@ import CardCategory from './Category';
 import styles from './category.module.css';
 
 const CategorieList = ({ categorias, filtroPorCategorias, handleCategoriaSelecionada }) => {
-  console.log(categorias);
   return (
     <div className={styles.categoryList}>
       {categorias.map((categoria) => (

@@ -5,24 +5,38 @@ import { FiArrowRight } from 'react-icons/fi';
 import styles from './card.module.css';
 
 const Card = (props) => {
-  
+  const { id, qualificacao, nome, descricao, urlImagem } = props;
+  console.log(id);
+  const navigate = useNavigate();
+
+  function navigateToDetails(id) {
+    navigate(`/produtos/${id}`);
+  }
+
+  useEffect(() => {
+    console.log(props.id);
+  }, []);
+
   return (
     <div>
-      <div key={props.id} className={styles.cardContainer}>
+      <div key={id} className={styles.cardContainer}>
         <div className={styles.cardItem}>
-          <h3 className={styles.subtitle}>{props.categoria}</h3>
-          <h2 className={styles.title}>{props.nome}</h2>
+          <h3 className={styles.subtitle}>{qualificacao}</h3>
+          <h2 className={styles.title}>{nome}</h2>
           <div className={styles.image}>
-            <img src={props.imagens} alt={props.nome} />
+            <img src={urlImagem} alt={nome} />
           </div>
         </div>
         <div className={styles.cardItem}>
-          <p className={styles.description}>{props.descricao}</p>
+          <p className={styles.description}>{descricao}</p>
         </div>
         <div className={`${styles.cardItem} ${styles.btn}`}>
-          <Link to={`/produtos/${props.id}`} className={styles.btnCard}>
+          <button
+            onClick={() => navigateToDetails(id)}
+            className={styles.btnCard}
+          >
             <FiArrowRight className={styles.btnCardIcon} />
-          </Link>
+          </button>
         </div>
       </div>
     </div>

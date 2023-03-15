@@ -1,7 +1,7 @@
 .footer {
   width: 100%;
   background-color: var(--bg-dark-cyan);
-  
+  margin-top: 5rem;
 }
 
 .nav {

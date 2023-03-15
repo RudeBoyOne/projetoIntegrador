@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
@@ -7,12 +7,10 @@ import SearchBar from '../../components/search/Search';
 
 import CategorieList from '../../components/category/categoriesList';
 import Card from '../../components/card/Card';
-import CardList from '../../components/card/cardList';
 
 import api from '../../services/api';
 import styles from './home.module.css';
 import { FiArrowRight } from 'react-icons/fi';
-
 
 function Home() {
   const [cidades, setCidades] = useState([]);
@@ -21,6 +19,7 @@ function Home() {
   const [carrosFiltrados, setCarrosFiltrados] = useState([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState('');
   const [cidadeSelecionada, setCidadeSelecionada] = useState('');
+
 
   useEffect(() => {
     getCidades();
@@ -93,7 +92,6 @@ function Home() {
   //     )
   //   : carros;
 
-  console.log(carrosFiltrados);
   return (
     <div>
       <Header />
@@ -113,14 +111,10 @@ function Home() {
           categorias={categorias}
           filtroPorCategorias={filtroPorCategorias}
         />
-        <div className={styles.categoryCard}>
-         
-        </div>
+        <div className={styles.categoryCard}></div>
       </div>
 
-      {/* <div>
-        <CardList carros={filteredCarros} />
-      </div> */}
+      
 
       <div className={styles.cardContainer}>
         <h3 className={styles.cardTitle}>
@@ -131,10 +125,12 @@ function Home() {
           {carrosFiltrados.map((carro) => (
             <Card
               key={carro?.id}
+              id={carro?.id}
               qualificacao={carro?.qualificacao}
               nome={carro?.nome}
               urlImagem={carro?.image}
               descricao={carro?.descricao}
+              onClick={() => console.log(carro?.id)}
             />
           ))}
         </div>

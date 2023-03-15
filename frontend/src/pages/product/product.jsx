@@ -1,34 +1,59 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Pdp_header from '../../components/pdp_header/pdp_header';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import Pdp_local from '../../components/pdp_local/pdp_local';
 import Pdp_gallery from '../../components/pdp_gallery/pdp_gallery';
-// importar os componentes criados
 import Description from '../../components/description/Description';
 import Characteristics from '../../components/characteristics/Characteristics';
+import Booking from '../../components/booking/Booking';
 import AppPolicy from '../../components/policy/Policy';
+
+import Card from '../../components/card/Card';
+
+import api from '../../services/api';
+
 import styles from './product.module.css';
 
 const Product = () => {
-    return (
-        <>
-            <Header />
-            <div className={styles.productContainer}>
-                {/* Inserir os componentes criados aqui */}
-                <Pdp_header />
-                <Pdp_local />
-                <Pdp_gallery />
-                <Description />
-                <Characteristics />
-                <AppPolicy />
+  const [caracteristicas, setCaracteristicas] = useState([]);
+  const [local, setLocal] = useState([]);
+  const [produtoSelecionado, setProdutoSelecionado] = useState(null);
+  const { id } = useParams();
 
-            </div> 
-            <Footer />         
-         
-            
-        </>
-    );
+  async function getCarrosById() {
+    try {
+      const response = await api.get(`/produtos/${id}`);
+      setProdutoSelecionado(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getCarrosById();
+  }, []);
+
+  return (
+    <>
+      <Header />
+      <div className={styles.productContainer}>
+        <Pdp_header
+          titulo={produtoSelecionado?.nome}
+          categoria={produtoSelecionado?.categoria}
+        />
+        <Pdp_local local={produtoSelecionado?.cidade} />
+        <Pdp_gallery />
+        <Description />
+        <Characteristics caracteristicas={produtoSelecionado?.caracteristicas} />
+        <Booking />
+        <AppPolicy />
+      </div>
+      <Footer />
+    </>
+  );
 };
 
 export default Product;
