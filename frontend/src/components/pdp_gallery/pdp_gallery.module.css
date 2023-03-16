@@ -35,6 +35,10 @@
     grid-row: 2 / 3;
 }
 
+.pdp_grid_img_1, .pdp_grid_img_2, .pdp_grid_img_3, .pdp_grid_img_4, .pdp_grid_img_5 {
+    border-radius: 1rem;
+}
+
 .modal-content {
     width: 67%;
     position: absolute;

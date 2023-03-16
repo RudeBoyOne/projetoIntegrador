@@ -1,20 +1,20 @@
-import React, { useRef, useState, Component } from "react";
+import React, { useRef, useState, Component } from 'react';
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
 // import required modules
-import { FreeMode, Navigation, Thumbs } from "swiper";
+import { FreeMode, Navigation, Thumbs } from 'swiper';
 
- function Pdp_gallery_modal () {
+function Pdp_gallery_modal({ imagens }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
-    <>       
-      <Swiper      
+    <>
+      <Swiper
         loop={true}
         spaceBetween={10}
         navigation={true}
@@ -22,21 +22,11 @@ import { FreeMode, Navigation, Thumbs } from "swiper";
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2"
       >
-        <SwiperSlide>
-          <img src="https://i.postimg.cc/J4VTsPsg/208-01.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://i.postimg.cc/fW02W6Rm/208-02.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://i.postimg.cc/3NpnLDcn/208-03.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://i.postimg.cc/YCtb30fz/208-04.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://i.postimg.cc/5NBsLLvt/208-05.jpg" />
-        </SwiperSlide>     
+        {imagens.map((imagem) => (
+          <SwiperSlide>
+            <img key={imagem?.id} src={imagem?.url} alt={imagem?.titulo} />
+          </SwiperSlide>
+        ))}
       </Swiper>
       <Swiper
         onSwiper={setThumbsSwiper}
@@ -48,10 +38,12 @@ import { FreeMode, Navigation, Thumbs } from "swiper";
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <img src="https://i.postimg.cc/J4VTsPsg/208-01.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
+         {imagens.map((imagem) => (
+          <SwiperSlide>
+            <img key={imagem?.id} src={imagem?.url} alt={imagem?.titulo} />
+          </SwiperSlide>
+        ))}
+        {/* <SwiperSlide>
           <img src="https://i.postimg.cc/fW02W6Rm/208-02.jpg" />
         </SwiperSlide>
         <SwiperSlide>
@@ -62,7 +54,7 @@ import { FreeMode, Navigation, Thumbs } from "swiper";
         </SwiperSlide>
         <SwiperSlide>
           <img src="https://i.postimg.cc/5NBsLLvt/208-05.jpg" />
-        </SwiperSlide>    
+        </SwiperSlide> */}
       </Swiper>
     </>
   );

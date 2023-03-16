@@ -1,30 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import SearchBar from '../search/Search';
-
-import api from '../../services/api';
 
 import styles from './header.module.css';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
-const Header = ({ cidadeSelecionada }) => {
- 
-
+const Header = () => {
   const [isActive, setIsActive] = useState(false);
-
-  
-
-  const handleCidadeChange = (event) => {
-    setCidadeSelecionada(event.target.value);
-  };
-
-  function getFilteredList() {
-    if (!cidadeSelecionada) {
-      return cidades;
-    }
-    return cidades.filter((item) => item.categoria);
-  }
 
   return (
     <>

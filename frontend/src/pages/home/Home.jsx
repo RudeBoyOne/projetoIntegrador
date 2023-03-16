@@ -7,6 +7,7 @@ import SearchBar from '../../components/search/Search';
 
 import CategorieList from '../../components/category/categoriesList';
 import Card from '../../components/card/Card';
+import CarrosList from '../../components/card/CarrosList';
 
 import api from '../../services/api';
 import styles from './home.module.css';
@@ -19,7 +20,6 @@ function Home() {
   const [carrosFiltrados, setCarrosFiltrados] = useState([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState('');
   const [cidadeSelecionada, setCidadeSelecionada] = useState('');
-
 
   useEffect(() => {
     getCidades();
@@ -63,6 +63,7 @@ function Home() {
           `/produtos/listarPorCidade?cidade=${id}`
         );
         setCarrosFiltrados(response.data);
+        console.log(response.data);
       } else {
         setCarrosFiltrados(carros);
       }
@@ -71,20 +72,10 @@ function Home() {
     }
   }
 
-  async function filtroPorCategorias(id) {
-    try {
-      if (id) {
-        const response = await api.get(
-          `/produtos/listarPorCategoria?categoria=${id}`
-        );
-        setCarrosFiltrados(response.data);
-      } else {
-        setCarrosFiltrados(carros);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const filter = (button) => {
+    const filteredData = categorias.filter((item) => item.categoria === button);
+    setCategorias(filteredData);
+  };
 
   // const filteredCarros = carrosFiltrados
   //   ? carros.filter(
@@ -109,30 +100,31 @@ function Home() {
 
         <CategorieList
           categorias={categorias}
-          filtroPorCategorias={filtroPorCategorias}
+
+          // filtroPorCategorias={filtroPorCategorias}
         />
         <div className={styles.categoryCard}></div>
       </div>
 
-      
-
       <div className={styles.cardContainer}>
+        <CarrosList categoria={categoriaSelecionada} />
         <h3 className={styles.cardTitle}>
           <FiArrowRight className={styles.categoryTitleIcon} /> Conheça a Nossa
           Frota
         </h3>
         <div className={styles.cards}>
-          {carros.map((carro) => (
-            <Card
-              key={carro?.id}
-              id={carro?.id}
-              qualificacao={carro?.qualificacao}
-              nome={carro?.nome}
-              urlImagem={carro?.image}
-              descricao={carro?.descricao}
-              onClick={() => console.log(carro?.id)}
-            />
-          ))}
+          {carrosFiltrados !== ''
+            ? carrosFiltrados.map((carro) => (
+                <Card
+                  key={carro?.id}
+                  id={carro?.id}
+                  categoria={carro?.categoria}
+                  nome={carro?.nome}
+                  imagens={carro?.imagens}
+                  descricao={carro?.descricao}
+                />
+              ))
+            : carros}
         </div>
       </div>
 

@@ -5,26 +5,28 @@ import { FiArrowRight } from 'react-icons/fi';
 import styles from './card.module.css';
 
 const Card = (props) => {
-  const { id, qualificacao, nome, descricao, urlImagem } = props;
-  //console.log(id);
+  const { id, categoria, nome, descricao, imagens } = props;
+  const [primeiraImagem, setPrimeiraImagem] = useState({});
+  console.log(imagens);
   const navigate = useNavigate();
 
   function navigateToDetails(id) {
     navigate(`/produtos/${id}`);
   }
 
-  useEffect(() => {
-    //console.log(props.id);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div>
       <div key={id} className={styles.cardContainer}>
         <div className={styles.cardItem}>
-          <h3 className={styles.subtitle}>{qualificacao}</h3>
+          <h3 className={styles.subtitle}>{categoria.qualificacao}</h3>
           <h2 className={styles.title}>{nome}</h2>
           <div className={styles.image}>
-            <img src={urlImagem} alt={nome} />
+            <img
+              src={imagens !== undefined ? imagens.shift().url : ''}
+              alt={nome}
+            />
           </div>
         </div>
         <div className={styles.cardItem}>
