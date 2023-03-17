@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.List;
+
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
@@ -18,7 +20,7 @@ public class Usuario {
     private String email;
     private String senha;
 
-    @OneToOne
+    @ManyToMany
     @JoinColumn(name = "role_id")
-    private Role role;
+    private List<Role> roles;
 }
