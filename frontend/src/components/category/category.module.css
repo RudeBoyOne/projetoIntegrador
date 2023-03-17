@@ -37,9 +37,27 @@
     padding-top: 1rem;
 }
 
-
 .categoryList {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 576px) {
+    .categoryList {
+        display: block;
+        margin: 2rem auto
+    }
+}
+
+/* For medium devices */
+@media screen and (min-width: 576px) {
+    .categoryList {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 2rem auto
+    }
 }

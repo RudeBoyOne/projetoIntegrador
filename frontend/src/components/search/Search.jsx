@@ -1,14 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import api from '../../services/api';
-
 import styles from './search.module.css';
 import { FiSearch } from 'react-icons/fi';
 
-
 const SearchBar = ({ cidades, filtroPorCidades }) => {
-  
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -17,23 +13,21 @@ const SearchBar = ({ cidades, filtroPorCidades }) => {
     <div className={styles.boxSearch}>
       <form className={styles.search}>
         <select
+          title="cidades"
           name="cidades"
-          // value={cidades}
           onChange={(event) => {
             filtroPorCidades(event.target.value);
           }}
-          
           className={styles.searchInput}
         >
           <option value="" disable="true" className={styles.optionHide}>
             Onde vai retirar o carro?
           </option>
           {cidades.map((cidade) => (
-              <option key={cidade.id} value={cidade.id}>
-                {cidade.nome}
-              </option>
-            )
-          )}
+            <option key={cidade.id} value={cidade.id}>
+              {cidade.nome}
+            </option>
+          ))}
         </select>
 
         <input
@@ -50,7 +44,7 @@ const SearchBar = ({ cidades, filtroPorCidades }) => {
           onBlur={(e) => (e.target.type = 'text')}
           placeholder="Data de Entrega"
         />
-        <button className={styles.searchBtn}>
+        <button title="btnSearch" type="submit" className={styles.searchBtn}>
           <FiSearch />
         </button>
       </form>

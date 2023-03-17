@@ -1,72 +1,3 @@
-.cardList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-/* For small devices */
-@media screen and (max-width: 575px) {
-  .card {
-    max-width: 350px;
-    max-height: 550px;
-    border-radius: 1rem;
-    background-color: var(--bg-light-cyan);
-    margin: 2rem 0;
-    border: 1px solid var(--border-color);
-  }
-
-  .image {
-    width: 200px;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    margin: 1rem auto;
-    transition: all 0.3s ease-out;
-  }
-}
-
-/* For medium devices */
-@media screen and (min-width: 576px) {
-  .card {
-    width: 450px;
-    max-height: 550px;
-    border-radius: 1rem;
-    background-color: var(--bg-light-cyan);
-    margin: 2rem 0.5rem;
-    border: 1px solid var(--border-color);
-  }
-
-  .image {
-    width: 350px;
-    height: auto;
-    position: relative;
-    margin: 1rem auto;
-    transition: all 0.3s ease-out;
-  }
-}
-
-/* For large devices */
-@media screen and (min-width: 1040px) {
-  .card {
-    width: 350px;
-    max-height: 550px;
-    border-radius: 1rem;
-    background-color: var(--bg-light-cyan);
-    margin: 2rem;
-    border: 1px solid var(--border-color);
-  }
-
-  .image {
-    width: 350px;
-    height: auto;
-    position: relative;
-    margin: 1rem auto;
-    transition: all 0.3s ease-out;
-  }
-}
-
 .title {
   font-size: var(--h3-font-size);
   padding-left: 2rem;
@@ -167,8 +98,8 @@
     grid-template-areas:
       'i d'
       'b b';
-    width: 500px;
-    height: 500px;
+    width: 350px;
+    height: auto;
     border-radius: 1rem;
     background-color: var(--bg-light-cyan);
     margin: 1rem;
@@ -187,21 +118,25 @@
 
 @media screen and (min-width: 767px) {
   .cardContainer {
-    width: 550px;
-    max-height: 550px;
+    width: 335px;
+    height: auto;
     border-radius: 1rem;
     background-color: var(--bg-light-cyan);
-    margin: 2rem;
+    margin: 1rem;
     border: 1px solid var(--border-color);
   }
 
   .image {
-    width: 400px;
+    width: 300px;
     height: auto;
   }
 
   .btn {
     grid-area: b;
+  }
+
+  .description {
+    padding: 1rem;
   }
 }
 

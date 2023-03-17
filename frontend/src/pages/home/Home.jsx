@@ -5,9 +5,9 @@ import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import SearchBar from '../../components/search/Search';
 
-import CategorieList from '../../components/category/categoriesList';
+import CardCategory from '../../components/category/Category';
 import Card from '../../components/card/Card';
-import CarrosList from '../../components/card/CarrosList';
+import CarrosList from './CarrosList';
 
 import api from '../../services/api';
 import styles from './home.module.css';
@@ -19,12 +19,13 @@ function Home() {
   const [carros, setCarros] = useState([]);
   const [carrosFiltrados, setCarrosFiltrados] = useState([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState('');
-  const [cidadeSelecionada, setCidadeSelecionada] = useState('');
+  const [listaCarrosByCat, setListaCarrosByCat] = useState([]);
 
   useEffect(() => {
     getCidades();
     getCarros();
     getCategorias();
+    setCarros([...new Set(carros.filter((item) => item.categoria))]);
   }, []);
 
   async function getCidades() {
@@ -41,6 +42,7 @@ function Home() {
       const response = await api.get('/produtos');
       setCarros(response.data);
       setCarrosFiltrados(response.data);
+      // setListaCarrosByCat(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -63,7 +65,6 @@ function Home() {
           `/produtos/listarPorCidade?cidade=${id}`
         );
         setCarrosFiltrados(response.data);
-        console.log(response.data);
       } else {
         setCarrosFiltrados(carros);
       }
@@ -72,16 +73,16 @@ function Home() {
     }
   }
 
-  const filter = (button) => {
-    const filteredData = categorias.filter((item) => item.categoria === button);
-    setCategorias(filteredData);
-  };
-
-  // const filteredCarros = carrosFiltrados
-  //   ? carros.filter(
-  //       (product) => product.categoria === carrosFiltrados.categoria
-  //     )
-  //   : carros;
+  async function filtroPorCategoria(id) {
+    try {
+      const response = await api.get(
+        `/produtos/listarPorCategoria?categoria=${id}`
+      );
+      setListaCarrosByCat(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div>
@@ -98,16 +99,23 @@ function Home() {
           </Link>
         </h3>
 
-        <CategorieList
-          categorias={categorias}
-
-          // filtroPorCategorias={filtroPorCategorias}
-        />
-        <div className={styles.categoryCard}></div>
+        <div>
+          <CardCategory
+            categorias={categorias}
+            filtroPorCategoria={filtroPorCategoria}
+          />
+        </div>
       </div>
 
       <div className={styles.cardContainer}>
-        <CarrosList categoria={categoriaSelecionada} />
+        {listaCarrosByCat.length > 0 ? (
+          <div>
+            <CarrosList listaCarrosByCat={listaCarrosByCat} />
+          </div>
+        ) : (
+          <></>
+        )}
+
         <h3 className={styles.cardTitle}>
           <FiArrowRight className={styles.categoryTitleIcon} /> Conheça a Nossa
           Frota

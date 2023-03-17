@@ -76,7 +76,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 1rem 2rem;
+    margin: 8rem 1rem 2rem;
     padding: 2rem;
     border-radius: 10px;
   }
@@ -104,7 +104,7 @@
 
 @media screen and (min-width: 765px) {
   .boxSearch {
-    margin: 0 auto 0;
+    margin-top: var(--header-height);
     padding: 1rem;
   }
 
