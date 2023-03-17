@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import SearchBar from '../../components/search/Search';
 
-import CategorieList from '../../components/category/categoriesList';
+import CardCategory from '../../components/category/Category';
 import Card from '../../components/card/Card';
-import CardList from '../../components/card/cardList';
+import CarrosList from './CarrosList';
 
 import api from '../../services/api';
 import styles from './home.module.css';
 import { FiArrowRight } from 'react-icons/fi';
-
 
 function Home() {
   const [cidades, setCidades] = useState([]);
@@ -20,12 +19,13 @@ function Home() {
   const [carros, setCarros] = useState([]);
   const [carrosFiltrados, setCarrosFiltrados] = useState([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState('');
-  const [cidadeSelecionada, setCidadeSelecionada] = useState('');
+  const [listaCarrosByCat, setListaCarrosByCat] = useState([]);
 
   useEffect(() => {
     getCidades();
     getCarros();
     getCategorias();
+    setCarros([...new Set(carros.filter((item) => item.categoria))]);
   }, []);
 
   async function getCidades() {
@@ -42,6 +42,7 @@ function Home() {
       const response = await api.get('/produtos');
       setCarros(response.data);
       setCarrosFiltrados(response.data);
+      // setListaCarrosByCat(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -72,28 +73,17 @@ function Home() {
     }
   }
 
-  async function filtroPorCategorias(id) {
+  async function filtroPorCategoria(id) {
     try {
-      if (id) {
-        const response = await api.get(
-          `/produtos/listarPorCategoria?categoria=${id}`
-        );
-        setCarrosFiltrados(response.data);
-      } else {
-        setCarrosFiltrados(carros);
-      }
+      const response = await api.get(
+        `/produtos/listarPorCategoria?categoria=${id}`
+      );
+      setListaCarrosByCat(response.data);
     } catch (error) {
       console.log(error);
     }
   }
 
-  // const filteredCarros = carrosFiltrados
-  //   ? carros.filter(
-  //       (product) => product.categoria === carrosFiltrados.categoria
-  //     )
-  //   : carros;
-
-  console.log(carrosFiltrados);
   return (
     <div>
       <Header />
@@ -109,34 +99,40 @@ function Home() {
           </Link>
         </h3>
 
-        <CategorieList
-          categorias={categorias}
-          filtroPorCategorias={filtroPorCategorias}
-        />
-        <div className={styles.categoryCard}>
-         
+        <div>
+          <CardCategory
+            categorias={categorias}
+            filtroPorCategoria={filtroPorCategoria}
+          />
         </div>
       </div>
 
-      {/* <div>
-        <CardList carros={filteredCarros} />
-      </div> */}
-
       <div className={styles.cardContainer}>
+        {listaCarrosByCat.length > 0 ? (
+          <div>
+            <CarrosList listaCarrosByCat={listaCarrosByCat} />
+          </div>
+        ) : (
+          <></>
+        )}
+
         <h3 className={styles.cardTitle}>
           <FiArrowRight className={styles.categoryTitleIcon} /> Conheça a Nossa
           Frota
         </h3>
         <div className={styles.cards}>
-          {carrosFiltrados.map((carro) => (
-            <Card
-              key={carro?.id}
-              qualificacao={carro?.qualificacao}
-              nome={carro?.nome}
-              urlImagem={carro?.image}
-              descricao={carro?.descricao}
-            />
-          ))}
+          {carrosFiltrados !== ''
+            ? carrosFiltrados.map((carro) => (
+                <Card
+                  key={carro?.id}
+                  id={carro?.id}
+                  categoria={carro?.categoria}
+                  nome={carro?.nome}
+                  imagens={carro?.imagens}
+                  descricao={carro?.descricao}
+                />
+              ))
+            : carros}
         </div>
       </div>
 

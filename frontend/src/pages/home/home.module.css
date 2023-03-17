@@ -38,6 +38,25 @@
   font-size: var(--h3-font-size);
 }
 
+.cardList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.categoryList {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardCategoryList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 2rem;
+}
+
 /*=============== BREAKPOINTS ===============*/
 /* For small devices */
 @media screen and (max-width: 576px) {
@@ -51,7 +70,7 @@
 
   .categoryCard {
     display: flex;
-    max-width: 1440px;
+    max-width: 750px;
     position: relative;
     margin: 0 auto;
     flex-wrap: wrap;
@@ -59,16 +78,17 @@
     align-items: center;
   }
 
-  
   .category {
-    margin-top: 7rem;
+    margin-top: 4rem;
+    display: block;
   }
 }
 
 /* For medium devices */
 @media screen and (min-width: 576px) {
   .cards {
-    margin: 2rem 0.5rem;
+    margin: 2rem 0;
+    max-width: 768px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -76,14 +96,22 @@
   }
 
   .category {
-    margin: 7rem 2rem;
+    margin: 7rem 1rem;
+  }
+
+  .cardContainer {
+    max-width: auto;
+    height: auto;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 1rem;
+    color: var(--text-color-dark-cyan);
   }
 }
 
 /* For large devices */
 @media screen and (min-width: 1040px) {
   .cards {
-    /* margin: 2rem 1rem; */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     column-gap: 2.5rem;
@@ -93,7 +121,5 @@
 
   .category {
     margin: 2rem auto 3rem;
-
   }
- 
 }

@@ -9,7 +9,7 @@ const Booking = () => {
 
   return (
     <div className={styles.booking}>
-      <h1>Datas para reserva</h1>
+      <h2 className={styles.bookingTitle}>Datas para reserva</h2>
       <div className={styles.dataRent}>
         <Calendar className={styles.calendarRent} onChange={setDate} value={date} selectRange={true}/>
         <Calendar className={styles.calendarBack} onChange={setDate} value={date} />
@@ -18,7 +18,7 @@ const Booking = () => {
         
         <p>Adicione a data para reservar o seu carro e obter os preços exatos.</p>
 
-        <button className={styles.button}>Iniciar reserva</button>
+        <button className={styles.button}>Iniciar Reserva</button>
         
         {date.length > 0 ? (
         <p className={styles.textCenter}>
