@@ -14,13 +14,21 @@ public class TokenService {
 
     public String generateToken(Usuario usuario) {
         return JWT.create()
-                        .withIssuer("Pi_carango")
-                .withSubject(usuario.getEmail())
-                .withClaim("id", usuario.getId())
-                .withExpiresAt(Date.from(LocalDateTime.now()
-                        .plusMinutes(20)
-                        .toInstant(ZoneOffset.of("-03:00"))))
-                .sign(Algorithm.HMAC256("qualquerStringMaisForteQueEsta"));
+                        .withIssuer("pi_carango")
+                        .withSubject(usuario.getEmail())
+                        .withClaim("id", usuario.getId())
+                        .withExpiresAt(Date.from(LocalDateTime.now()
+                                . plusMinutes(20)
+                                .toInstant(ZoneOffset.of("-03:00"))))
+                        .sign(Algorithm.HMAC256("qualquerStringMaisForteQueEsta"));
 
+    }
+
+    public String getSubject(String token) {
+        return JWT.require(Algorithm.HMAC256("qualquerStringMaisForteQueEsta"))
+                .withIssuer("pi_carango")
+                .build()
+                    .verify(token)
+                    .getSubject();
     }
 }

@@ -1,9 +1,11 @@
 package com.backendprojetointegrador.lajeDev.api.controller;
 
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.Login;
+import com.backendprojetointegrador.lajeDev.api.dtos.outputs.LoginOutput;
 import com.backendprojetointegrador.lajeDev.domain.model.Usuario;
 import com.backendprojetointegrador.lajeDev.domain.service.security.TokenService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,7 +24,7 @@ public class AuthController {
     private final TokenService tokenService;
 
     @PostMapping
-    public String login(@RequestBody Login login) {
+    public ResponseEntity<LoginOutput> login(@RequestBody Login login) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                 new UsernamePasswordAuthenticationToken(login.getEmail(), login.getSenha());
 
@@ -31,6 +33,12 @@ public class AuthController {
 
         Usuario usuario = (Usuario) authentication.getPrincipal();
 
-        return tokenService.generateToken(usuario);
+        LoginOutput loginOutput = new LoginOutput();
+        loginOutput.setId(usuario.getId());
+        loginOutput.setNomeESobrenome(usuario.getNome() + " " + usuario.getSobrenome());
+        loginOutput.setEmail(usuario.getEmail());
+        loginOutput.setToken(tokenService.generateToken(usuario));
+
+        return ResponseEntity.ok(loginOutput);
     }
 }

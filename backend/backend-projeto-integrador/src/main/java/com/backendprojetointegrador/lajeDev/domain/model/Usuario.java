@@ -25,7 +25,7 @@ public class Usuario implements UserDetails {
     private String email;
     private String senha;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
 
     @Override
