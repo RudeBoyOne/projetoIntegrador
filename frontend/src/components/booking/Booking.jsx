@@ -3,9 +3,12 @@ import styles from './booking.module.css';
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 
+import { AuthContext } from '../../providers/AuthContext';
+
 const Booking = () => {
   const [value, onChange] = useState(new Date());
   const [date, setDate] = useState(new Date());
+ 
 
   return (
     <div className={styles.booking}>
