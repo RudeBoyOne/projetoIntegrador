@@ -2,7 +2,9 @@ package com.backendprojetointegrador.lajeDev.api.controller;
 
 import com.backendprojetointegrador.lajeDev.api.assembler.UsuarioAssembler;
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.UsuarioInput;
+import com.backendprojetointegrador.lajeDev.domain.model.Cliente;
 import com.backendprojetointegrador.lajeDev.domain.model.Usuario;
+import com.backendprojetointegrador.lajeDev.domain.repository.IClienteRepository;
 import com.backendprojetointegrador.lajeDev.domain.service.UsuarioService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
     private final UsuarioAssembler usuarioAssembler;
+    private final IClienteRepository clienteRepository;
 
     @PostMapping
     public ResponseEntity<String> cria(@RequestBody UsuarioInput usuarioInput) {
@@ -30,4 +33,17 @@ public class UsuarioController {
                                            + usuarioInput.getEmail() + " já existe. Tente novamente!") :
                 ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+    @PostMapping("/clientes")
+    public ResponseEntity<String> criaCliente(@RequestBody UsuarioInput usuarioInput) {
+        Cliente usuarioEntity = usuarioAssembler.toEntityCliente(usuarioInput);
+
+        Boolean criouUsuario = usuarioService.criarUsuarioCliente(usuarioEntity);
+
+        return criouUsuario ? ResponseEntity.badRequest().body("Usuário com e-mail "
+                                           + usuarioInput.getEmail() + " já existe. Tente novamente!") :
+                ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+
 }
