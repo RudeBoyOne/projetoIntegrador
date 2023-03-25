@@ -2,12 +2,10 @@ package com.backendprojetointegrador.lajeDev.api.controller;
 
 import com.backendprojetointegrador.lajeDev.api.assembler.ReservaAssembler;
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.ReservaInput;
-import com.backendprojetointegrador.lajeDev.api.dtos.outputs.ProdutoOutput;
 import com.backendprojetointegrador.lajeDev.api.dtos.outputs.ReservaOutput;
 import com.backendprojetointegrador.lajeDev.domain.model.Cliente;
 import com.backendprojetointegrador.lajeDev.domain.model.Produto;
 import com.backendprojetointegrador.lajeDev.domain.model.Reserva;
-import com.backendprojetointegrador.lajeDev.domain.model.Usuario;
 import com.backendprojetointegrador.lajeDev.domain.service.ProdutoService;
 import com.backendprojetointegrador.lajeDev.domain.service.ReservaService;
 import com.backendprojetointegrador.lajeDev.domain.service.UsuarioService;
@@ -17,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @RestController

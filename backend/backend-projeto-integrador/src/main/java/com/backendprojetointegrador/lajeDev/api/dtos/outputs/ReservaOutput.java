@@ -1,6 +1,5 @@
 package com.backendprojetointegrador.lajeDev.api.dtos.outputs;
 
-import com.backendprojetointegrador.lajeDev.domain.model.Cliente;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
