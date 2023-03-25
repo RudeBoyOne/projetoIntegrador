@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import Pdp_header from '../../components/pdp_header/pdp_header';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
@@ -16,8 +16,11 @@ import api from '../../services/api';
 import styles from './product.module.css';
 
 const Product = () => {
-  const [produtoSelecionado, setProdutoSelecionado] = useState(null);
   const { id } = useParams();
+  const [produtoSelecionado, setProdutoSelecionado] = useState(null);
+  // const { loggedIn, user } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   async function getCarrosById() {
     try {
@@ -30,7 +33,17 @@ const Product = () => {
 
   useEffect(() => {
     getCarrosById();
+    // bookingDetail();
   }, []);
+
+
+  // const bookingDetail = async () => {
+  //  if(!user) {
+  //    navigate('/login');
+  //   } else {
+  //    navigate(`/bookingdetail/${id}`);
+  //  }
+  // }
 
   return (
     <>

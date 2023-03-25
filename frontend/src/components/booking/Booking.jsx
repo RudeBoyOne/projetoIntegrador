@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import styles from './booking.module.css';
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 
 import { AuthContext } from '../../providers/AuthContext';
 
-const Booking = () => {
+const Booking = ({ bookingDetail }) => {
   const [value, onChange] = useState(new Date());
   const [date, setDate] = useState(new Date());
+  const { loggedIn } = useContext(AuthContext);
  
 
   return (
@@ -21,7 +22,7 @@ const Booking = () => {
         
         <p>Adicione a data para reservar o seu carro e obter os preços exatos.</p>
 
-        <button className={styles.button}>Iniciar Reserva</button>
+        <button onClick={() => bookingDetail()} className={styles.button}>Iniciar Reserva</button>
         
         {date.length > 0 ? (
         <p className={styles.textCenter}>
