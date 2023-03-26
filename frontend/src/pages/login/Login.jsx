@@ -1,16 +1,15 @@
 import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import Header from '../../components/header/Header';
+import Footer from '../../components/footer/Footer';
+
 import api from '../../services/api';
 import { AuthContext } from '../../providers/AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import styles from './login.module.css';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
-
-import Header from '../../components/header/Header';
-import Footer from '../../components/footer/Footer';
 
 function LoginPage() {
   const { userData, fillUserDataState } = useContext(AuthContext);
@@ -32,52 +31,23 @@ function LoginPage() {
       email: email,
       senha: senha,
     });
-    console.log(response);
-    // try {
-    //   if (email.length <= 3 || senha.length < 6) {
-    //     toast.error(
-    //       'Login deve conter mais de 3 caracteres e senha mais de 6 caracteres. Tente novamente.',
-    //       {
-    //         autoClose: 4000,
-    //         position: 'top-center',
-    //         theme: 'colored',
-    //       }
-    //       );
-    //     } else {
-    //   const response = await api.post('/login', {
-    //     email: email,
-    //     senha: senha,
-    //   });
-    // }
 
-   
+    fillUserDataState({
+      token: response.data.token,
+      tipo: response.data.tipo,
+    });
 
 
+    toast('Login efetuado com sucesso.', {
+      type: 'success',
+      autoClose: 2500,
+      position: 'top-center',
+      theme: 'colored',
+    });
 
-
-    //   fillUserDataState({
-    //     token: response.data.token,
-    //     tipo: response.data.tipo,
-    //   });
-    //   localStorage.setItem('token', JSON.stringify(response.data.token));
-    //   toast('Login efetuado com sucesso.', {
-    //     type: 'success',
-    //     autoClose: 2000,
-    //     position: 'top-center',
-    //     theme: 'colored',
-    //   });
-
-    //   setTimeout(() => {
-    //     // navigate('/');
-    //   }, 2000);
-    // }
-    // // } catch (error) {
-    // //   toast.error('Erro ao fazer login, tente navamente', {
-    // //     autoClose: 2500,
-    // //     position: 'top-center',
-    // //     theme: 'colored',
-    // //   });
-    // // }
+    setTimeout(() => {
+      navigate('/');
+    }, 2500);
   }
 
   // const handleSubmit = (e) => {
@@ -179,6 +149,7 @@ function LoginPage() {
           </form>
         </div>
       </div>
+      <ToastContainer />
       <Footer />
     </>
   );

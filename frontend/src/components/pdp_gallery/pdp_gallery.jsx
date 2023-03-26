@@ -5,7 +5,6 @@ import styles from './pdp_gallery.module.css';
 Modal.setAppElement('#root');
 
 function Pdp_gallery({ imagens }) {
-  console.log(imagens);
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function abrirModal() {

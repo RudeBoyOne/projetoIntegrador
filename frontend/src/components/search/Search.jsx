@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { DateRange } from 'react-date-range';
-import pt from 'date-fns/locale/pt';
 import format from 'date-fns/format';
+import pt from 'date-fns/locale/pt';
 import { addDays } from 'date-fns';
 
 import styles from './search.module.css';
@@ -41,16 +40,7 @@ const SearchBar = ({ cidades, filtroPorCidades }) => {
     }
   };
 
-  // const handleSelect = (ranges) => {
-  //   setStartDate(ranges.selection.startDate);
-  //   setEndDate(ranges.selection.endDate);
-  // };
-
-  // const selectionRange = {
-  //   startDate: startDate,
-  //   endDate: endDate,
-  //   key: 'selection',
-  // };
+ 
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -106,6 +96,7 @@ const SearchBar = ({ cidades, filtroPorCidades }) => {
                   direction="horizontal"
                   className={styles.calendarPicker}
                 />
+              
               )}
             </div>
           </div>

@@ -92,11 +92,9 @@ function Home() {
       </div>
 
       <div className={styles.category}>
-        <h3>
-          <Link to="/categorias" className={styles.categoryTitle}>
-            <FiArrowRight className={styles.categoryTitleIcon} /> Pesquise por
-            Categoria
-          </Link>
+        <h3 className={styles.categoryTitle}>
+          <FiArrowRight className={styles.categoryTitleIcon} /> Pesquise por
+          Categoria
         </h3>
 
         <div>

@@ -123,6 +123,7 @@
     margin: 8rem 1rem 2rem;
     padding: 2rem;
     border-radius: 10px;
+    padding: 0.5rem;
   }
 
   .search {
@@ -130,22 +131,22 @@
     flex-direction: column;
     justify-content: space-around;
     font-family: 'Poppins';
+    
   }
 
   .inputCidade, .inputDataRange {
-    width: 100%;
+    width: 300px;
   }
 
   .inputDate {
     display: flex;
     align-items: center;
-    width: 325px; 
   }
   
   .calendarPicker {
     position: absolute;
-    top: calc(28% - 20px);
-    left: 5rem;
+    top: calc(32% - 20px);
+    left: 1rem;
     width: 375px;
     z-index: 1000;
   }
@@ -177,24 +178,6 @@
     justify-content: space-around;
   }
 
-  .inputCidade, .inputDataRange {
-    width: 100%;
-  }
-
-  .inputDate {
-    display: flex;
-    align-items: center;
-    width: 325px; 
-  }
-  
-  .calendarPicker {
-    position: absolute;
-    top: calc(25% - 18px);
-    left: 9rem;
-    width: 375px;
-    z-index: 1000;
-  }
-
   .searchBtn {
     padding: 0.75rem 1rem;
     margin: 1px 0;
@@ -213,9 +196,6 @@
     padding: 1rem;
   }
 
-  /* .searchInput {
-    width: 100%;
-  } */
 
   .searchInputData {
     width: 100%;
@@ -227,9 +207,9 @@
 
   .calendarPicker {
     position: absolute;
-    top: calc(17% - 30px);
-    left: 23rem;
-    width: 400px;
+    top: calc(19% - 30px);
+    left: 20rem;
+    width: 425px;
   }
 }
 
@@ -253,15 +233,15 @@
 
   .calendarPicker {
     position: absolute;
-    top: calc(17% - 25px);
-    left: 51rem;
+    top: calc(22% - 25px);
+    left: 42rem;
     width: 500px;
   }
 }
 
 
 /* For x-large devices */
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1441px) {
   .searchInput {
     width: 300px;
   }
@@ -274,8 +254,8 @@
 
   .calendarPicker {
     position: absolute;
-    top: calc(20% - 22px);
-    left: 57rem;
+    top: calc(20% - 28px);
+    left: 54rem;
     width: 500px;
   }
 }
