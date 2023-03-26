@@ -1,23 +1,19 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import styles from './booking.module.css';
 
 import Calendar from '../calendar/calendar';
 
-import { AuthContext } from '../../providers/AuthContext';
-
 const Booking = ({ produtoSelecionado, bookingDetail }) => {
-  
   const [value, onChange] = useState(new Date());
   const [date, setDate] = useState(new Date());
-  const { loggedIn, userData } = useContext(AuthContext);
+  
 
   return (
     <div className={styles.booking}>
       <h2 className={styles.bookingTitle}>Datas para reserva</h2>
       <div className={styles.dataRent}>
         <Calendar onChange={setDate} value={date} />
-        {/* <Calendar className={styles.calendarRent} onChange={setDate} value={date} selectRange={true}/>
-        <Calendar className={styles.calendarBack} onChange={setDate} value={date} /> */}
+       
       </div>
       <div className={styles.boxBooking}>
         <p>

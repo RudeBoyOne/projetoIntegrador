@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../providers/AuthContext';
 
 import Pdp_header from '../../components/pdp_header/pdp_header';
 import Header from '../../components/header/Header';
@@ -12,8 +11,6 @@ import Characteristics from '../../components/characteristics/Characteristics';
 import Booking from '../../components/booking/Booking';
 import AppPolicy from '../../components/policy/Policy';
 
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import styles from './product.module.css';
 
 import api from '../../services/api';
@@ -21,7 +18,7 @@ import api from '../../services/api';
 const Product = () => {
   const { id } = useParams();
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
-  const { userData } = useContext(AuthContext);
+
 
   const navigate = useNavigate();
 
@@ -39,24 +36,24 @@ const Product = () => {
   }, []);
 
 
-  const bookingDetail = () => {
-    const token = userData?.token;
+  // const bookingDetail = () => {
+  //   const token = userData?.token;
 
-    if (token) {
-      navigate(`/reservas/${id}`);
-    } else {
-      setTimeout(() => {
-        navigate('/login');
-      }, 1000);
+  //   if (token) {
+  //     navigate(`/reservas/${id}`);
+  //   } else {
+  //     setTimeout(() => {
+  //       navigate('/login');
+  //     }, 1000);
 
-      toast('Para fazer uma reserva você precisa estar logado.', {
-        type: 'error',
-        autoClose: 2500,
-        position: 'top-center',
-        theme: 'colored',
-      });
-    }
-  };
+  //     toast('Para fazer uma reserva você precisa estar logado.', {
+  //       type: 'error',
+  //       autoClose: 2500,
+  //       position: 'top-center',
+  //       theme: 'colored',
+  //     });
+  //   }
+  // };
 
   return (
     <>
