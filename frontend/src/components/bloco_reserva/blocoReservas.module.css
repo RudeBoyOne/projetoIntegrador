@@ -46,6 +46,16 @@
   margin: 35px 0 10px 20px;
   width: 365px;
   height: 50px;
+  background-color: var(--bg-dark-cyan);
+  color: var(--white-color);
+  border-radius: 0.25rem;
+  font-size: var(--normal-font-size);
+  transition: 0.3s ease-in-out;
+}
+
+.buttonReservation:hover {
+  background-color: var(--bg-light-cyan);
+  color: var(--text-color-dark-cyan);
 }
 
 /* ===========RESPONSIVE TABLET=========== */

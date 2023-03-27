@@ -1,8 +1,4 @@
 import { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
-import { AuthContext } from '../providers/AuthContext';
-
 import Home from '../pages/home/Home';
 import Login from '../pages/login/Login';
 import CriarConta from '../pages/cadastro/CriarConta';
