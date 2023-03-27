@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>backend-projeto-integrador</groupId>
-	<artifactId>lajeDev-locadora</artifactId>
+	<artifactId>lajedev-locadora</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Projeto Integrador</name>
+	<name>projeto-integrador</name>
 	<description>API desenvolvida para soluções em aluguéis de carro</description>
 	<properties>
 		<java.version>17</java.version>
