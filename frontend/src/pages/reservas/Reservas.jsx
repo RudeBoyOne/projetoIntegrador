@@ -6,7 +6,6 @@ import Booking from '../../components/booking/Booking';
 
 
 const Reservas = () => {
-  
 
   return (
     <>
