@@ -1,0 +1,134 @@
+.registerPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  font-size: var(--normal-font-size);
+  margin: 10% 0 3% 0;
+}
+
+.container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--bg-light-cyan);
+  border: 1px solid var(--border-color);
+  width: 600px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+h2 {
+  margin-top: 0;
+  padding-bottom: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+  padding: 0.5rem 0;
+}
+
+.formName {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem
+}
+
+.formName input {
+  width: 100%;
+}
+
+label {
+  margin-bottom: 5px;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'] {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+button {
+  background-color: var(--bg-dark-cyan);
+  border: none;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  text-align: center;
+}
+
+button:hover {
+  background-color: var(--text-color-dark-cyan);
+}
+
+.loginLink {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.loginLink a {
+  color: #007bff;
+}
+
+.formError {
+  color: red;
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 575px) {
+  .registerPage {
+    height: 80%;
+  }
+
+  .container {
+    width: 100%;
+    margin: 2rem;
+  }
+
+  .formName {
+    display: block;
+  }
+
+  .formName input {
+    width: 100%;
+  }
+}
+
+/* For medium devices */
+@media screen and (min-width: 576px) {
+  .registerPage {
+    height: 90%;
+  }
+
+  .container {
+    width: 100%;
+    margin: 2rem 1rem;
+  }
+
+
+  .formName:nth-of-type(1) {
+    gap: 1rem;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1040px) {
+  .registerPage {
+    margin: 12rem auto 1rem;
+  }
+
+  .container {
+    width: 600px;
+  }
+}

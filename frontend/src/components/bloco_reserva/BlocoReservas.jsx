@@ -23,8 +23,9 @@ const BlocoReservas = ({produtoSelecionado}) => {
  
   return (  
       
-    <div className={styles.bookingDetailInfo}>
-      <h1>Detalhes da reserva</h1>
+      
+      <div className={styles.bookingDetailInfo}>
+      <h1 className={styles.reservaTitle}>Detalhes da reserva</h1>
         
           <div className={styles.image}>
             <Pdp_gallery imagens={ produtoSelecionado?.imagens }/>
@@ -59,8 +60,7 @@ const BlocoReservas = ({produtoSelecionado}) => {
 
           <div className={styles.divider}></div>
 
-          <button className={styles.buttonReservation} onClick={handleReserva}>Confirmar reserva</button>
-          {reservaEfetuada && <ReservaSucesso />}
+        <button className={styles.btnReserva}>Confirmar reserva</button>
       </div>
    </div>
   )
