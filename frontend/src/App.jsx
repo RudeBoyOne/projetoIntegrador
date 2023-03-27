@@ -5,14 +5,13 @@ import FormularioReserva from './components/formulario_reserva/FormularioReserva
 
 
 function App() {
-
   return (
-
     <div className="App">
-      {/* <AppRoutes /> */}
-      <FormularioReserva />
+      <AppRoutes />
+      
+
      </div>   
   );
-};
+}
 
 export default App;

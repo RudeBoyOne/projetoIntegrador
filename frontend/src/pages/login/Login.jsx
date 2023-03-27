@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import styles from './login.module.css';
-import { FiEye, FiEyeOff } from "react-icons/fi";
-
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 
+import styles from './login.module.css';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+
 function LoginPage() {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [senha, setSenha] = useState('');
   const [formError, setFormError] = useState('');
   const [viewPassword, setViewPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
@@ -44,73 +44,77 @@ function LoginPage() {
     // Se as informações estiverem corretas, redirecionar o usuário para a página principal
     window.location.href = '/';
 
-
   };
 
   const handleRememberMeChange = (event) => {
     setRememberMe(event.target.checked);
   };
 
-
   return (
     <>
-    <Header />
-    <div className={styles.loginPage}>
-      <div className={styles.container}>
-        <form onSubmit={handleSubmit}>
-          <h2 className={styles.textLogin}>Login</h2>
-          {formError && <div className={styles.formError}>{formError}</div>}
+      <Header />
+      <div className={styles.loginPage}>
+        <div className={styles.container}>
+          <form onSubmit={handleSubmit}>
+            <h2 className={styles.textLogin}>Login</h2>
+            {formError && <div className={styles.formError}>{formError}</div>}
 
-          <div className={styles.formGroup}>
-            <label htmlFor="email">E-mail:</label>
-            <input
-              type="text"
-              id="email"
-              placeholder='Digite seu e-mail'
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label htmlFor="password">Senha:</label>
-            <input
-              type={viewPassword ? "text" : "password"}
-              id="password"
-              placeholder='Digite sua senha'
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
-            <div className={styles.icon}
-              onClick={() => setViewPassword(!viewPassword)} >
+            <div className={styles.formGroup}>
+              <label htmlFor="email">E-mail:</label>
+              <input
+                type="text"
+                id="email"
+                placeholder="Digite seu e-mail"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              />
             </div>
-          </div>
-          <div className={styles.formGroup}>
-            <div className={styles.checkbox}>
-              <label className={styles.formControl}>
-                <input
-                  className={styles.formCheckbox}
-                  type="checkbox"
-                  checked={true}
-                  name="checkbox"
-                  onChange={handleRememberMeChange}
-                />
-                Lembrar-me
-              </label>
-              <a href="#">Esqueci a senha</a>
+            <div className={styles.formGroup}>
+              <label htmlFor="password">Senha:</label>
+              <input
+                type={viewPassword ? 'text' : 'password'}
+                id="password"
+                placeholder="Digite sua senha"
+                value={senha}
+                onChange={(event) => setSenha(event.target.value)}
+              />
+              <div
+                className={styles.icon}
+                onClick={() => setViewPassword(!viewPassword)}
+              ></div>
             </div>
+            <div className={styles.formGroup}>
+              <div className={styles.checkbox}>
+                <label className={styles.formControl}>
+                  <input
+                    className={styles.formCheckbox}
+                    type="checkbox"
+                    checked={true}
+                    name="checkbox"
+                    onChange={handleRememberMeChange}
+                  />
+                  Lembrar-me
+                </label>
+                <a href="#">Esqueci a senha</a>
+              </div>
 
-            <div className={styles.btn}>
-              <button className={styles.btnLogin} type="submit">Entrar</button>
+              <div className={styles.btn}>
+                <button className={styles.btnLogin} type="submit">
+                  Entrar
+                </button>
+              </div>
+              <div className={styles.registerLink}>
+                <span>
+                  Ainda não tem uma conta?{' '}
+                  <Link to="/Register">Criar conta</Link>
+                </span>
+              </div>
             </div>
-            <div className={styles.registerLink}>
-              <span>Ainda não tem uma conta? <Link to="/Register">Criar conta</Link></span>
-            </div>
-          </div>
-        </form>
-
+          </form>
+        </div>
       </div>
-    </div>
-    <Footer />
+      <ToastContainer />
+      <Footer />
     </>
   );
 }
