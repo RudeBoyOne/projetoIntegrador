@@ -17,7 +17,7 @@ console.log(produtoSelecionado)
       
       
       <div className={styles.bookingDetailInfo}>
-      <h1>Detalhes da reserva</h1>
+      <h1 className={styles.reservaTitle}>Detalhes da reserva</h1>
         
 
         <div className={styles.image}>
@@ -53,7 +53,7 @@ console.log(produtoSelecionado)
 
         <div className={styles.divider}></div>
 
-        <button className={styles.buttonReservation}>Confirmar reserva</button>
+        <button className={styles.btnReserva}>Confirmar reserva</button>
       </div>
         </div>
   )

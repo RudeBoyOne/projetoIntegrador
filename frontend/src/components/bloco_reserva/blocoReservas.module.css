@@ -1,4 +1,3 @@
-
 .bookingDetailInfo {
   display: absolute;
   justify-content: center;
@@ -9,16 +8,17 @@
   margin-top: 7rem;
   border: 2px solid #eee;
   border-radius: 10px;
-  box-shadow: 2px 2px 2px #BEBEBE;
-  -webkit-box-shadow: 1px 4px 3px #BEBEBE;
-  -moz-box-shadow: 1px 4px 3px #BEBEBE;
+  box-shadow: 2px 2px 2px #bebebe;
+  -webkit-box-shadow: 1px 4px 3px #bebebe;
+  -moz-box-shadow: 1px 4px 3px #bebebe;
 }
 
-h1 {
+.reservaTitle {
   margin: 15px 0 5px 10px;
-  font-size: var(--h1-font-size)
+  font-size: var(--h1-font-size);
 }
-.image{
+
+.image {
   background: red;
   height: 20rem;
   margin: 10px;
@@ -27,7 +27,7 @@ h1 {
 
 .divider {
   width: 370px;
-  border: 1px solid #BEBEBE;
+  border: 1px solid #bebebe;
   margin: auto;
 }
 
@@ -39,10 +39,10 @@ h1 {
 }
 
 .checkData {
-  margin-left:10px;
+  margin-left: 10px;
 }
 
-button {
+.btnReserva {
   margin: 35px 0 10px 20px;
   width: 365px;
   height: 50px;
@@ -62,22 +62,22 @@ button {
     border-radius: 10px;
     justify-content: start;
     align-items: start;
-    box-shadow: 2px 2px 2px #BEBEBE;
-  -webkit-box-shadow: 1px 4px 3px #BEBEBE;
-  -moz-box-shadow: 1px 4px 3px #BEBEBE;
+    box-shadow: 2px 2px 2px #bebebe;
+    -webkit-box-shadow: 1px 4px 3px #bebebe;
+    -moz-box-shadow: 1px 4px 3px #bebebe;
   }
-  
-  h1 {
+
+  reservaTitle {
     margin: 15px 0 0 15px;
-    font-size: var(--h2-font-size)
+    font-size: var(--h2-font-size);
   }
-  .image{
+  .image {
     grid-column: image;
-    
+
     background: red;
     width: 335px;
     height: 475px;
-    margin-top: 0; 
+    margin-top: 0;
     border-radius: 5px;
   }
 
@@ -91,19 +91,18 @@ button {
 
   .carName {
     width: 325px;
-    
   }
 
   .localInfo {
     width: 325px;
   }
-  
+
   .divider {
     width: 325px;
-    border: 1px solid #BEBEBE;
+    border: 1px solid #bebebe;
     margin: auto;
   }
-  
+
   .check {
     display: flex;
     gap: 4rem;
@@ -112,10 +111,10 @@ button {
   }
 
   .checkData {
-    margin-left:5px;
+    margin-left: 5px;
   }
-  
-  .buttonReservation {
+
+  .btnReserva {
     margin: 10px 0 10px 20px;
     width: 325px;
     height: 50px;
@@ -133,43 +132,43 @@ button {
     margin-top: 6rem;
     border: 2px solid #eee;
     border-radius: 10px;
-    box-shadow: 2px 2px 2px #BEBEBE;
-    -webkit-box-shadow: 1px 4px 3px #BEBEBE;
-    -moz-box-shadow: 1px 4px 3px #BEBEBE;
+    box-shadow: 2px 2px 2px #bebebe;
+    -webkit-box-shadow: 1px 4px 3px #bebebe;
+    -moz-box-shadow: 1px 4px 3px #bebebe;
   }
-  
-  h1 {
+
+  reservaTitle {
     display: inline;
     font-size: var(--h3-font-size);
   }
-  .image{
-    height: 0; */
+  .image {
+    height: 0;
     background: red;
     width: 330px;
     height: 310px;
-    margin-top: 3.10rem; 
-    margin-left: -13rem;  
+    margin-top: 3.1rem;
+    margin-left: -13rem;
   }
-  
-  .info{
+
+  .info {
     width: 240px;
     height: 250px;
     margin-top: 18rem;
     margin-left: -21rem;
   }
-  
+
   .divider {
     width: 298px;
-    border: 1px solid #BEBEBE;
+    border: 1px solid #bebebe;
     margin: auto;
   }
-  
+
   .check {
     display: flex;
     gap: 9rem;
   }
-  
-  .buttonReservation {
+
+  .btnReserva {
     align-items: center;
     justify-content: start;
     width: 260px;
