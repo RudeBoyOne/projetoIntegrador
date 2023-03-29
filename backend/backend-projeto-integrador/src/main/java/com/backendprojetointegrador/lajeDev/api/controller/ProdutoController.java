@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -76,6 +77,14 @@ public class ProdutoController {
         List<Produto> produtosEntitys = produtoService.listarByCidade(cidade);
         List<ProdutoOutput> produtoOutputs = produtoAssembler.toCollectionOutput(produtosEntitys);
         return produtoOutputs;
+    }
+
+    @GetMapping("/listarPorCidadeEDatas/{idCidade}")
+    public ResponseEntity<List<ProdutoOutput>> listarPorCidadeAndDatas(@PathVariable Long idCidade,
+                       @RequestParam("dateStart") LocalDate dateStart, @RequestParam("dateEnd") LocalDate dateEnd) {
+        List<Produto> produtosReservados = produtoService.listarByCidadeAndDates(idCidade, dateStart, dateEnd);
+        List<ProdutoOutput> produtoOutputs = produtoAssembler.toCollectionOutput(produtosReservados);
+        return ResponseEntity.ok(produtoOutputs);
     }
 
     @DeleteMapping("/{idProduto}")
