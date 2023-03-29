@@ -1,159 +1,82 @@
-/* ===========RESPONSIVE MOBILE=========== */
-@media screen and (max-width: 390px) {
+.titleForm {
+  font-size: var(--h2-font-size);
+  margin-bottom: 2rem;
+}
 
-form {
-  margin: auto;
-  margin-top: 3rem;
-  width: 380px;
-  height: 398px;
-  border: 2px solid #eee;
+.formReserva {
+  width: 100%;
+  height: auto;
+  padding: 2rem 1rem;
   border-radius: 10px;
-  box-shadow: 2px 2px 2px #BEBEBE;
-  -webkit-box-shadow: 1px 4px 3px #BEBEBE;
-  -moz-box-shadow: 1px 4px 3px #BEBEBE;
+  background-color: var(--bg-light-cyan);
+  border: 1px solid var(--border-color);
 }
 
-.inputContainer {
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  margin: 25px 5px 15px 12px;
-  width: 350px;
-  height: 61px;
-}
-
-label{
+.nome,
+.sobrenome,
+.email,
+.cidade {
   font-size: var(--normal-font-size);
-  font-weight: bold;
-  color: var(--bg-dark-cyan);
+  padding-top: 1rem;
 }
 
-input,
-textarea {
-  padding: 0.8rem;
-  border: none;
-  border-radius: 3px;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+.inputDados {
+  width: 100%;
+  height: auto;
+  padding: 0.5rem;
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  outline: none;
+  font-size: var(--normal-font-size);
+  color: var(--text-color);
 }
 
+.inputDados::placeholder {
+  font-size: var(--normal-font-size);
+  color: var(--text-color);
+}
+
+/* ===========RESPONSIVE MOBILE=========== */
+@media screen and (max-width: 576px) {
+  .formReserva {
+    width: 100%;
+    height: auto;
+  }
+  .titleForm {
+    margin-left: 1rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .formReserva {
+    width: 100%;
+    height: auto;
+  }
+  .titleForm {
+    margin-left: 1rem;
+  }
 }
 
 /* ===========RESPONSIVE TABLET=========== */
 
-@media screen and (min-width: 391px) and (max-width: 768px) {
-  form {
-    margin: auto;
-    margin-top: 3rem;
-    width: 708px;
-    height: 227px;
-    border: 2px solid #eee;
-    border-radius: 10px;
-    box-shadow: 2px 2px 2px #BEBEBE;
-    -webkit-box-shadow: 1px 4px 3px #BEBEBE;
-    -moz-box-shadow: 1px 4px 3px #BEBEBE;
+@media screen and (min-width: 768px) {
+  .formReserva {
+    margin: 1rem;
+    width: 680px;
+    height: auto;
   }
-
-  .inputContainer {
-    
-    margin: auto;
-    margin: 25px 5px 15px 12px;
-    width: 320px;
-    height: 61px;
-  }
-
-  .nome {
-    margin-left: 12px;
-  }
-
-  .sobrenome {
-    margin-left: 22rem;
-    margin-top: -6rem;
-    padding: 0.7rem;
-  }
-
-  .email {
-    margin-left: 12px;
-    padding: 0.4rem;
-  }
-
-  .cidade {
-    margin-left: 22rem;
-    margin-top: -5rem;
-    padding: 0.7rem;
-  }
-
-  label{
-  
-    font-size: var(--normal-font-size);
-    font-weight: bold;
-    color: var(--bg-dark-cyan);
-  }
-
-  input,
-textarea {
-  padding: 0.8rem;
-  border: none;
-  border-radius: 3px;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
 }
 
 /* ===========RESPONSIVE DESKTOP=========== */
 
-@media screen and (min-width: 769px) and (max-width: 1440px) {
+@media screen and (min-width: 1024px) {
+  .formReserva {
+    margin: 1rem;
+    width: 100%;
+    height: auto;
+  }
 
-form {
-  margin-left: 40px;
-  margin-top: 3rem;
-  width: 847px;
-  height: 227px;
-  border: 2px solid #eee;
-  border-radius: 10px;
-  box-shadow: 2px 2px 2px #BEBEBE;
-  -webkit-box-shadow: 1px 4px 3px #BEBEBE;
-  -moz-box-shadow: 1px 4px 3px #BEBEBE;
-}
-
-.inputContainer {
-  margin: auto;
-  margin: 25px 5px 15px 12px;
-  width: 388px;
-  height: 63px;
-}
-
-.nome {
-  margin-left: 12px;
-}
-
-.sobrenome {
-  margin-left: 27em;
-  margin-top: -6.2rem;
-  padding: 0.7rem;
-}
-
-.email {
-  margin-left: 12px;
-  margin-top: .1rem;
-}
-
-.cidade {
-  margin-left: 27rem;
-  margin-top: -6rem;
-  padding: 0.7rem;
-}
-
-label{
-  margin-top: 0;
-  font-size: var(--normal-font-size);
-  font-weight: bold;
-  color: var(--bg-dark-cyan);
-}
-
-input,
-textarea {
-  padding: 0.8rem;
-  border: none;
-  border-radius: 3px;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
+  .titleForm {
+    margin-left: 1rem;
+  }
 }

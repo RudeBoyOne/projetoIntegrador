@@ -1,51 +1,63 @@
 
 .bookingDetailInfo {
-  display: absolute;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-start;
   align-items: center;
-  width: 409px;
-  height: 890px;
-  margin-left: 50rem;
-  margin-top: 7rem;
-  border: 2px solid #eee;
+  margin-top: 1rem;
+  width: 100%;
+  height: auto;
   border-radius: 10px;
-  box-shadow: 2px 2px 2px #BEBEBE;
-  -webkit-box-shadow: 1px 4px 3px #BEBEBE;
-  -moz-box-shadow: 1px 4px 3px #BEBEBE;
+  background-color: var(--bg-light-cyan);
+  border: 1px solid var(--border-color);
 }
 
-h1 {
-  margin: 15px 0 5px 10px;
-  font-size: var(--h1-font-size)
+.titleReservaDetail {
+  font-size: var(--h2-font-size)
 }
+
 .image{
-  background: red;
   height: 20rem;
   margin: 10px;
   border-radius: 5px;
 }
 
+.info {
+  width: 100%;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.localInfo {
+  margin: 2rem 1rem;
+
+}
+
+.reservaDescription {
+  margin: 0.5rem;
+}
+
+
 .divider {
-  width: 370px;
-  border: 1px solid #BEBEBE;
+  width: 100%;
+  border: 1px solid #d8d8d8;
   margin: auto;
 }
 
 .check {
   display: flex;
-  gap: 9rem;
-  margin-left: 15px;
-  margin: 10px;
+  justify-content: space-between;
+  margin-left: 1rem;
 }
 
 .checkData {
-  margin-left:10px;
+  margin-right:1rem;
 }
 
+
 .buttonReservation {
-  margin: 35px 0 10px 20px;
-  width: 365px;
-  height: 50px;
+  margin: 1rem;
   background-color: var(--bg-dark-cyan);
   color: var(--white-color);
   border-radius: 0.25rem;
@@ -54,62 +66,36 @@ h1 {
 }
 
 .buttonReservation:hover {
-  background-color: var(--bg-light-cyan);
-  color: var(--text-color-dark-cyan);
+  background-color: var(--text-color-dark-cyan);
+  color: var(--white-color);
 }
+
+
 
 /* ===========RESPONSIVE TABLET=========== */
 
 @media only screen and (max-width: 768px) {
   .bookingDetailInfo {
-    display: grid;
-    grid-template-columns: [image] 2fr [info] 1fr;
+    display: flex;
     margin: auto;
-    width: 718px;
-    height: 560px;
-    margin-top: 7rem;
-    border: 2px solid #eee;
-    border-radius: 10px;
-    justify-content: start;
-    align-items: start;
-    box-shadow: 2px 2px 2px #BEBEBE;
-  -webkit-box-shadow: 1px 4px 3px #BEBEBE;
-  -moz-box-shadow: 1px 4px 3px #BEBEBE;
+    width: 90%;
+    height: auto;
   }
   
-  h1 {
-    margin: 15px 0 0 15px;
+  .titleReservaDetail{
+    margin-left: 2rem;
     font-size: var(--h2-font-size)
   }
+
   .image{
-    grid-column: image;
-    background: red;
-    width: 335px;
-    height: 475px;
-    margin-top: 0; 
-    border-radius: 5px;
-  }
-
-  .info {
-    grid-column: info;
-    margin: auto;
-    margin-top: 0;
-    width: 325;
-    height: 475px;
-  }
-
-  .carName {
-    width: 325px;
-    
-  }
-
-  .localInfo {
-    width: 325px;
+    width: 90%;
+    height: auto;
+    margin: 1rem; 
   }
   
   .divider {
-    width: 325px;
-    border: 1px solid #BEBEBE;
+    width: 100%;
+    border: 1px solid var(--border-color);
     margin: auto;
   }
   
@@ -123,65 +109,25 @@ h1 {
   .checkData {
     margin-left:5px;
   }
-  
-  .buttonReservation {
-    margin: 10px 0 10px 20px;
-    width: 325px;
-    height: 50px;
-    margin-right: 15px;
-  }
 }
 
 /* ===========RESPONSIVE MOBILE=========== */
 @media screen and (max-width: 390px) {
   .bookingDetailInfo {
-    display: grid;
     display: flex;
-    width: 360px;
-    height: 760px;
-    margin-top: 6rem;
-    border: 2px solid #eee;
-    border-radius: 10px;
-    box-shadow: 2px 2px 2px #BEBEBE;
-    -webkit-box-shadow: 1px 4px 3px #BEBEBE;
-    -moz-box-shadow: 1px 4px 3px #BEBEBE;
+    width: 90%;
+    height: auto;
+    margin-bottom: 2rem;
   }
   
-  h1 {
-    display: inline;
-    font-size: var(--h3-font-size);
+  .titleReservaDetail {
+    font-size: var(--h2-font-size);
   }
+
   .image{
     height: 0;
-    background: red;
-    width: 330px;
-    height: 310px;
-    margin-top: 3.10rem; 
-    margin-left: -13rem;  
+    width: 90%;
+    height: auto; 
   }
-  
-  .info{
-    width: 240px;
-    height: 250px;
-    margin-top: 18rem;
-    margin-left: -21rem;
-  }
-  
-  .divider {
-    width: 298px;
-    border: 1px solid #BEBEBE;
-    margin: auto;
-  }
-  
-  .check {
-    display: flex;
-    gap: 9rem;
-  }
-  
-  .buttonReservation {
-    align-items: center;
-    justify-content: start;
-    width: 260px;
-    height: 50px;
-  }
+
 }
