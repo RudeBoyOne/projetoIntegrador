@@ -9,6 +9,7 @@ import com.backendprojetointegrador.lajeDev.domain.repository.IProdutoRepository
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -44,6 +45,10 @@ public class ProdutoService {
 
     public List<Produto> listarByCidade(Cidade cidade) {
         return produtoRepository.findByCidade(cidade);
+    }
+
+    public List<Produto> listarByCidadeAndDates(Long idCidade, LocalDate dateStar, LocalDate dateEnd) {
+        return produtoRepository.findByProdutosNotReservados(idCidade, dateStar, dateEnd);
     }
 
     public void excluirProduto(Long idProduto) {
