@@ -36,7 +36,10 @@
 }
 
 .btnCard {
-  display: inline-block;
+  /* display: inline-block; */
+  position: relative;
+  right: 0;
+  bottom: 0;
   background-color: var(--bg-dark-cyan);
   color: var(--white-color);
   padding: 2rem 2rem;
@@ -44,9 +47,6 @@
   border: none;
   outline: none;
   padding: 0.75rem 2rem;
-  position: relative;
-  right: 0;
-  bottom: 0;
   border-radius: 1rem 0 1rem 0;
   cursor: pointer;
   transition: 0.3s;

@@ -1,4 +1,3 @@
-
 .bookingDetailInfo {
   display: flex;
   flex-direction: column;
@@ -92,13 +91,13 @@
     height: auto;
     margin: 1rem; 
   }
-  
+
   .divider {
     width: 100%;
     border: 1px solid var(--border-color);
     margin: auto;
   }
-  
+
   .check {
     display: flex;
     gap: 4rem;
@@ -107,7 +106,7 @@
   }
 
   .checkData {
-    margin-left:5px;
+    margin-left: 5px;
   }
 }
 

@@ -29,14 +29,13 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className={styles.navItem_button}>
-                  <Link to="/Register" className={styles.navLink_button}>
+                  <Link to="/criarconta" className={styles.navLink_button}>
                     Criar conta
                   </Link>
                 </li>
               </ul>
             </div>
           </div>
-          
         </nav>
         <div className="btnToggle" onClick={() => setIsActive(!isActive)}>
           <FaBars />
