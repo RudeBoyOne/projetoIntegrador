@@ -43,10 +43,11 @@ function LoginPage() {
           email: email,
           senha: senha,
         });
-
+           console.log(response.data)
         fillUserDataState({
           token: response.data.token,
-          tipo: response.data.tipo,
+          email: response.data.email,
+          nomeESobrenome: response.data.nomeESobrenome
         });
 
         toast('Login efetuado com sucesso.', {

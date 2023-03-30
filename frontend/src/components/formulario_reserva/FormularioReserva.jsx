@@ -1,4 +1,4 @@
-import RegisterPage from '../../pages/register/Register';
+import CriarConta from '../../pages/cadastro/CriarConta';
 import styles from './formularioReserva.module.css';
 import { useState } from 'react';
 
