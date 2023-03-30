@@ -1,0 +1,69 @@
+.containerReserva {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    'form bloco'
+    'calendario bloco'
+    'horario bloco';
+  gap: 4rem;
+  margin: 8rem auto 0;
+  align-items: center;
+  justify-content: center;
+  max-width: 1440px;
+}
+.formulario {
+  grid-area: form;
+}
+
+.calendar {
+  grid-area: calendario;
+}
+
+.calendar h2 {
+  font-size: var(--h2-font-size);
+  color: var(--bg-dark-cyan);
+  margin: 1rem;
+}
+
+.horas {
+  grid-area: horario;
+}
+
+.bloco {
+  grid-column: 3 / 4;
+  grid-row: 1 / 4;
+  align-self: start !important;
+  margin-top: 2rem;
+}
+
+/* For small devices */
+@media screen and (max-width: 576px) {
+  .containerReserva {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bloco{
+    order: 5;
+  }
+}
+
+/* For medium devices */
+@media screen and (min-width: 576px) {
+  .containerReserva {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bloco{
+    order: 5;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1040px) {
+  .containerReserva {
+    display: grid;
+  }
+}

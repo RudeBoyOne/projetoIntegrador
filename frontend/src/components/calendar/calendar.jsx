@@ -16,18 +16,21 @@ const Calendar = () => {
     },
   ]);
 
+  const isMobile = window.innerWidth <= 767;
+
   return (
     <div>
       <DateRange
         ranges={range}
         editableDateInputs={true}
+        showSelectionPreview={true}
         moveRangeOnFirstSelection={false}
         minDate={new Date()}
         rangeColors={['#0c456e']}
         onChange={(item) => setRange([item.selection])}
         locale={pt}
-        months={2}
-        direction="horizontal"
+        months={isMobile? 1 : 2}
+        direction={isMobile? 'vertical' : 'horizontal'}
         className={styles.calendar}
       />
     </div>
