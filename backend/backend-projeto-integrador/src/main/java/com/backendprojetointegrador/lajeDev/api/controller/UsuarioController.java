@@ -4,15 +4,11 @@ import com.backendprojetointegrador.lajeDev.api.assembler.UsuarioAssembler;
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.UsuarioInput;
 import com.backendprojetointegrador.lajeDev.domain.model.Cliente;
 import com.backendprojetointegrador.lajeDev.domain.model.Usuario;
-import com.backendprojetointegrador.lajeDev.domain.repository.IClienteRepository;
 import com.backendprojetointegrador.lajeDev.domain.service.UsuarioService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -21,7 +17,6 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
     private final UsuarioAssembler usuarioAssembler;
-    private final IClienteRepository clienteRepository;
 
     @PostMapping
     public ResponseEntity<String> cria(@RequestBody UsuarioInput usuarioInput) {
@@ -45,5 +40,10 @@ public class UsuarioController {
                 ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @DeleteMapping("{idUsuario}")
+    public ResponseEntity<Void> deletar(@PathVariable Long idUsuario) {
+        usuarioService.excluirUsuario(idUsuario);
+        return ResponseEntity.noContent().build();
+    }
 
 }
