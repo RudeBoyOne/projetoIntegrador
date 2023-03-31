@@ -4,6 +4,7 @@ import com.backendprojetointegrador.lajeDev.api.assembler.ImagemAssembler;
 import com.backendprojetointegrador.lajeDev.api.assembler.ProdutoAssembler;
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.ProdutoInput;
 import com.backendprojetointegrador.lajeDev.api.dtos.outputs.ProdutoOutput;
+import com.backendprojetointegrador.lajeDev.domain.exception.RecursoNaoEncontrado;
 import com.backendprojetointegrador.lajeDev.domain.model.*;
 import com.backendprojetointegrador.lajeDev.domain.service.*;
 import lombok.AllArgsConstructor;
@@ -28,25 +29,56 @@ public class ProdutoController {
     private final CidadeService cidadeService;
 
     @PostMapping
-    public ResponseEntity<ProdutoOutput> criar(@RequestBody ProdutoInput produto) {
-        Produto produtoToSave = produtoAssembler.toEntity(produto);
+    public ResponseEntity<ProdutoOutput> criar(@RequestBody ProdutoInput produtoInput) {
+        Produto produtoToSave = produtoAssembler.toEntity(produtoInput);
 
         List<Caracteristica> caracteristicas = caracteristicaService
-                .listarDeterminandasCaracteristicas(produto.getCaracteristicas());
+                .listarDeterminandasCaracteristicas(produtoInput.getCaracteristicas());
         produtoToSave.setCaracteristicas(caracteristicas);
 
-        List<Imagem> imagens = imagemService.criaObjetosImagens(produto.getImagens(), imagemAssembler);
+        List<Imagem> imagens = imagemService.criaObjetosImagens(produtoInput.getImagens(), imagemAssembler);
         produtoToSave.setImagens(imagens);
 
-        Categoria categoria = categoriaService.buscarCategoria(produto.getCategoria());
+        Categoria categoria = categoriaService.buscarCategoria(produtoInput.getCategoria());
         produtoToSave.setCategoria(categoria);
 
-        Cidade cidade = cidadeService.buscarCidadeById(produto.getCidade());
+        Cidade cidade = cidadeService.buscarCidadeById(produtoInput.getCidade());
         produtoToSave.setCidade(cidade);
 
         ProdutoOutput produtoOutput = produtoAssembler.toOutput(produtoService.criarProduto(produtoToSave));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(produtoOutput);
+    }
+    
+    @PutMapping("{idProduto}")
+    public ResponseEntity<?> atualizar(@PathVariable Long idProduto ,
+                                                                  @RequestBody ProdutoInput produtoInput) {
+        if(produtoService.existeProduto(idProduto)) {
+            Produto produtoToSave = produtoAssembler.toEntity(produtoInput);
+
+            List<Caracteristica> caracteristicas = caracteristicaService
+                    .listarDeterminandasCaracteristicas(produtoInput.getCaracteristicas());
+            produtoToSave.setCaracteristicas(caracteristicas);
+
+            List<Imagem> imagens = imagemService.criaObjetosImagens(produtoInput.getImagens(), imagemAssembler);
+            produtoToSave.setImagens(imagens);
+
+            Categoria categoria = categoriaService.buscarCategoria(produtoInput.getCategoria());
+            produtoToSave.setCategoria(categoria);
+
+            Cidade cidade = cidadeService.buscarCidadeById(produtoInput.getCidade());
+            produtoToSave.setCidade(cidade);
+
+            produtoToSave.setId(idProduto);
+
+            ProdutoOutput produtoOutput = produtoAssembler.toOutput(produtoService.criarProduto(produtoToSave));
+
+            return ResponseEntity.status(HttpStatus.OK).body(produtoOutput);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new RecursoNaoEncontrado("Produto com o id: " + idProduto + " não existe!"));
+        }
+
     }
 
     @GetMapping
