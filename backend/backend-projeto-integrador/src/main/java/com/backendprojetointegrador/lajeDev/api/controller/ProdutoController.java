@@ -49,11 +49,11 @@ public class ProdutoController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(produtoOutput);
     }
-    
+
     @PutMapping("{idProduto}")
-    public ResponseEntity<?> atualizar(@PathVariable Long idProduto ,
-                                                                  @RequestBody ProdutoInput produtoInput) {
-        if(produtoService.existeProduto(idProduto)) {
+    public ResponseEntity<?> atualizar(@PathVariable Long idProduto,
+                                       @RequestBody ProdutoInput produtoInput) {
+        if (produtoService.existeProduto(idProduto)) {
             Produto produtoToSave = produtoAssembler.toEntity(produtoInput);
 
             List<Caracteristica> caracteristicas = caracteristicaService
@@ -76,7 +76,7 @@ public class ProdutoController {
             return ResponseEntity.status(HttpStatus.OK).body(produtoOutput);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new RecursoNaoEncontrado("Produto com o id: " + idProduto + " não existe!"));
+                    .body(new RecursoNaoEncontrado("Produto com o id: " + idProduto + " não existe!").getMessage());
         }
 
     }
@@ -113,7 +113,7 @@ public class ProdutoController {
 
     @GetMapping("/listarPorCidadeEDatas/{idCidade}")
     public ResponseEntity<List<ProdutoOutput>> listarPorCidadeAndDatas(@PathVariable Long idCidade,
-                       @RequestParam("dateStart") LocalDate dateStart, @RequestParam("dateEnd") LocalDate dateEnd) {
+                        @RequestParam("dateStart") LocalDate dateStart, @RequestParam("dateEnd") LocalDate dateEnd) {
         List<Produto> produtosReservados = produtoService.listarByCidadeAndDates(idCidade, dateStart, dateEnd);
         List<ProdutoOutput> produtoOutputs = produtoAssembler.toCollectionOutput(produtosReservados);
         return ResponseEntity.ok(produtoOutputs);
