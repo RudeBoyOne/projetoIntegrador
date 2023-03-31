@@ -1,6 +1,7 @@
 package com.backendprojetointegrador.lajeDev.domain.service;
 
 import com.backendprojetointegrador.lajeDev.domain.exception.RecursoJaExistenteException;
+import com.backendprojetointegrador.lajeDev.domain.model.Cliente;
 import com.backendprojetointegrador.lajeDev.domain.model.Produto;
 import com.backendprojetointegrador.lajeDev.domain.model.Reserva;
 import com.backendprojetointegrador.lajeDev.domain.repository.IReservaRepository;
@@ -35,6 +36,9 @@ public class ReservaService {
         return reservaRepository.findByProduto(produto);
     }
 
+    public List<Reserva> listarReservasPorCliente(Cliente cliente) {
+        return reservaRepository.findByCliente(cliente);
+    }
 
     public List<Reserva> listarReservas() {
         return reservaRepository.findAll();
