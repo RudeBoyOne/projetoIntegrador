@@ -1,6 +1,7 @@
 package com.backendprojetointegrador.lajeDev.domain.service;
 
 import com.backendprojetointegrador.lajeDev.common.PasswordEncoder;
+import com.backendprojetointegrador.lajeDev.domain.exception.RecursoNaoEncontrado;
 import com.backendprojetointegrador.lajeDev.domain.model.Cliente;
 import com.backendprojetointegrador.lajeDev.domain.model.Usuario;
 import com.backendprojetointegrador.lajeDev.domain.repository.IClienteRepository;
@@ -48,5 +49,13 @@ public class UsuarioService {
 
     public Usuario buscarUsuario(Long idUsuario) {
         return usuarioRepository.findById(idUsuario).get();
+    }
+
+    public void excluirUsuario(Long idUsuario) {
+        if (!usuarioRepository.existsById(idUsuario)) {
+            throw new RecursoNaoEncontrado("Usuário com o id " + idUsuario + " não existe!");
+        }
+
+        usuarioRepository.deleteById(idUsuario);
     }
 }

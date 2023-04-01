@@ -46,11 +46,19 @@ public class ReservaController {
         return reservaAssembler.toCollectionOutput(reservaService.listarReservas());
     }
 
-    @GetMapping("{idProduto}")
+    @GetMapping("/listarPorProduto/{idProduto}")
     public ResponseEntity<List<ReservaOutput>> listarPorProduto(@PathVariable Long idProduto) {
         Produto produto = produtoService.buscarProduto(idProduto);
         List<Reserva> reservasEntity = reservaService.listarReservasPorProduto(produto);
         List<ReservaOutput> reservasOutputs = reservaAssembler.toCollectionOutput(reservasEntity);
         return ResponseEntity.ok(reservasOutputs);
+    }
+
+    @GetMapping("/listarPorCliente/{idCliente}")
+    public ResponseEntity<List<ReservaOutput>> listarPorCliente(@PathVariable Long idCliente) {
+        Cliente cliente = (Cliente) usuarioService.buscarUsuario(idCliente);
+        List<Reserva> reservasEntity = reservaService.listarReservasPorCliente(cliente);
+        List<ReservaOutput> reservaOutputs = reservaAssembler.toCollectionOutput(reservasEntity);
+        return ResponseEntity.ok(reservaOutputs);
     }
 }
