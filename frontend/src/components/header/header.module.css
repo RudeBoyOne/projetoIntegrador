@@ -104,7 +104,6 @@
   font-weight: var(--font-semibold);
   text-align: center;
   padding-top: 0.7rem;
-  /* background-color: var(--text-color-light-cyan); */
   border: 2px solid var(--border-color);
 }
 
