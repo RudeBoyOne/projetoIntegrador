@@ -12,7 +12,9 @@
 }
 
 .titleReservaDetail {
-  font-size: var(--h2-font-size)
+  font-size: var(--h3-font-size);
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .image{
@@ -29,25 +31,25 @@
 }
 
 .localInfo {
-  margin: 2rem 1rem;
+  margin: 3rem 1rem;
 
 }
 
 .reservaDescription {
-  margin: 0.5rem;
+  margin: 2rem 0;
 }
 
 
 .divider {
   width: 100%;
-  border: 1px solid #d8d8d8;
-  margin: auto;
+  border: 1px solid var(--border-color);
+  margin: 0.5rem 0;
 }
 
 .check {
   display: flex;
   justify-content: space-between;
-  margin-left: 1rem;
+  margin: 1rem;
 }
 
 .checkData {
@@ -60,8 +62,12 @@
   background-color: var(--bg-dark-cyan);
   color: var(--white-color);
   border-radius: 0.25rem;
+  padding: 1rem 0;
   font-size: var(--normal-font-size);
   transition: 0.3s ease-in-out;
+  outline: none;
+  border: none;
+  cursor: pointer;
 }
 
 .buttonReservation:hover {

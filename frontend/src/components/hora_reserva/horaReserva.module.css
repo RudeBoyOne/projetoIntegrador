@@ -1,7 +1,8 @@
 .titleReservaHorario {
-  font-size: var(--h2-font-size);
+  font-size: var(--h3-font-size);
   color: var(--bg-dark-cyan);
-  margin: 1rem 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .horaMarcar {
@@ -35,6 +36,8 @@
     height: 50px;
     padding: 0.5rem;
     border-radius: 5px;
+    border: 2px solid var(--border-color);
+    outline: none;
     font-size: var(--normal-font-size);
     font-weight: var(--font-semibold);
     color: var(--text-color-dark-cyan);
@@ -78,7 +81,7 @@
   }
 
   .titleReservaHorario {
-    margin: 2rem 0 0 1rem;
+    margin-bottom: 1rem;
   }
 
 }
@@ -88,11 +91,11 @@
 @media screen and (min-width: 1024px) {
 
   .titleReservaHorario {
-    margin: 2rem 0 0 1rem;
+    margin-bottom: 1rem;
   }
 
   .horaMarcar {
-  margin: 2rem 1rem;
+  margin: 2rem 0;
   width: 100%;
   height: auto;
   }
@@ -100,6 +103,6 @@
 
 @media screen and (min-width: 1440px) {
   .titleReservaHorario {
-    margin: 2rem 0 0 1rem;
+    margin-bottom: 2rem;
   }
 }

@@ -14,15 +14,23 @@
 }
 
 .headerLogo {
-  font-size: var(--h1-font-size);
+  font-size: var(--h2-font-size);
   font-weight: var(--font-semibold);
   color: var(--title-color);
+  transition: all 0.3s ease;
 }
 
-.logo,
 .loginLink {
   color: var(--title-color);
-  transition: all 0.3s ease;
+  font-size: var(--normal-font-size);
+  font-weight: var(--font-semibold);
+  display: flex;
+  align-items: center;
+}
+
+.headerIcon {
+  font-size: var(--h2-font-size);
+  margin: 0 0.5rem;
 }
 
 .logo:hover,
@@ -32,7 +40,7 @@
 
 .navList {
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
   align-items: center;
   gap: 2rem;
 }
@@ -49,10 +57,13 @@
   display: inline-block;
   background-color: var(--bg-dark-cyan);
   color: var(--white-color);
-  padding: 0.875rem 1.5rem;
+  padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
   font-size: var(--normal-font-size);
   transition: 0.3s ease-in-out;
+  cursor: pointer;
+  outline: none;
+  border: none;
 }
 
 .navLink_button:hover {
@@ -72,13 +83,36 @@
   justify-content: flex-end;
   align-items: center;
   height: var(--header-height);
+  width: 100%;
+}
+
+.navName {
+  display: flex;
+  align-items: center;
+  font-size: var(--normal-font-size);
+  color: var(--bg-dark-cyan);
+}
+
+.navName p {
+  margin: 0 0.5rem;
+}
+
+.navName p:first-child {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  font-weight: var(--font-semibold);
+  text-align: center;
+  padding-top: 0.7rem;
+  /* background-color: var(--text-color-light-cyan); */
+  border: 2px solid var(--border-color);
 }
 
 .navMenuList ul {
   display: flex;
-  justify-self: end;
-  gap: 2rem;
+  justify-content: flex-end;
   align-items: center;
+  gap: 2rem;
 }
 
 /*=============== BREAKPOINTS ===============*/
@@ -105,8 +139,8 @@
     margin-top: 4rem;
     display: flex;
     justify-content: center;
-    gap: 2rem;
     align-items: center;
+    gap: 2rem;
   }
 
   .navMenuList ul {
@@ -114,7 +148,6 @@
     align-items: center;
     justify-content: center;
   }
-
 }
 
 @media screen and (max-width: 1039px) {
@@ -171,5 +204,4 @@
   .navSearch {
     width: 100%;
   }
-
 }

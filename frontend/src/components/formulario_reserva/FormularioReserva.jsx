@@ -3,8 +3,9 @@ import styles from './formularioReserva.module.css';
 
 import { AuthContext } from '../../providers/AuthContext';
 
-const FormularioReserva = () => {
+const FormularioReserva = ({cidades, getCidades}) => {
   const { userData } = useContext(AuthContext);
+  
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -18,9 +19,11 @@ const FormularioReserva = () => {
     RegisterPage();
   };
 
+
+
   return (
     <>
-      <h1 className={styles.titleForm}>Complete os seus dados</h1>
+      <h2 className={styles.titleForm}>Complete os seus dados</h2>
       <form className={styles.formReserva}>
         <div className={styles.inputContainer}>
           <label htmlFor="nome" className={styles.nome}>
@@ -65,14 +68,23 @@ const FormularioReserva = () => {
           <label htmlFor="cidade" className={styles.cidade}>
             Cidade
           </label>
-          <input
-            type="text"
-            name="text"
-            id="cidade"
-            placeholder="Digite a cidade"
+          <select
+            title="cidades"
+            name="cidades"
+            onChange={(event) => {
+              getCidades(event.target.value);
+            }}
             className={styles.inputDados}
-            required
-          />
+          >
+            <option value="" disable="true" className={styles.optionHide}>
+              Onde vai retirar o carro?
+            </option>
+            {cidades.map((cidade) => (
+              <option key={cidade.id} value={cidade.id}>
+                {cidade.nome}
+              </option>
+            ))}
+          </select>
         </div>
       </form>
     </>

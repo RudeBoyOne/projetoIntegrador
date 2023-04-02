@@ -46,13 +46,14 @@ function LoginPage() {
 
         fillUserDataState({
           token: response.data.token,
-          tipo: response.data.tipo,
+          email: response.data.email,
+          nomeESobrenome: response.data.nomeESobrenome
         });
 
         toast('Login efetuado com sucesso.', {
           type: 'success',
           autoClose: 2500,
-          position: 'top-center',
+          position: 'top-right',
           theme: 'colored',
         });
 
@@ -63,7 +64,7 @@ function LoginPage() {
     } catch (error) {
       toast.error('Erro ao fazer login, tente navamente', {
         autoClose: 2500,
-        position: 'top-center',
+        position: 'top-right',
         theme: 'colored',
       });
     }
@@ -106,7 +107,6 @@ function LoginPage() {
                 className={styles.icon}
                 onClick={() => setViewPassword(!viewPassword)}
               >
-                {viewPassword ? <FiEye /> : <FiEyeOff />}
               </div>
             </div>
             <div className={styles.formGroup}>
