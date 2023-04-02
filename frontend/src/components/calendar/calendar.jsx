@@ -7,15 +7,7 @@ import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import styles from './calendar.module.css';
 
-const Calendar = () => {
-  const [range, setRange] = useState([
-    {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 1),
-      key: 'selection',
-    },
-  ]);
-
+const Calendar = ({ range, onDateChange }) => {
   const isMobile = window.innerWidth <= 767;
 
   return (
@@ -27,10 +19,10 @@ const Calendar = () => {
         moveRangeOnFirstSelection={false}
         minDate={new Date()}
         rangeColors={['#0c456e']}
-        onChange={(item) => setRange([item.selection])}
+        onChange={onDateChange}
         locale={pt}
-        months={isMobile? 1 : 2}
-        direction={isMobile? 'vertical' : 'horizontal'}
+        months={isMobile ? 1 : 2}
+        direction={isMobile ? 'vertical' : 'horizontal'}
         className={styles.calendar}
       />
     </div>

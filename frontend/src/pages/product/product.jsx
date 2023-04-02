@@ -1,6 +1,10 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+import { AuthContext } from '../../providers/AuthContext';
+import { ProductContext } from '../../providers/ProductContext';
+import { CidadeContext } from '../../providers/CidadeContext';
+
 import Pdp_header from '../../components/pdp_header/pdp_header';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
@@ -17,8 +21,11 @@ import api from '../../services/api';
 
 const Product = () => {
   const { id } = useParams();
+  const [cidades, setCidades] = useState([]);
+  const { userData } = useContext(AuthContext);
+  const { fillDataProduct, detalheProduto } = useContext(ProductContext);
+  const { setCidadeSelecionada, cidadeSelecionada } = useContext(CidadeContext);
   const [produtoSelecionado, setProdutoSelecionado] = useState(null);
-
 
   const navigate = useNavigate();
 
@@ -26,6 +33,7 @@ const Product = () => {
     try {
       const response = await api.get(`/produtos/${id}`);
       setProdutoSelecionado(response.data);
+      fillDataProduct(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -35,25 +43,44 @@ const Product = () => {
     getCarrosById();
   }, []);
 
+  const bookingDetail = () => {
+    const token = userData?.token;
 
-  // const bookingDetail = () => {
-  //   const token = userData?.token;
+    if (token) {
+      navigate(`/reservas/${id}`);
+    } else {
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
 
-  //   if (token) {
-  //     navigate(`/reservas/${id}`);
-  //   } else {
-  //     setTimeout(() => {
-  //       navigate('/login');
-  //     }, 1000);
+      toast('Para fazer uma reserva você precisa estar logado.', {
+        type: 'error',
+        autoClose: 2500,
+        position: 'top-center',
+        theme: 'colored',
+      });
+    }
+  };
 
-  //     toast('Para fazer uma reserva você precisa estar logado.', {
-  //       type: 'error',
-  //       autoClose: 2500,
-  //       position: 'top-center',
-  //       theme: 'colored',
-  //     });
-  //   }
-  // };
+  async function getCidades() {
+    try {
+      const response = await api.get('/cidades');
+      setCidades(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getCidades();
+  }, []);
+
+
+  const getCidadeSelecionada = (item) => {
+    setCidadeSelecionada(item);
+  }
+ 
+
 
   return (
     <>
@@ -63,18 +90,30 @@ const Product = () => {
           titulo={produtoSelecionado?.nome}
           categoria={produtoSelecionado?.categoria}
         />
-        <Pdp_local local={produtoSelecionado?.cidade} />
-        <Pdp_gallery imagens={produtoSelecionado?.imagens} />
+        <div className={styles.produtoInfoReserva}>
+          <Pdp_local
+            local={produtoSelecionado?.cidade}
+            cidades={cidades}
+            // cidadeSelecionada={setCidadeSelecionada}
+            onCidadeSelecionada={getCidadeSelecionada}
+            // onSelectCidade={selectCidade}
+            // detalheReserva={detalheReserva}
+          />
+          <div>
+            <Booking
+              produtoSelecionado={produtoSelecionado}
+              bookingDetail={bookingDetail}
+              cidadeSelecionada={cidadeSelecionada}
+            />
+          </div>
+        </div>
         <Description
           descricao={produtoSelecionado?.descricao}
           nomeCarro={produtoSelecionado?.nome}
         />
+        <Pdp_gallery imagens={produtoSelecionado?.imagens} />
         <Characteristics
           caracteristicas={produtoSelecionado?.caracteristicas}
-        />
-        <Booking
-          produtoSelecionado={produtoSelecionado}
-          bookingDetail={bookingDetail}
         />
         <AppPolicy />
       </div>

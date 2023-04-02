@@ -5,15 +5,36 @@
   padding: 1rem;
 }
 
+.produtoInfoReserva {
+display: grid;
+grid-template-columns: 1fr 1fr;
+margin: 2rem 0 4rem;
+}
+
 /*=============== BREAKPOINTS ===============*/
 /* For small devices */
 @media screen and (max-width: 576px) {
+  .produtoInfoReserva {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0 4rem;
+    }   
 }
 
 /* For medium devices */
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 577px) {
+  .produtoInfoReserva {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0 4rem;
+    } 
 }
 
 /* For large devices */
 @media screen and (min-width: 1040px) {
+  .produtoInfoReserva {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 2rem 0 4rem;
+    }
 }

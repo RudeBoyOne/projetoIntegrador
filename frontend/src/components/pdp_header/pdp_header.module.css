@@ -1,10 +1,10 @@
 .pdp_header_c {
-    margin-top: 6rem;
+    margin: 6rem 0 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: var(--bg-light-cyan);    
+    border-bottom: 1px solid var(--border-color);  
 }
 
 .pdp_header_left {
@@ -13,12 +13,13 @@
 }
 
 .pdp_header_title {
-    font-size: var(--normal-font-size);
-    color: var(--text-color-dark-cyan);    
+    font-size: var(--h2-font-size);
+    font-weight: var(--font-semibold);
+    color: var(--text-color-dark-cyan);  
 }
 
 .pdp_header_category{
-    font-size: var(--h3-font-size);
+    font-size: var(--normal-font-size);
     color: var(--text-color-dark-cyan);
 }
 
