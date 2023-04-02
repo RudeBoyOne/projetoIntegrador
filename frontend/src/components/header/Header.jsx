@@ -47,6 +47,7 @@ const Header = () => {
                 <li>
                   {userData.token ? (
                     <div className={styles.navName}>
+                      <p>Olá,  {`${userData?.nomeESobrenome} `}</p>
                       <p>{`${userData?.nomeESobrenome
                         ?.split(' ')[0]
                         .charAt(0)}${userData?.nomeESobrenome

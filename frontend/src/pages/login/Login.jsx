@@ -43,7 +43,7 @@ function LoginPage() {
           email: email,
           senha: senha,
         });
-
+           console.log(response.data)
         fillUserDataState({
           token: response.data.token,
           email: response.data.email,
