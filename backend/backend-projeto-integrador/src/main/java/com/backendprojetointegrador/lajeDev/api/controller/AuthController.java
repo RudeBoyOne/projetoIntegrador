@@ -2,11 +2,9 @@ package com.backendprojetointegrador.lajeDev.api.controller;
 
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.Login;
 import com.backendprojetointegrador.lajeDev.api.dtos.outputs.LoginOutput;
-import com.backendprojetointegrador.lajeDev.domain.exception.RecursoNaoEncontrado;
 import com.backendprojetointegrador.lajeDev.domain.model.Usuario;
 import com.backendprojetointegrador.lajeDev.domain.service.security.TokenService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

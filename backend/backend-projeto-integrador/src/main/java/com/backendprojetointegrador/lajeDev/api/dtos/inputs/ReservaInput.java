@@ -18,6 +18,6 @@ public class ReservaInput {
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataFinalDaReserva;
-    private Long cliente;
+    private Long usuario;
     private Long produto;
 }
