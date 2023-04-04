@@ -50,14 +50,14 @@ public class SecurityConfiguration {
                             .requestMatchers(HttpMethod.POST, "/login")
                                 .permitAll()
 
-                            .requestMatchers(HttpMethod.GET, "/**")
-                                .permitAll()
-
                             .requestMatchers(HttpMethod.POST, "/produtos/**")
                                 .hasAnyRole("ADMIN", "USER")
 
                             .requestMatchers(HttpMethod.POST.name() ,"/reservas/**")
                                 .hasAnyRole("CLIENT")
+
+                            .requestMatchers(HttpMethod.GET, "/**")
+                                .permitAll()
 
                             .anyRequest()
                                 .authenticated()

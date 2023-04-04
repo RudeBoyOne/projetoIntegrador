@@ -11,6 +11,7 @@ public class ProdutoInput {
 
     private String nome;
     private String descricao;
+    private String vin;
     private List<Long> caracteristicas;
     private List<ImagemInput> imagens;
     private Long categoria;

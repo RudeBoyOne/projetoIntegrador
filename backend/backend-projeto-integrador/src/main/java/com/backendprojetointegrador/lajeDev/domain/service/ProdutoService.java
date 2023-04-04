@@ -19,11 +19,11 @@ public class ProdutoService {
     private final IProdutoRepository produtoRepository;
 
     public Produto criarProduto(Produto produto) {
-        boolean produtoExiste = produtoRepository.findByNome(produto.getNome()).stream()
+        boolean produtoExiste = produtoRepository.findByVin(produto.getVin()).stream()
                 .anyMatch((produtoExistente) -> !produtoExistente.equals(produto));
 
         if (produtoExiste){
-            throw new RecursoJaExistenteException("Produto com nome: " + produto.getNome() +
+            throw new RecursoJaExistenteException("Produto com VIN: " + produto.getVin() +
                     " já existe. Tente novamente!");
         }
         return produtoRepository.save(produto);
