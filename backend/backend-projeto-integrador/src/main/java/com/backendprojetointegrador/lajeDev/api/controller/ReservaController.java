@@ -30,7 +30,7 @@ public class ReservaController {
     public ResponseEntity<ReservaOutput> criar(@RequestBody ReservaInput reserva) {
         Reserva reservaToSave = reservaAssembler.toEntity(reserva);
 
-        Usuario usuario = usuarioService.buscarUsuario(reserva.getUsuario());
+        Usuario usuario = usuarioService.buscarUsuario(reserva.getUsuario()).get();
         reservaToSave.setUsuario(usuario);
 
         Produto produto = produtoService.buscarProduto(reserva.getProduto());
@@ -56,7 +56,7 @@ public class ReservaController {
 
     @GetMapping("/listarPorCliente/{idUsuario}")
     public ResponseEntity<List<ReservaOutput>> listarPorCliente(@PathVariable Long idUsuario) {
-        Usuario usuario = usuarioService.buscarUsuario(idUsuario);
+        Usuario usuario = usuarioService.buscarUsuario(idUsuario).get();
         List<Reserva> reservasEntity = reservaService.listarReservasPorUsuario(usuario);
         List<ReservaOutput> reservaOutputs = reservaAssembler.toCollectionOutput(reservasEntity);
         return ResponseEntity.ok(reservaOutputs);

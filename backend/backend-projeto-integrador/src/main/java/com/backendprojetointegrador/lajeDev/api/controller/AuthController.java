@@ -1,5 +1,6 @@
 package com.backendprojetointegrador.lajeDev.api.controller;
 
+import com.backendprojetointegrador.lajeDev.api.assembler.RoleAssembler;
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.Login;
 import com.backendprojetointegrador.lajeDev.api.dtos.outputs.LoginOutput;
 import com.backendprojetointegrador.lajeDev.domain.model.Usuario;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
-
+    private final RoleAssembler roleAssembler;
     private final TokenService tokenService;
 
     @PostMapping
@@ -37,6 +38,7 @@ public class AuthController {
         loginOutput.setId(usuario.getId());
         loginOutput.setNomeESobrenome(usuario.getNome() + " " + usuario.getSobrenome());
         loginOutput.setEmail(usuario.getEmail());
+        loginOutput.setRoles(roleAssembler.toCollectionOutput(usuario.getRoles()));
         loginOutput.setToken(tokenService.generateToken(usuario));
 
         return ResponseEntity.ok(loginOutput);
