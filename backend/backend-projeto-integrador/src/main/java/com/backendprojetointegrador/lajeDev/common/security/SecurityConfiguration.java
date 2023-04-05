@@ -53,7 +53,7 @@ public class SecurityConfiguration {
                             .requestMatchers(HttpMethod.POST, "/produtos/**")
                                 .hasAnyRole("ADMIN", "USER")
 
-                            .requestMatchers(HttpMethod.POST.name() ,"/reservas/**")
+                            .requestMatchers(HttpMethod.POST ,"/reservas/**")
                                 .hasAnyRole("CLIENT")
 
                             .requestMatchers(HttpMethod.GET, "/**")

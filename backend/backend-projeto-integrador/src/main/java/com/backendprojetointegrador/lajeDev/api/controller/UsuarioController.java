@@ -43,8 +43,9 @@ public class UsuarioController {
 
             usuarioEntity.setId(idUsuario);
 
-            usuarioEntity.setRoles(rolesInput.getRoles().stream()
-                    .map(idRole -> roleRepository.findById(idRole).get()).collect(Collectors.toList()));
+            rolesInput.getRoles().forEach(idRole -> {
+                usuarioEntity.getRoles().add(roleRepository.findById(idRole).get());
+            });
 
             usuarioService.criarUsuario(usuarioEntity);
 
