@@ -4,6 +4,5 @@ CREATE TABLE `usuario` (
   `sobrenome` varchar(60) NOT NULL,
   `email` varchar(255) NOT NULL,
   `senha` varchar(255) NOT NULL,
-  `discriminator` varchar(31) NOT NULL,
   PRIMARY KEY (`id`)
 );

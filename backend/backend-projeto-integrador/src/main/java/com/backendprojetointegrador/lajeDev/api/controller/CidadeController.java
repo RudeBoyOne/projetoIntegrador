@@ -5,6 +5,7 @@ import com.backendprojetointegrador.lajeDev.api.dtos.inputs.CidadeInput;
 import com.backendprojetointegrador.lajeDev.api.dtos.outputs.CidadeOutput;
 import com.backendprojetointegrador.lajeDev.domain.model.Cidade;
 import com.backendprojetointegrador.lajeDev.domain.service.CidadeService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,21 +23,17 @@ public class CidadeController {
 
 
     @PostMapping
-    public ResponseEntity<CidadeOutput> criar(@RequestBody CidadeInput cidadeInput) {
+    public ResponseEntity<CidadeOutput> criar(@RequestBody @Valid CidadeInput cidadeInput) {
         Cidade cidadeToSave = cidadeAssembler.toEntity(cidadeInput);
         CidadeOutput cidadeOutput = cidadeAssembler.toOutput(cidadeService.criarCidade(cidadeToSave));
         return ResponseEntity.status(HttpStatus.CREATED).body(cidadeOutput);
     }
 
     @PutMapping("/{idCidade}")
-    public ResponseEntity<CidadeOutput> atualizar(@PathVariable Long idCidade, @RequestBody CidadeInput cidadeInput) {
-        if(!cidadeService.existeCidadeById(idCidade)){
-            return ResponseEntity.notFound().build();
-        }
-
+    public ResponseEntity<CidadeOutput> atualizar(@PathVariable Long idCidade,
+                                                  @RequestBody @Valid CidadeInput cidadeInput) {
         Cidade cidadeEntity = cidadeAssembler.toEntity(cidadeInput);
-        cidadeEntity.setId(idCidade);
-        CidadeOutput cidadeOutput = cidadeAssembler.toOutput(cidadeService.criarCidade(cidadeEntity));
+        CidadeOutput cidadeOutput = cidadeAssembler.toOutput(cidadeService.atualizaCidade(idCidade, cidadeEntity));
         return ResponseEntity.ok(cidadeOutput);
     }
 

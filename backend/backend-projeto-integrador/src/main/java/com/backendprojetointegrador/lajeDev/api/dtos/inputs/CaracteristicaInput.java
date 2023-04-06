@@ -1,5 +1,6 @@
 package com.backendprojetointegrador.lajeDev.api.dtos.inputs;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +8,8 @@ import lombok.Setter;
 @Setter
 public class CaracteristicaInput {
 
+    @NotBlank
     private String nome;
+    @NotBlank
     private String icone;
 }

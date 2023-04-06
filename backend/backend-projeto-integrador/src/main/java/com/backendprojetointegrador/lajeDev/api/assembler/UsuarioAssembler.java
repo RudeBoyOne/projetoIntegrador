@@ -1,7 +1,6 @@
 package com.backendprojetointegrador.lajeDev.api.assembler;
 
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.UsuarioInput;
-import com.backendprojetointegrador.lajeDev.domain.model.Cliente;
 import com.backendprojetointegrador.lajeDev.domain.model.Usuario;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -17,7 +16,4 @@ public class UsuarioAssembler {
         return modelMapper.map(usuarioInput, Usuario.class);
     }
 
-    public Cliente toEntityCliente(UsuarioInput usuarioInput) {
-        return modelMapper.map(usuarioInput, Cliente.class);
-    }
 }

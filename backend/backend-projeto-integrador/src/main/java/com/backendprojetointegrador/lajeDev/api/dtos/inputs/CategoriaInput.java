@@ -1,5 +1,6 @@
 package com.backendprojetointegrador.lajeDev.api.dtos.inputs;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,7 +8,10 @@ import lombok.Setter;
 @Setter
 public class CategoriaInput {
 
+    @NotBlank
     private String qualificacao;
+    @NotBlank
     private String descricao;
+    @NotBlank
     private String urlImagem;
 }

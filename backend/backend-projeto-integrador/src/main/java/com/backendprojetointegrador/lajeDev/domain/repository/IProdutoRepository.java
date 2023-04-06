@@ -15,7 +15,7 @@ import java.util.Optional;
 @Repository
 @Transactional
 public interface IProdutoRepository extends JpaRepository<Produto, Long> {
-    Optional<Produto> findByNome(String nome);
+    Optional<Produto> findByVin(String vin);
     List<Produto> findByCidade(Cidade cidade);
     List<Produto> findByCategoria(Categoria categoria);
 

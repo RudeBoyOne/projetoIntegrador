@@ -17,6 +17,7 @@ public class Produto {
     private Long id;
     private String nome;
     private String descricao;
+    private String vin;
 
     @ManyToMany
     @JoinTable(name = "produto_has_caracteristicas", joinColumns = @JoinColumn(name = "produto_id",

@@ -12,6 +12,7 @@ public class ProdutoOutput {
     private Long id;
     private String nome;
     private String descricao;
+    private String vin;
     private List<CaracteristicaOutput> caracteristicas;
     private List<ImagemOutput> imagens;
     private CategoriaOutput categoria;
