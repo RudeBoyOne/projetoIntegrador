@@ -19,7 +19,7 @@ public class UsuarioService {
 
     private final IUsuarioRepository usuarioRepository;
     private final IRoleRepository roleRepository;
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     public Boolean criarUsuario(Usuario usuario) {
         boolean usuarioExiste = usuarioRepository.findByEmail(usuario.getEmail()).stream()

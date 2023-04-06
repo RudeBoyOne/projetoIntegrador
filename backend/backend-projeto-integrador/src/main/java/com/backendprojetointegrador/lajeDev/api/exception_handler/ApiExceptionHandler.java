@@ -21,8 +21,8 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@ControllerAdvice
 @AllArgsConstructor
+@ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     private final MessageSource messageSource;
 

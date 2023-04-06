@@ -9,6 +9,7 @@ import com.backendprojetointegrador.lajeDev.domain.model.Usuario;
 import com.backendprojetointegrador.lajeDev.domain.service.ProdutoService;
 import com.backendprojetointegrador.lajeDev.domain.service.ReservaService;
 import com.backendprojetointegrador.lajeDev.domain.service.UsuarioService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class ReservaController {
     private final ProdutoService produtoService;
 
     @PostMapping
-    public ResponseEntity<ReservaOutput> criar(@RequestBody ReservaInput reserva) {
+    public ResponseEntity<ReservaOutput> criar(@RequestBody @Valid ReservaInput reserva) {
         Reserva reservaToSave = reservaAssembler.toEntity(reserva);
 
         Usuario usuario = usuarioService.buscarUsuario(reserva.getUsuario()).get();

@@ -5,6 +5,7 @@ import com.backendprojetointegrador.lajeDev.api.dtos.inputs.Login;
 import com.backendprojetointegrador.lajeDev.api.dtos.outputs.LoginOutput;
 import com.backendprojetointegrador.lajeDev.domain.model.Usuario;
 import com.backendprojetointegrador.lajeDev.domain.service.security.TokenService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,7 +26,7 @@ public class AuthController {
     private final TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity<LoginOutput> login(@RequestBody Login login) {
+    public ResponseEntity<LoginOutput> login(@RequestBody @Valid Login login) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                 new UsernamePasswordAuthenticationToken(login.getEmail(), login.getSenha());
 

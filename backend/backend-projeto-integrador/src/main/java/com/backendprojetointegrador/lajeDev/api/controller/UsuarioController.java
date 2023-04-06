@@ -6,13 +6,13 @@ import com.backendprojetointegrador.lajeDev.api.dtos.inputs.UsuarioInput;
 import com.backendprojetointegrador.lajeDev.domain.model.Usuario;
 import com.backendprojetointegrador.lajeDev.domain.repository.IRoleRepository;
 import com.backendprojetointegrador.lajeDev.domain.service.UsuarioService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @RestController
@@ -24,19 +24,19 @@ public class UsuarioController {
     private final UsuarioAssembler usuarioAssembler;
 
     @PostMapping
-    public ResponseEntity<String> cria(@RequestBody UsuarioInput usuarioInput) {
+    public ResponseEntity<String> cria(@RequestBody @Valid UsuarioInput usuarioInput) {
         Usuario usuarioEntity = usuarioAssembler.toEntity(usuarioInput);
 
         Boolean criouUsuario = usuarioService.criarUsuario(usuarioEntity);
 
-        return criouUsuario ? ResponseEntity.badRequest().body("Usuário com e-mail "
-                                           + usuarioInput.getEmail() + " já existe. Tente novamente!") :
+        return criouUsuario ?
+                ResponseEntity.badRequest().body("Usuário com e-mail " + usuarioInput.getEmail() + " já existe.") :
                 ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PatchMapping("{idUsuario}")
     public ResponseEntity<String> adicionarRolesUsuario(@PathVariable Long idUsuario,
-                                                          @RequestBody RolesInput rolesInput) {
+                                                          @RequestBody @Valid RolesInput rolesInput) {
         Optional<Usuario> usuarioOptional = usuarioService.buscarUsuario(idUsuario);
         if (usuarioOptional.isPresent()) {
             Usuario usuarioEntity = usuarioOptional.get();

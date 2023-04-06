@@ -7,13 +7,15 @@ import com.backendprojetointegrador.lajeDev.domain.model.Cidade;
 import com.backendprojetointegrador.lajeDev.domain.model.Produto;
 import com.backendprojetointegrador.lajeDev.domain.repository.IProdutoRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@AllArgsConstructor
+@Slf4j
 @Service
+@AllArgsConstructor
 public class ProdutoService {
 
     private final IProdutoRepository produtoRepository;
@@ -23,16 +25,29 @@ public class ProdutoService {
                 .anyMatch((produtoExistente) -> !produtoExistente.equals(produto));
 
         if (produtoExiste){
+            log.info("Criação de Produto falhou - Produto com o VIN: "+ produto.getVin() + ". Já existe!");
             throw new RecursoJaExistenteException("Produto com VIN: " + produto.getVin() +
                     " já existe. Tente novamente!");
         }
         return produtoRepository.save(produto);
     }
 
+    public Produto atualizaProduto(Long idProduto, Produto produto) {
+        if (!existeProduto(idProduto)) {
+            log.info("Atualização de Produto falhou - Produto com o id: "+ idProduto + ". Não existe!");
+            throw new RecursoNaoEncontrado("Produto com o id: " + idProduto + ". Não existe!");
+        }
+        produto.setId(idProduto);
+        return criarProduto(produto);
+    }
+
     public Produto buscarProduto(Long idProduto) {
         return produtoRepository.findById(idProduto)
-                .orElseThrow(() -> new RecursoNaoEncontrado("Produto com o id: "+ idProduto +
-                        " não existe!"));
+                .orElseThrow(() -> {
+                    log.info("Busca por um Produto falhou - Produto com o id: "+ idProduto + ". Não existe!");
+                    return new RecursoNaoEncontrado("Produto com o id: "+ idProduto +
+                            ". Não existe!");
+                });
     }
 
     public List<Produto> listarProdutos() {
@@ -53,7 +68,8 @@ public class ProdutoService {
 
     public void excluirProduto(Long idProduto) {
         if (!existeProduto(idProduto)) {
-            throw new RecursoNaoEncontrado("Produto com o id: "+ idProduto +" não existe!");
+            log.info("Exclusão de Produto falhou - Produto com o id: "+ idProduto + ". Não existe!");
+            throw new RecursoNaoEncontrado("Produto com o id: "+ idProduto +". Não existe!");
         }
         produtoRepository.deleteById(idProduto);
     }

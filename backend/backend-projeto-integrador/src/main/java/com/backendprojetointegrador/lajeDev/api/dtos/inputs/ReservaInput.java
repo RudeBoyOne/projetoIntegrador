@@ -1,6 +1,7 @@
 package com.backendprojetointegrador.lajeDev.api.dtos.inputs;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,13 +12,18 @@ import java.time.LocalTime;
 @Setter
 public class ReservaInput {
 
+    @NotNull
     private LocalTime horaDeInicioDaReserva;
 
+    @NotNull
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataInicialDaReserva;
 
+    @NotNull
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataFinalDaReserva;
+    @NotNull
     private Long usuario;
+    @NotNull
     private Long produto;
 }

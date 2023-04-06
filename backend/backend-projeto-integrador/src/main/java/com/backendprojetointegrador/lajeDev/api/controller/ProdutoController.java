@@ -4,9 +4,9 @@ import com.backendprojetointegrador.lajeDev.api.assembler.ImagemAssembler;
 import com.backendprojetointegrador.lajeDev.api.assembler.ProdutoAssembler;
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.ProdutoInput;
 import com.backendprojetointegrador.lajeDev.api.dtos.outputs.ProdutoOutput;
-import com.backendprojetointegrador.lajeDev.domain.exception.RecursoNaoEncontrado;
 import com.backendprojetointegrador.lajeDev.domain.model.*;
 import com.backendprojetointegrador.lajeDev.domain.service.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +29,7 @@ public class ProdutoController {
     private final CidadeService cidadeService;
 
     @PostMapping
-    public ResponseEntity<ProdutoOutput> criar(@RequestBody ProdutoInput produtoInput) {
+    public ResponseEntity<ProdutoOutput> criar(@RequestBody @Valid ProdutoInput produtoInput) {
         Produto produtoToSave = produtoAssembler.toEntity(produtoInput);
 
         List<Caracteristica> caracteristicas = caracteristicaService
@@ -52,8 +52,7 @@ public class ProdutoController {
 
     @PutMapping("{idProduto}")
     public ResponseEntity<?> atualizar(@PathVariable Long idProduto,
-                                       @RequestBody ProdutoInput produtoInput) {
-        if (produtoService.existeProduto(idProduto)) {
+                                       @RequestBody @Valid ProdutoInput produtoInput) {
             Produto produtoToSave = produtoAssembler.toEntity(produtoInput);
 
             List<Caracteristica> caracteristicas = caracteristicaService
@@ -69,16 +68,10 @@ public class ProdutoController {
             Cidade cidade = cidadeService.buscarCidadeById(produtoInput.getCidade());
             produtoToSave.setCidade(cidade);
 
-            produtoToSave.setId(idProduto);
-
-            ProdutoOutput produtoOutput = produtoAssembler.toOutput(produtoService.criarProduto(produtoToSave));
+            ProdutoOutput produtoOutput = produtoAssembler.toOutput(produtoService.atualizaProduto(idProduto,
+                    produtoToSave));
 
             return ResponseEntity.status(HttpStatus.OK).body(produtoOutput);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new RecursoNaoEncontrado("Produto com o id: " + idProduto + " não existe!").getMessage());
-        }
-
     }
 
     @GetMapping
