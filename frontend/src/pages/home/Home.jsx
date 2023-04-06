@@ -84,6 +84,8 @@ function Home() {
     }
   }
 
+  
+
   return (
     <div>
       <Header />
@@ -133,7 +135,7 @@ function Home() {
             : carros}
         </div>
       </div>
-
+      
       <Footer />
     </div>
   );
