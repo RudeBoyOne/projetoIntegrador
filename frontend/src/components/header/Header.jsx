@@ -6,6 +6,8 @@ import { AuthContext } from '../../providers/AuthContext'; //exemplo //
 import styles from './header.module.css';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { FiLogIn, FiLogOut } from 'react-icons/fi';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Header = () => {
   const { userData, emptyUserData } = useContext(AuthContext);
@@ -15,6 +17,14 @@ const Header = () => {
 
   function logout() {
     emptyUserData();
+    toast.warn(
+      'Você foi desconectado. Para fazer reservas você precisa efetuar o login novamente.',
+      {
+        autoClose: 3000,
+        position: 'top-right',
+        theme: 'colored',
+      }
+    );
     navigate('/');
   }
 
@@ -29,7 +39,7 @@ const Header = () => {
           <div className={styles.navContainer}>
             <div className={styles.headerLogo}>
               <Link to="/" className={styles.logo}>
-                <p>Laje Dev</p>
+                <p>CaranGo</p>
               </Link>
             </div>
             <div className={styles.navMenuList}>
@@ -43,12 +53,13 @@ const Header = () => {
                         .charAt(0)}${userData?.nomeESobrenome
                         ?.split(' ')[1]
                         .charAt(0)}`}</p>
+                      <p>
+                        Olá,<br></br> {`${userData?.nomeESobrenome} `}
+                      </p>
                     </div>
                   ) : (
                     <Link to="/Login" className={styles.loginLink}>
-                      <p>
-                       Login
-                      </p>
+                      <p>Login</p>
                     </Link>
                   )}
                 </li>
@@ -75,6 +86,7 @@ const Header = () => {
         <div className="btnToggle" onClick={() => setIsActive(!isActive)}>
           <FaBars />
         </div>
+        <ToastContainer />
       </div>
     </>
   );

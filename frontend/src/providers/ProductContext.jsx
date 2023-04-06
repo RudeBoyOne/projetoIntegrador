@@ -5,7 +5,7 @@ import api from '../services/api';
 
 export const ProductContext = createContext({});
 
-const ProductProvider = ({ children }) => {
+export const ProductProvider = ({ children }) => {
   // const { id } = useParams();
   const [detalheProduto, setDetalheProduto] = useState(null);
   // const [loading, setLoading] = useState(false);
@@ -25,4 +25,3 @@ const fillDataProduct = (produto) => {
   );
 };
 
-export default ProductProvider;

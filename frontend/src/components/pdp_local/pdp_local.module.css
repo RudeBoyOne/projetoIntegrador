@@ -1,6 +1,6 @@
 .pdp_local_c {
-    background-color: #eeeef1;
-    padding: 20px;
+    /* background-color: #eeeef1; */
+    padding-left: 1rem;
 }
 
 .pdp_local_left {
@@ -12,3 +12,33 @@
     font-size: var(--h3-font-size);
     font-weight: bold;
 }
+
+.cidade {
+    font-size: var(--normal-font-size);
+    padding-top: 1rem;
+  }
+
+.inputDados {
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    height: auto;
+    padding: 0.5rem;
+    margin-top: 1.5rem;
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    outline: none;
+    font-size: var(--normal-font-size);
+    color: var(--text-color);
+  }
+  
+  .inputDados::placeholder {
+    font-size: var(--normal-font-size);
+    color: var(--text-color);
+  }
+
+  .bookingTitle {
+    font-size: var(--h3-font-size);
+    color: var(--title-color);
+    padding-bottom: 1rem;
+  }

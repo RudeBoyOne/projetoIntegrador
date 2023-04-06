@@ -2,13 +2,9 @@ import styles from './horaReserva.module.css';
 import React, { useState } from 'react';
 import { BsCheck2Circle } from "react-icons/bs";
 
-const HoraReserva = () => {
-  const [selectedTime, setSelectedTime] = useState("");
+const HoraReserva = ({ selectedTime, onTimeChange }) => {
   
-
-  const handleTimeChange = (event) => {
-    setSelectedTime(event.target.value);
-  };
+  
 
   return (
     <>
@@ -22,7 +18,7 @@ const HoraReserva = () => {
       <p className={styles.textReservaHorario}>Indique o horário previsto para retirar o veículo</p>
 
       <div >
-      <select className={styles.selectHorario} value={selectedTime} onChange={handleTimeChange}>
+      <select className={styles.selectHorario} value={selectedTime} onChange={onTimeChange}>
 
       <option value="">Selecione um horário</option>
 

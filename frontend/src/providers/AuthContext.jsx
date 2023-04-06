@@ -1,3 +1,4 @@
+import { id } from 'date-fns/locale';
 import { useState, createContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,6 +23,7 @@ export const AuthProvider = ({ children }) => {
     );
     setUserData({
       ...fillUserDataState,
+      id: id,
       email: email,
       token: token,
       nome: nome,
@@ -49,6 +51,7 @@ export const AuthProvider = ({ children }) => {
     if (response) {
       user = JSON.parse(response);
       fillUserDataState({
+        id: user.id,
         email: user.email,
         token: user.token,
         nome: user.nome,

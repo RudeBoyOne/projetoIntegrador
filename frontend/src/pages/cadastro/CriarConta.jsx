@@ -27,76 +27,47 @@ function CriarConta() {
   };
 
   async function CriarConta() {
-    const response = await api.post('/usuarios', {
-      nome: nome,
-      sobrenome: sobrenome,
-      email: email,
-      senha: senha,
-    });
-    console.log(response.data);
-    toast('Sua conta foi criada com sucesso.', {
-      type: 'success',
-      autoClose: 2500,
-      position: 'top-center',
-      theme: 'colored',
-    });
+    try {
+      const emailRegex = /^\S+@\S+\.\S+$/;
+      if (!nome || !sobrenome || !email || !senha) {
+        setFormError('* Por favor, preencha todos os campos.');
+        return;
+      } else if (!emailRegex.test(email)) {
+        setFormError('* Por favor, digite um e-mail válido.');
+        return;
+      } else if (senha.length < 6) {
+        setFormError('* A senha deve ter pelo menos 6 caracteres.');
+        return;
+      } else {
+        await api
+          .post('/usuarios', {
+            nome: nome,
+            sobrenome: sobrenome,
+            email: email,
+            senha: senha,
+          })
+          .then((response) => {
+            toast('Sua conta foi criada com sucesso.', {
+              type: 'success',
+              autoClose: 2500,
+              position: 'top-right',
+              theme: 'colored',
+            });
 
-    setTimeout(() => {
-      navigate('/');
-    }, 2500);
+            setTimeout(() => {
+              navigate('/');
+            }, 2500);
+          });
+      }
+    } catch (error) {
+      toast.error('Erro ao criar a sua conta, tente navamente', {
+        autoClose: 2500,
+        position: 'top-right',
+        theme: 'colored',
+      });
+    }
   }
 
-  // async function CriarConta() {
-  //   try {
-  //     const emailRegex = /^\S+@\S+\.\S+$/;
-  //     if (!nome || !sobrenome || !email || !senha) {
-  //       setFormError('* Por favor, preencha todos os campos.');
-  //       return;
-  //     } else if (!emailRegex.test(email)) {
-  //       setFormError('* Por favor, digite um e-mail válido.');
-  //       return;
-  //     } else if (senha.length < 6) {
-  //       setFormError('* A senha deve ter pelo menos 6 caracteres.');
-  //       return;
-  //     } else {
-  //       await api
-  //         .post('/usuarios', {
-  //           nome: nome,
-  //           sobrenome: sobrenome,
-  //           email: email,
-  //           senha: senha,
-  //         })
-  //         .then((response) => {
-  //           console.log(response.data);
-  //           toast('Sua conta foi criada com sucesso.', {
-  //             type: 'success',
-  //             autoClose: 2500,
-  //             position: 'top-center',
-  //             theme: 'colored',
-  //           });
-
-  //           setTimeout(() => {
-  //             navigate('/');
-  //           }, 2500);
-  //         });
-  //     }
-  //   } catch (error) {
-  //     toast.error('Erro ao criar a sua conta, tente navamente', {
-  //       autoClose: 2500,
-  //       position: 'top-center',
-  //       theme: 'colored',
-  //     });
-  //   }
-  // }
-
-  // const users = JSON.parse(localStorage.getItem('users')) || [];
-  // const emailExists = users.some((user) => user.email === email);
-  // if (emailExists) {
-  //   setFormError(
-  //     'Este e-mail já foi cadastrado. Por favor, tente fazer login ou utilize outro e-mail.'
-  //   );
-  //   return;
-  // }
 
   return (
     <>
@@ -149,7 +120,7 @@ function CriarConta() {
                 onChange={(event) => setSenha(event.target.value)}
               />
             </div>
-            <button type="submit">Criar conta</button>
+            <button className={styles.btnCriarConta} type="submit">Criar conta</button>
           </form>
           <div className={styles.loginLink}>
             Já possui uma conta? <Link to="/Login">Faça o login</Link>

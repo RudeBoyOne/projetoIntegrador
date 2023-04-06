@@ -6,9 +6,11 @@
     'form bloco'
     'calendario bloco'
     'horario bloco';
-  gap: 4rem;
+  grid-column-gap: 2rem;
+  grid-row-gap: 1rem;
+  height: auto;
   margin: 8rem auto 0;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   max-width: 1440px;
 }
@@ -21,20 +23,20 @@
 }
 
 .calendar h2 {
-  font-size: var(--h2-font-size);
+  font-size: var(--h3-font-size);
   color: var(--bg-dark-cyan);
-  margin: 1rem;
+  margin: 1rem 0;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .horas {
   grid-area: horario;
 }
 
-.bloco {
+.blocoReserva {
   grid-column: 3 / 4;
   grid-row: 1 / 4;
   align-self: start !important;
-  margin-top: 2rem;
 }
 
 /* For small devices */
