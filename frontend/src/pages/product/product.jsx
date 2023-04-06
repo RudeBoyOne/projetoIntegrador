@@ -36,24 +36,24 @@ const Product = () => {
   }, []);
 
 
-  // const bookingDetail = () => {
-  //   const token = userData?.token;
+   const bookingDetail = () => {
+     const token = userData?.token;
 
-  //   if (token) {
-  //     navigate(`/reservas/${id}`);
-  //   } else {
-  //     setTimeout(() => {
-  //       navigate('/login');
-  //     }, 1000);
+     if (token) {
+      navigate(`/reservas/${id}`);
+    } else {
+       setTimeout(() => {
+         navigate('/login');
+      }, 1000);
 
-  //     toast('Para fazer uma reserva você precisa estar logado.', {
-  //       type: 'error',
-  //       autoClose: 2500,
-  //       position: 'top-center',
-  //       theme: 'colored',
-  //     });
-  //   }
-  // };
+       toast('Para fazer uma reserva você precisa estar logado.', {
+         type: 'error',
+        autoClose: 2500,
+        position: 'top-center',
+        theme: 'colored',
+       });
+    }
+  };
 
   return (
     <>
