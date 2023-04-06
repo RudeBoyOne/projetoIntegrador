@@ -1,19 +1,26 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '../../providers/AuthContext'; //exemplo //
 
 import styles from './header.module.css';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { FiLogIn, FiLogOut } from 'react-icons/fi';
+import { AiOutlineCar } from 'react-icons/ai';
+import { FiLogIn, FiLogOut, FiUser } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Header = () => {
-  const { userData, emptyUserData } = useContext(AuthContext);
+  const { userData, emptyUserData, isLogin, setIsLoggin } =
+    useContext(AuthContext);
   const [isActive, setIsActive] = useState(false);
+  const [showMenuProfile, setShowMenuProfile] = useState(false);
 
   const navigate = useNavigate();
+
+  const toggleMenu = () => {
+    setShowMenuProfile(!showMenuProfile);
+  };
 
   function logout() {
     emptyUserData();
@@ -27,6 +34,12 @@ const Header = () => {
     );
     navigate('/');
   }
+
+  const incluirVeiculo = () => {
+    if (userData.token) {
+      navigate('/criarproduto');
+    }
+  };
 
   return (
     <>
@@ -46,13 +59,28 @@ const Header = () => {
               <ul className="">
                 <li>
                   {userData.token ? (
-                    <div className={styles.navName}>
-                      <p>Olá,  {`${userData?.nomeESobrenome} `}</p>
-                      <p>{`${userData?.nomeESobrenome
-                        ?.split(' ')[0]
-                        .charAt(0)}${userData?.nomeESobrenome
-                        ?.split(' ')[1]
-                        .charAt(0)}`}</p>
+                    <div
+                      className={`${styles.navName} ${styles.avatarDropdown}`}
+                    >
+                      <div className={styles.avatar} onClick={toggleMenu}>
+                        <p>{`${userData?.nomeESobrenome
+                          ?.split(' ')[0]
+                          .charAt(0)}${userData?.nomeESobrenome
+                          ?.split(' ')[1]
+                          .charAt(0)}`}</p>
+                      </div>
+                      {isLogin && showMenuProfile && (
+                        <ul className={styles.dropdownMenu}>
+                          <li>
+                            <FiUser className={styles.menuIcon} />
+                            Meu Perfil
+                          </li>
+                          <li onClick={() => incluirVeiculo()}>
+                            <AiOutlineCar className={styles.menuIcon} />
+                            Incluir Veículo
+                          </li>
+                        </ul>
+                      )}
                       <p>
                         Olá,<br></br> {`${userData?.nomeESobrenome} `}
                       </p>

@@ -4,13 +4,14 @@ import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext({});
 
-export const AuthProvider = ({ children }) => {
+const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState({});
   const [isLogin, setIsLogin] = useState(false);
 
   const navigate = useNavigate();
 
   function fillUserDataState({
+    id,
     email,
     token,
     nome,
@@ -19,10 +20,10 @@ export const AuthProvider = ({ children }) => {
   }) {
     localStorage.setItem(
       '@system_user',
-      JSON.stringify({ email, token, nome, sobrenome, nomeESobrenome })
+      JSON.stringify({ id, email, token, nome, sobrenome, nomeESobrenome })
     );
     setUserData({
-      ...fillUserDataState,
+      ...useState,
       id: id,
       email: email,
       token: token,
@@ -30,10 +31,12 @@ export const AuthProvider = ({ children }) => {
       sobrenome: sobrenome,
       nomeESobrenome: nomeESobrenome,
     });
+    setIsLogin(true);
   }
 
   function emptyUserData() {
     setUserData({
+      id: '',
       email: '',
       token: '',
       nome: '',
@@ -41,6 +44,7 @@ export const AuthProvider = ({ children }) => {
       nomeESobrenome: '',
     });
     localStorage.clear();
+    setIsLogin(false);
   }
 
   useEffect(() => {
@@ -76,3 +80,5 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
+export default AuthProvider;

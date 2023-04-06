@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import { CidadeContext } from '../../providers/CidadeContext';
 
 import Pdp_header from '../pdp_header/pdp_header';
 import styles from './blocoReservas.module.css';
@@ -10,6 +12,7 @@ import ReservaSucesso from '../reserva_sucesso/ReservaSucesso';
 
 const BlocoReservas = ({ detalheProduto, range, horario, criarReserva }) => {
   const [reservaEfetuada, setReservaEfetuada] = useState(false);
+  const { cidadeSelecionada } = useContext(CidadeContext);
 
   const handleReserva = () => {
     efetuarReserva()
@@ -45,7 +48,7 @@ const BlocoReservas = ({ detalheProduto, range, horario, criarReserva }) => {
           <div className={styles.check}>
             <p>Cidade</p>
             <p className={styles.checkData}>
-              cidade
+              {cidadeSelecionada.nome}
             </p>
           </div>
           <div className={styles.divider}></div>

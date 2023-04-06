@@ -75,12 +75,14 @@ const Product = () => {
     getCidades();
   }, []);
 
-
-  const getCidadeSelecionada = (item) => {
-    setCidadeSelecionada(item);
+  function handleSelectCidade(event) {
+    const cidadeIdSelecionada = parseInt(event.target.value);
+    const cidadeSelecionada = cidades.find(
+      (cidade) => cidade.id === cidadeIdSelecionada
+    );
+    setCidadeSelecionada(cidadeSelecionada);
+    console.log(cidadeSelecionada.nome);
   }
- 
-
 
   return (
     <>
@@ -94,10 +96,7 @@ const Product = () => {
           <Pdp_local
             local={produtoSelecionado?.cidade}
             cidades={cidades}
-            // cidadeSelecionada={setCidadeSelecionada}
-            onCidadeSelecionada={getCidadeSelecionada}
-            // onSelectCidade={selectCidade}
-            // detalheReserva={detalheReserva}
+            onSelectCidade={handleSelectCidade}
           />
           <div>
             <Booking

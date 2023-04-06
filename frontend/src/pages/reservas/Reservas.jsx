@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { addDays } from 'date-fns';
 import { DateRange } from 'react-date-range';
 
@@ -20,10 +21,12 @@ import api from '../../services/api';
 
 import { ProductContext } from '../../providers/ProductContext';
 import { AuthContext } from '../../providers/AuthContext';
+import { CidadeContext } from '../../providers/CidadeContext';
 
 const Reservas = () => {
   const { userData } = useContext(AuthContext);
   const { detalheProduto } = useContext(ProductContext);
+  const { cidadeSelecionada } = useContext(CidadeContext);
   const [cidades, setCidades] = useState([]);
   const [selectedTime, setSelectedTime] = useState('');
   const [range, setRange] = useState([
@@ -33,6 +36,9 @@ const Reservas = () => {
       key: 'selection',
     },
   ]);
+
+  console.log(userData);
+  const navigate = useNavigate();
 
   function handleDateChange(item) {
     setRange([item.selection]);
@@ -103,7 +109,11 @@ const Reservas = () => {
         </div>
 
         <div className={styles.formulario}>
-          <FormularioReserva cidades={cidades} getCidades={getCidades} />
+          <FormularioReserva
+            cidades={cidades}
+            getCidades={getCidades}
+            // onCidadeSelecioanda={cidadeSelecionada}
+          />
         </div>
 
         <div className={styles.calendar}>
