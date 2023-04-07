@@ -14,6 +14,7 @@ import java.time.LocalTime;
 public class ReservaInput {
 
     @NotNull
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime horaDeInicioDaReserva;
 
     @NotNull
