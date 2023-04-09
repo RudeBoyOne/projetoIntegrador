@@ -14,9 +14,6 @@ import java.util.stream.Collectors;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "DISCRIMINATOR")
-@DiscriminatorValue("USUARIO")
 public class Usuario implements UserDetails {
 
     @EqualsAndHashCode.Include

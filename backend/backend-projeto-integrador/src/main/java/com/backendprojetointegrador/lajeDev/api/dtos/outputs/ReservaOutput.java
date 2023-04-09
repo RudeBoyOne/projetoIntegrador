@@ -21,6 +21,6 @@ public class ReservaOutput {
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataFinalDaReserva;
-    private ClienteOutput cliente;
+    private UsuarioOutput Usuario;
     private ProdutoOutput produto;
 }

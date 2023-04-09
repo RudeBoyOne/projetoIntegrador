@@ -1,14 +1,18 @@
 package com.backendprojetointegrador.lajeDev.api.controller;
 
 import com.backendprojetointegrador.lajeDev.api.assembler.UsuarioAssembler;
+import com.backendprojetointegrador.lajeDev.api.dtos.inputs.RolesInput;
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.UsuarioInput;
-import com.backendprojetointegrador.lajeDev.domain.model.Cliente;
 import com.backendprojetointegrador.lajeDev.domain.model.Usuario;
+import com.backendprojetointegrador.lajeDev.domain.repository.IRoleRepository;
 import com.backendprojetointegrador.lajeDev.domain.service.UsuarioService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
@@ -16,28 +20,39 @@ import org.springframework.web.bind.annotation.*;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
+    private final IRoleRepository roleRepository;
     private final UsuarioAssembler usuarioAssembler;
 
     @PostMapping
-    public ResponseEntity<String> cria(@RequestBody UsuarioInput usuarioInput) {
+    public ResponseEntity<String> cria(@RequestBody @Valid UsuarioInput usuarioInput) {
         Usuario usuarioEntity = usuarioAssembler.toEntity(usuarioInput);
 
         Boolean criouUsuario = usuarioService.criarUsuario(usuarioEntity);
 
-        return criouUsuario ? ResponseEntity.badRequest().body("Usuário com e-mail "
-                                           + usuarioInput.getEmail() + " já existe. Tente novamente!") :
+        return criouUsuario ?
+                ResponseEntity.badRequest().body("Usuário com e-mail " + usuarioInput.getEmail() + " já existe.") :
                 ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PostMapping("/clientes")
-    public ResponseEntity<String> criaCliente(@RequestBody UsuarioInput usuarioInput) {
-        Cliente usuarioEntity = usuarioAssembler.toEntityCliente(usuarioInput);
+    @PatchMapping("{idUsuario}")
+    public ResponseEntity<String> adicionarRolesUsuario(@PathVariable Long idUsuario,
+                                                          @RequestBody @Valid RolesInput rolesInput) {
+        Optional<Usuario> usuarioOptional = usuarioService.buscarUsuario(idUsuario);
+        if (usuarioOptional.isPresent()) {
+            Usuario usuarioEntity = usuarioOptional.get();
 
-        Boolean criouUsuario = usuarioService.criarUsuarioCliente(usuarioEntity);
+            usuarioEntity.setId(idUsuario);
 
-        return criouUsuario ? ResponseEntity.badRequest().body("Usuário com e-mail "
-                                           + usuarioInput.getEmail() + " já existe. Tente novamente!") :
-                ResponseEntity.status(HttpStatus.CREATED).build();
+            rolesInput.getRoles().forEach(idRole -> {
+                usuarioEntity.getRoles().add(roleRepository.findById(idRole).get());
+            });
+
+            usuarioService.criarUsuario(usuarioEntity);
+
+            return ResponseEntity.ok().build();
+        }
+
+        return ResponseEntity.badRequest().body("Usuário com id: " + idUsuario + " não existe!");
     }
 
     @DeleteMapping("{idUsuario}")

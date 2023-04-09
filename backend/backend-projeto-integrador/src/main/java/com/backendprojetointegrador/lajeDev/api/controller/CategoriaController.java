@@ -5,6 +5,7 @@ import com.backendprojetointegrador.lajeDev.api.dtos.inputs.CategoriaInput;
 import com.backendprojetointegrador.lajeDev.api.dtos.outputs.CategoriaOutput;
 import com.backendprojetointegrador.lajeDev.domain.model.Categoria;
 import com.backendprojetointegrador.lajeDev.domain.service.CategoriaService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,21 +22,18 @@ public class CategoriaController {
     CategoriaAssembler categoriaAssembler;
 
     @PostMapping
-    public ResponseEntity<CategoriaOutput> criar(@RequestBody CategoriaInput categoria) {
+    public ResponseEntity<CategoriaOutput> criar(@RequestBody @Valid CategoriaInput categoria) {
         Categoria categoriaToSave = categoriaAssembler.toEntity(categoria);
         CategoriaOutput categoriaOutput = categoriaAssembler.toOutput(categoriaService.criarCategoria(categoriaToSave));
         return ResponseEntity.status(HttpStatus.CREATED).body(categoriaOutput);
     }
 
     @PutMapping("/{idCategoria}")
-    public ResponseEntity<CategoriaOutput> atualizar(@PathVariable Long idCategoria, @RequestBody CategoriaInput categoriaInput) {
-        if (!categoriaService.existeCategoria(idCategoria)) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<CategoriaOutput> atualizar(@PathVariable Long idCategoria,
+                                                     @RequestBody @Valid CategoriaInput categoriaInput) {
         Categoria categoriaToUpdate = categoriaAssembler.toEntity(categoriaInput);
-        categoriaToUpdate.setId(idCategoria);
         CategoriaOutput categoriaOutput = categoriaAssembler
-                .toOutput(categoriaService.criarCategoria(categoriaToUpdate));
+                .toOutput(categoriaService.atualizarCategoria(idCategoria, categoriaToUpdate));
         return ResponseEntity.ok(categoriaOutput);
     }
 

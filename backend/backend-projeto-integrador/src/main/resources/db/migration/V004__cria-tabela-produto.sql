@@ -1,7 +1,8 @@
 CREATE TABLE `produto` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `descricao` varchar(255) NOT NULL,
   `nome` varchar(60) NOT NULL,
+  `descricao` varchar(255) NOT NULL,
+  `vin` varchar(17) NOT NULL,
   `categoria_id` bigint NOT NULL,
   `cidade_id` bigint NOT NULL,
   PRIMARY KEY (`id`),

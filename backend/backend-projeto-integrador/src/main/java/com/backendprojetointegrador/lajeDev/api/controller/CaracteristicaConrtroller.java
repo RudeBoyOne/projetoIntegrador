@@ -5,6 +5,7 @@ import com.backendprojetointegrador.lajeDev.api.dtos.inputs.CaracteristicaInput;
 import com.backendprojetointegrador.lajeDev.api.dtos.outputs.CaracteristicaOutput;
 import com.backendprojetointegrador.lajeDev.domain.model.Caracteristica;
 import com.backendprojetointegrador.lajeDev.domain.service.CaracteristicaService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class CaracteristicaConrtroller {
     private final CaracteristicaAssembler caracteristicaAssembler;
 
     @PostMapping
-    public ResponseEntity<CaracteristicaOutput> criar(@RequestBody CaracteristicaInput caracteristicaInput) {
+    public ResponseEntity<CaracteristicaOutput> criar(@RequestBody @Valid CaracteristicaInput caracteristicaInput) {
         Caracteristica caracteristicaToSave = caracteristicaAssembler.toEntity(caracteristicaInput);
         CaracteristicaOutput caracteristicaOutput = caracteristicaAssembler
                 .toOutput(caracteristicaService.criarCaracteristica(caracteristicaToSave));
@@ -30,16 +31,10 @@ public class CaracteristicaConrtroller {
 
     @PutMapping("/{idCaracteristica}")
     public ResponseEntity<CaracteristicaOutput> atualizar(@PathVariable Long idCaracteristica,
-                                                          @RequestBody CaracteristicaInput caracteristicaInput) {
-        if(!caracteristicaService.existeCaracteristica(idCaracteristica)) {
-            return ResponseEntity.notFound().build();
-        }
-
+                                                          @RequestBody @Valid CaracteristicaInput caracteristicaInput) {
         Caracteristica caracteristicaEntity = caracteristicaAssembler.toEntity(caracteristicaInput);
-        caracteristicaEntity.setId(idCaracteristica);
-        CaracteristicaOutput caracteristicaOutput = caracteristicaAssembler.toOutput(caracteristicaService
-                .criarCaracteristica(caracteristicaEntity));
-
+        CaracteristicaOutput caracteristicaOutput = caracteristicaAssembler
+                .toOutput(caracteristicaService.atualizaCaracteristica(idCaracteristica, caracteristicaEntity));
         return ResponseEntity.ok(caracteristicaOutput);
     }
 

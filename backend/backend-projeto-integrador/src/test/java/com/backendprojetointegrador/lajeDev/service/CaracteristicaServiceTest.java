@@ -58,7 +58,7 @@ public class CaracteristicaServiceTest  {
     @Order(4)
     void listTodasCaracteristicasTest() {
         Caracteristica caracteristicaTwo = new Caracteristica();
-        caracteristicaTwo.setNome("Jipe");
+        caracteristicaTwo.setNome("Confortável");
         caracteristicaTwo.setIcone("texto totalmente aleatório para estar no lugar do endereço do icone");
         caracteristicaService.criarCaracteristica(caracteristicaTwo);
 

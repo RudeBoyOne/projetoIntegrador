@@ -1,18 +1,20 @@
 package com.backendprojetointegrador.lajeDev.domain.service;
 
 import com.backendprojetointegrador.lajeDev.domain.exception.RecursoJaExistenteException;
-import com.backendprojetointegrador.lajeDev.domain.model.Cliente;
 import com.backendprojetointegrador.lajeDev.domain.model.Produto;
 import com.backendprojetointegrador.lajeDev.domain.model.Reserva;
+import com.backendprojetointegrador.lajeDev.domain.model.Usuario;
 import com.backendprojetointegrador.lajeDev.domain.repository.IReservaRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-@AllArgsConstructor
+@Slf4j
 @Service
+@AllArgsConstructor
 public class ReservaService {
 
     private final IReservaRepository reservaRepository;
@@ -22,6 +24,9 @@ public class ReservaService {
                 .stream().anyMatch(reserva1 -> reserva1.equals(reserva));
 
         if(reservaExiste) {
+            log.info("Criação de Reserva falhou - Produto: " + reserva.getProduto() + " já está reservado no periódo " +
+                    "de datas solicitado!");
+
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             throw new RecursoJaExistenteException("Produto: " + reserva.getProduto().getNome().toUpperCase()
                     + " já reservado no período: Data inicial " +
@@ -36,8 +41,8 @@ public class ReservaService {
         return reservaRepository.findByProduto(produto);
     }
 
-    public List<Reserva> listarReservasPorCliente(Cliente cliente) {
-        return reservaRepository.findByCliente(cliente);
+    public List<Reserva> listarReservasPorUsuario(Usuario usuario) {
+        return reservaRepository.findByUsuario(usuario);
     }
 
     public List<Reserva> listarReservas() {

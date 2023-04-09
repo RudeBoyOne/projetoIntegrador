@@ -41,22 +41,22 @@ public class SecurityConfiguration {
                             .requestMatchers(HttpMethod.POST, "/usuarios/**")
                                 .permitAll()
 
+                            .requestMatchers(HttpMethod.DELETE, "/usuarios/**")
+                                .hasAnyRole("ADMIN")
+
+                            .requestMatchers(HttpMethod.PATCH, "/usuarios/**")
+                                .hasAnyRole("ADMIN")
+
                             .requestMatchers(HttpMethod.POST, "/login")
                                 .permitAll()
 
-                            .requestMatchers(HttpMethod.GET, "/caracteristicas/**")
-                                .permitAll()
+                            .requestMatchers(HttpMethod.POST, "/produtos/**")
+                                .hasAnyRole("ADMIN", "USER")
 
-                            .requestMatchers(HttpMethod.GET, "/categorias/**")
-                                .permitAll()
+                            .requestMatchers(HttpMethod.POST ,"/reservas/**")
+                                .hasAnyRole("CLIENT")
 
-                            .requestMatchers(HttpMethod.GET, "/cidades/**")
-                                .permitAll()
-
-                            .requestMatchers(HttpMethod.GET, "/produtos/**")
-                                .permitAll()
-
-                            .requestMatchers(HttpMethod.GET, "/reservas/**")
+                            .requestMatchers(HttpMethod.GET, "/**")
                                 .permitAll()
 
                             .anyRequest()
