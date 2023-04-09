@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { CidadeContext } from '../../providers/CidadeContext';
@@ -10,32 +10,30 @@ import Pdp_gallery from '../pdp_gallery/pdp_gallery';
 import Description from '../description/Description';
 import ReservaSucesso from '../reserva_sucesso/ReservaSucesso';
 
-const BlocoReservas = ({ detalheProduto, range, horario, criarReserva }) => {
-  const [reservaEfetuada, setReservaEfetuada] = useState(false);
+const BlocoReservas = ({
+  userData,
+  detalheProduto,
+  range,
+  horario,
+  dataInicial,
+  dataFinal,
+  onCriarReserva,
+  mostrarModal,
+  setMostrarModal,
+}) => {
   const { cidadeSelecionada } = useContext(CidadeContext);
 
-  const handleReserva = () => {
-    efetuarReserva()
-      .then(() => {
-        setReservaEfetuada(true);
-        <ReservaSucesso />;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
 
   return (
     <>
       <h2 className={styles.titleReservaDetail}>Detalhes da reserva</h2>
       <div className={styles.bookingDetailInfo}>
-        <div className={styles.image}>
-          <img src={detalheProduto?.imagens[0].url} />
+        <div className={styles.imageBox}>
+          <img src={detalheProduto?.imagens[0].url} className={styles.image} />
         </div>
 
         <div className={styles.info}>
           <div className={styles.localInfo}>
-            {/* <Pdp_local local={detalheProduto?.cidade} /> */}
             <div className={styles.reservaDescription}>
               <Description
                 nomeCarro={detalheProduto?.nome}
@@ -46,19 +44,13 @@ const BlocoReservas = ({ detalheProduto, range, horario, criarReserva }) => {
 
           <div className={styles.divider}></div>
           <div className={styles.check}>
-            <p>Cidade</p>
-            <p className={styles.checkData}>
-              {cidadeSelecionada.nome}
-            </p>
+            <p>Cliente</p>
+            <p className={styles.checkData}>{userData.nomeESobrenome}</p>
           </div>
           <div className={styles.divider}></div>
           <div className={styles.check}>
-            <p>Retirada</p>
-            <p className={styles.checkData}>
-              {range && range[0] && range[0].startDate && range[0].endDate
-                ? `${range[0].startDate.toLocaleDateString('pt-BR')}`
-                : 'Selecione uma data'}
-            </p>
+            <p>Cidade</p>
+            <p className={styles.checkData}>{cidadeSelecionada.nome}</p>
           </div>
           <div className={styles.divider}></div>
           <div className={styles.check}>
@@ -66,23 +58,31 @@ const BlocoReservas = ({ detalheProduto, range, horario, criarReserva }) => {
             <p className={styles.checkData}>
               {horario ? horario : 'Selecione um horário'}
             </p>
-            {/* <p>{horario}</p> */}
+          </div>
+          <div className={styles.divider}></div>
+          <div className={styles.check}>
+            <p>Retirada</p>
+            <p className={styles.checkData}>
+              {range && range[0] && range[0].startDate && range[0].endDate
+                ? dataInicial
+                : 'Selecione uma data'}
+            </p>
           </div>
           <div className={styles.divider}></div>
           <div className={styles.check}>
             <p>Devolução</p>
             <p className={styles.checkData}>
               {range && range[0] && range[0].startDate && range[0].endDate
-                ? `${range[0].endDate.toLocaleDateString('pt-BR')}`
+                ? dataFinal
                 : 'Selecione uma data'}
             </p>
           </div>
           <div className={styles.divider}></div>
 
-          <button className={styles.buttonReservation} onClick={criarReserva}>
+          <button className={styles.buttonReservation} onClick={onCriarReserva}>
             Confirmar reserva
           </button>
-          {reservaEfetuada && <ReservaSucesso />}
+        
         </div>
       </div>
     </>

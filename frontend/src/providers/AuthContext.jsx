@@ -17,10 +17,19 @@ const AuthProvider = ({ children }) => {
     nome,
     sobrenome,
     nomeESobrenome,
+    roles,
   }) {
     localStorage.setItem(
       '@system_user',
-      JSON.stringify({ id, email, token, nome, sobrenome, nomeESobrenome })
+      JSON.stringify({
+        id,
+        email,
+        token,
+        nome,
+        sobrenome,
+        nomeESobrenome,
+        roles,
+      })
     );
     setUserData({
       ...useState,
@@ -30,6 +39,7 @@ const AuthProvider = ({ children }) => {
       nome: nome,
       sobrenome: sobrenome,
       nomeESobrenome: nomeESobrenome,
+      roles: roles,
     });
     setIsLogin(true);
   }
@@ -42,6 +52,7 @@ const AuthProvider = ({ children }) => {
       nome: '',
       sobrenome: '',
       nomeESobrenome: '',
+      roles: '',
     });
     localStorage.clear();
     setIsLogin(false);
@@ -61,6 +72,7 @@ const AuthProvider = ({ children }) => {
         nome: user.nome,
         sobrenome: user.sobrenome,
         nomeESobrenome: user.nomeESobrenome,
+        roles: user.roles,
       });
       navigate('/');
     }

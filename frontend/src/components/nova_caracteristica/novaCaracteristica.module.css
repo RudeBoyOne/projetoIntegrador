@@ -1,0 +1,56 @@
+
+
+.inputNovaCaracteristicaContainer form{
+    display: flex;
+    margin-left: 1.5rem;
+  }
+  
+  .inputNovaCaracteristica{
+    width: 95%;
+    height: 2rem;
+    outline: none;
+  }
+  
+  .btnCriarNovaCaracteristica{
+    padding: 0.5rem 0.5rem;
+    height: 2rem;
+    width: 4rem;
+    background-color: var(--bg-dark-cyan);
+    color: var(--white-color);
+    border-radius: 0.25rem;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .inputUrlImage {
+    width: 90%;
+    margin: 1rem 0;
+    padding: 0 0.5rem;
+    height: auto;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 0.5rem;
+    outline: none;
+    font-size: var(--small-font-size);
+    color: var(--text-color);
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  
+  .inputPlusIcon {
+    margin-left: 1rem;
+    padding: 0.85rem;
+    border-radius: 0.25rem;
+    outline: none;
+    font-size: var(--small-font-size);
+    color: var(--white-color);
+    background-color: var(--bg-dark-cyan);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .inputPlusIcon:hover {
+    background-color: var(--text-color-dark-cyan);
+  }

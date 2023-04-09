@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import logo from '../../images/Carango-logo-h.png';
 import { AuthContext } from '../../providers/AuthContext'; //exemplo //
 
 import styles from './header.module.css';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { AiOutlineCar } from 'react-icons/ai';
-import { FiLogIn, FiLogOut, FiUser } from 'react-icons/fi';
+import { FiLogIn, FiLogOut, FiUser, FiPieChart } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -41,6 +42,12 @@ const Header = () => {
     }
   };
 
+  const navDashboard = () => {
+    if (userData.token) {
+      navigate('/dashboard');
+    }
+  };
+
   return (
     <>
       <div className={styles.header}>
@@ -51,8 +58,9 @@ const Header = () => {
           />
           <div className={styles.navContainer}>
             <div className={styles.headerLogo}>
-              <Link to="/" className={styles.logo}>
-                <p>CaranGo</p>
+              <Link to="/">
+                {/* <p>CaranGo</p> */}
+                <img src={logo} alt="Carango" className={styles.logo} />
               </Link>
             </div>
             <div className={styles.navMenuList}>
@@ -78,6 +86,10 @@ const Header = () => {
                           <li onClick={() => incluirVeiculo()}>
                             <AiOutlineCar className={styles.menuIcon} />
                             Incluir Veículo
+                          </li>
+                          <li onClick={() => navDashboard()}>
+                            <FiPieChart className={styles.menuIcon} />
+                            Dashboard
                           </li>
                         </ul>
                       )}

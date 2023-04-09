@@ -11,15 +11,15 @@ import { BsCalendar3 } from 'react-icons/bs';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 
-const SearchBar = ({ cidades, filtroPorCidades }) => {
+const SearchBar = ({
+  cidades,
+  filtroPorCidades,
+  range,
+  setRange,
+  onFiltroPorCidadeEData,
+  onSelecionarCidade,
+}) => {
   const [open, setOpen] = useState(false);
-  const [range, setRange] = useState([
-    {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 1),
-      key: 'selection',
-    },
-  ]);
 
   const refOne = useRef(null);
 
@@ -40,8 +40,6 @@ const SearchBar = ({ cidades, filtroPorCidades }) => {
     }
   };
 
- 
-
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -56,6 +54,7 @@ const SearchBar = ({ cidades, filtroPorCidades }) => {
             name="cidades"
             onChange={(event) => {
               filtroPorCidades(event.target.value);
+              onSelecionarCidade(event);
             }}
             className={styles.searchInput}
           >
@@ -82,7 +81,7 @@ const SearchBar = ({ cidades, filtroPorCidades }) => {
               className={styles.inputDate}
               onClick={() => setOpen((open) => !open)}
             />
-            <div ref={refOne} >
+            <div ref={refOne}>
               {open && (
                 <DateRange
                   ranges={range}
@@ -96,13 +95,17 @@ const SearchBar = ({ cidades, filtroPorCidades }) => {
                   direction="horizontal"
                   className={styles.calendarPicker}
                 />
-              
               )}
             </div>
           </div>
         </div>
 
-        <button title="btnSearch" type="submit" className={styles.searchBtn}>
+        <button
+          title="btnSearch"
+          type="submit"
+          onClick={onFiltroPorCidadeEData}
+          className={styles.searchBtn}
+        >
           <FiSearch /> <span className={styles.btnText}>Buscar</span>
         </button>
       </form>

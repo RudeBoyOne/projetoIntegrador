@@ -50,6 +50,7 @@ function LoginPage() {
           email: response.data.email,
           nomeESobrenome: response.data.nomeESobrenome,
           id: response.data.id,
+          roles: response.data.roles,
         });
 
         toast('Login efetuado com sucesso.', {

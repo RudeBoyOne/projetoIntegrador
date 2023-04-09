@@ -1,5 +1,5 @@
 :root {
-  --header-height: 5rem;
+  --header-height: 6rem;
 
   --title-color: #0d141c;
   --text-color: #0b141e;
@@ -20,6 +20,7 @@
   --small-font-size: 0.875rem;
   --smaller-font-size: 0.75rem;
 
+  --font-light: 200;
   --font-regular: 300;
   --font-medium: 400;
   --font-semibold: 600;

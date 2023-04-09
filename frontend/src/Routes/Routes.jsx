@@ -7,6 +7,7 @@ import CriarConta from '../pages/cadastro/CriarConta';
 import Product from '../pages/product/product';
 import Reservas from '../pages/reservas/Reservas';
 import CriarProduto from '../pages/criarProduto/criarProduto';
+import Dashboard from '../pages/dashboard/dashboard';
 
 import AuthProvider, { AuthContext } from '../providers/AuthContext';
 import { ProductProvider } from '../providers/ProductContext';
@@ -41,6 +42,14 @@ const AppRoutes = () => {
               element={
                 <PrivateRoute>
                   <CriarProduto />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
                 </PrivateRoute>
               }
             />

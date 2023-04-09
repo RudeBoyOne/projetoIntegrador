@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addDays } from 'date-fns';
-import { DateRange } from 'react-date-range';
+
 
 import BlocoReservas from '../../components/bloco_reserva/BlocoReservas';
 import Header from '../../components/header/Header';
@@ -10,6 +10,7 @@ import AppPolicy from '../../components/policy/Policy';
 import HoraReserva from '../../components/hora_reserva/HoraReserva';
 import Calendar from '../../components/calendar/calendar';
 import FormularioReserva from '../../components/formulario_reserva/FormularioReserva';
+import ReservaSucesso from '../../components/reserva_sucesso/ReservaSucesso';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -27,8 +28,11 @@ const Reservas = () => {
   const { userData } = useContext(AuthContext);
   const { detalheProduto } = useContext(ProductContext);
   const { cidadeSelecionada } = useContext(CidadeContext);
+  const [mostrarModal, setMostrarModal] = useState(false);
   const [cidades, setCidades] = useState([]);
   const [selectedTime, setSelectedTime] = useState('');
+  const [dataInicial, setDataInicial] = useState('');
+  const [dataFinal, setDataFinal] = useState('');
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -37,7 +41,6 @@ const Reservas = () => {
     },
   ]);
 
-  console.log(userData);
   const navigate = useNavigate();
 
   function handleDateChange(item) {
@@ -61,59 +64,89 @@ const Reservas = () => {
     getCidades();
   }, []);
 
-  async function criarReserva() {
-    try {
-      if (userData.id) {
-        const response = await api.post('/reservas', {
-          produto: detalheProduto.id,
-          cliente: userData.id,
-          horaDeInicioDaReserva: selectedTime,
-          dataIicialDaReserva: range.startDate,
-        });
-      } else {
-        setTimeout(() => {
-          navigate('/login');
-        }, 2000);
+  useEffect(() => {
+    if (range && range[0] && range[0].startDate && range[0].endDate) {
+      setDataInicial(range[0].startDate.toLocaleDateString('pt-BR'));
+      setDataFinal(range[0].endDate.toLocaleDateString('pt-BR'));
+    }
+  }, [range]);
 
-        toast('Para fazer uma reserva você precisa estar logado.', {
-          type: 'error',
+  async function criarReserva() {
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${userData.token}`,
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const body = JSON.stringify({
+      produto: detalheProduto.id,
+      usuario: userData.id,
+      horaDeInicioDaReserva: selectedTime,
+      dataInicialDaReserva: dataInicial,
+      dataFinalDaReserva: dataFinal,
+    });
+
+    try {
+      await api.post('/reservas', body, headers).then((response) => {
+        setMostrarModal(true);
+        toast('Sua reserva foi criada com sucesso.', {
+          type: 'success',
           autoClose: 2500,
           position: 'top-right',
           theme: 'colored',
         });
-      }
-    } catch (error) {
-      toast.error('Erro ao efetuar sua reserva, tente navamente', {
-        autoClose: 2500,
-        position: 'top-right',
-        theme: 'colored',
       });
+    } catch (error) {
+      if (error.response.data !== '') {
+        // toast.error(error.response.data.titulo, {
+        //   autoClose: 4500,
+        //   position: 'top-center',
+        //   theme: 'colored',
+        // });
+        toast.error(
+          'Veículo já esta reservado no período selecionado. Tente uma data diferente.',
+          {
+            autoClose: 4500,
+            position: 'top-center',
+            theme: 'colored',
+          }
+        );
+      } else {
+        toast.error('Você não tem permissão para realizar uma reserva', {
+          autoClose: 4500,
+          position: 'top-center',
+          theme: 'colored',
+        });
+      }
+      console.log(error);
     }
   }
-
-  useEffect(() => {
-    criarReserva();
-  }, []);
 
   return (
     <>
       <Header />
+      <div className={styles.titleReserva}>
+      <p>Falta pouco para concluir a sua reserva</p>
+      </div>
       <div className={styles.containerReserva}>
+        
         <div className={styles.blocoReserva}>
           <BlocoReservas
             detalheProduto={detalheProduto}
             range={range}
             horario={selectedTime}
-            criarReserva={criarReserva}
+            dataInicial={dataInicial}
+            dataFinal={dataFinal}
+            onCriarReserva={criarReserva}
+            userData={userData}
+            // mostrarModal={mostrarModal}
+            // setMostrarModal={setMostrarModal}
           />
         </div>
 
         <div className={styles.formulario}>
-          <FormularioReserva
-            cidades={cidades}
-            getCidades={getCidades}
-            // onCidadeSelecioanda={cidadeSelecionada}
-          />
+          <FormularioReserva cidades={cidades} getCidades={getCidades} />
         </div>
 
         <div className={styles.calendar}>
@@ -132,6 +165,9 @@ const Reservas = () => {
       <AppPolicy />
       <Footer />
       <ToastContainer />
+      {mostrarModal && (
+        <ReservaSucesso onClose={() => setMostrarModal(false)} />
+      )}
     </>
   );
 };

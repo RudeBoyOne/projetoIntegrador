@@ -81,7 +81,6 @@ const Product = () => {
       (cidade) => cidade.id === cidadeIdSelecionada
     );
     setCidadeSelecionada(cidadeSelecionada);
-    console.log(cidadeSelecionada.nome);
   }
 
   return (
