@@ -9,8 +9,6 @@ const Booking = ({ produtoSelecionado, bookingDetail }) => {
   const [value, onChange] = useState(new Date());
   const [date, setDate] = useState(new Date());
 
-  console.log(cidadeSelecionada);
-
   return (
     <>
       <div className={styles.bookingTitleContainer}>

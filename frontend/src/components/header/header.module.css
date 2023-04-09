@@ -20,6 +20,12 @@
   transition: all 0.3s ease;
 }
 
+.logo {
+  max-width: 200px;
+  height: auto;
+  padding: 0.5rem 0;
+}
+
 .loginLink {
   color: var(--title-color);
   font-size: var(--normal-font-size);
@@ -97,21 +103,63 @@
   margin: 0 0.5rem;
 }
 
-.navName p:first-child {
+.navName p:first-child{
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
   font-weight: var(--font-semibold);
+  background-color: #fff;
   text-align: center;
   padding-top: 0.7rem;
   border: 2px solid var(--border-color);
+  cursor: pointer;
 }
 
 .navMenuList ul {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
   gap: 2rem;
+}
+
+.avatarDropdown {
+  position: relative;
+}
+
+
+
+.dropdownMenu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  top: 55px;
+  right: 55px;
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+  width: 175px;
+  height: auto;
+  list-style: none;
+}
+
+.dropdownMenu li {
+  display: flex;
+ align-items: center;
+ justify-content: flex-start;
+  
+  padding: 0 1rem 0 0.5rem;
+  font-size: var(--regular-font-size);
+  cursor: pointer;
+}
+
+.dropdownMenu li:hover {
+  background-color: var(--text-color-light-cyan);
+}
+
+.menuIcon {
+  margin-right: 0.5rem;
 }
 
 /*=============== BREAKPOINTS ===============*/

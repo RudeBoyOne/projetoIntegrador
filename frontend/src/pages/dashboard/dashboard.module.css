@@ -1,0 +1,26 @@
+.dashNavigation {
+  margin: 8rem auto 4rem;
+  max-width: 1440px;
+}
+
+.dashNavList {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 1.5rem 2rem;
+  background-color: var(--bg-dark-cyan);
+  color: #fff;
+  border-radius: 0.5rem;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.dashNavItem {
+  display: flex;
+  justify-self: center;
+  cursor: pointer;
+}
+
+.dashIcon {
+  font-size: var(--h2-font-size);
+  margin-right: 0.5rem;
+}

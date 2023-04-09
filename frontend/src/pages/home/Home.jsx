@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { addDays, set } from 'date-fns';
 
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
@@ -19,7 +20,18 @@ function Home() {
   const [carros, setCarros] = useState([]);
   const [carrosFiltrados, setCarrosFiltrados] = useState([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState('');
+  const [cidadeSelecionada, setCidadeSelecionada] = useState('');
   const [listaCarrosByCat, setListaCarrosByCat] = useState([]);
+  const [dataInicial, setDataInicial] = useState('');
+  const [dataFinal, setDataFinal] = useState('');
+  const [listaCarrosByCidadeData, setListaCarrosByCidadeData] = useState('');
+  const [range, setRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 1),
+      key: 'selection',
+    },
+  ]);
 
   useEffect(() => {
     getCidades();
@@ -42,7 +54,6 @@ function Home() {
       const response = await api.get('/produtos');
       setCarros(response.data);
       setCarrosFiltrados(response.data);
-      // setListaCarrosByCat(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -84,13 +95,46 @@ function Home() {
     }
   }
 
-  
+  useEffect(() => {
+    if (range && range[0] && range[0].startDate && range[0].endDate) {
+      setDataInicial(range[0].startDate.toLocaleDateString('ja-JP'));
+      setDataFinal(range[0].endDate.toLocaleDateString('ja-JP'));
+    }
+  }, [range]);
+
+  function handleSelecionarCidade(event) {
+    setCidadeSelecionada(event.target.value);
+  }
+
+  console.log(cidadeSelecionada);
+  async function filtroPorCidadeEData(cidadeSelecionada) {
+    try {
+      if (cidadeSelecionada) {
+        const response = await api.get(
+          `/produtos/listarPorCidadeEDatas/${cidadeSelecionada.id}?dateStart=${dataInicial}&dateEnd=${dataFinal}`
+        );
+        setListaCarrosByCidadeData(response.data);
+        console.log(listaCarrosByCidadeData);
+      } else {
+        setListaCarrosByCidadeData(carros);
+      }
+    } catch (error) {
+      console.error(error.response.data);
+    }
+  }
 
   return (
     <div>
       <Header />
       <div className="navSearch">
-        <SearchBar cidades={cidades} filtroPorCidades={filtroPorCidades} />
+        <SearchBar
+          cidades={cidades}
+          filtroPorCidades={filtroPorCidades}
+          onFiltroPorCidadeEData={filtroPorCidadeEData}
+          range={range}
+          setRange={setRange}
+          onSelecionarCidade={handleSelecionarCidade}
+        />
       </div>
 
       <div className={styles.category}>

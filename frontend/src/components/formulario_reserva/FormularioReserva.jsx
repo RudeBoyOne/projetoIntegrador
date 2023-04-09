@@ -2,10 +2,11 @@ import { useState, useContext } from 'react';
 import styles from './formularioReserva.module.css';
 
 import { AuthContext } from '../../providers/AuthContext';
+import { CidadeContext } from '../../providers/CidadeContext';
 
-const FormularioReserva = ({cidades, getCidades}) => {
+const FormularioReserva = ({ cidades, getCidades, onCidadeSelecionada }) => {
   const { userData } = useContext(AuthContext);
-  
+  const { cidadeSelecionada } = useContext(CidadeContext);
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -18,8 +19,6 @@ const FormularioReserva = ({cidades, getCidades}) => {
 
     RegisterPage();
   };
-
-
 
   return (
     <>
@@ -65,7 +64,17 @@ const FormularioReserva = ({cidades, getCidades}) => {
         </div>
 
         <div className={styles.inputContainer}>
-          <label htmlFor="cidade" className={styles.cidade}>
+        <label htmlFor="email" className={styles.cidade}>
+            Local para retirar o veículo
+            </label>
+          <input
+            type="text"
+            value={cidadeSelecionada.nome}
+            id="cidadeSelecionada"
+            className={styles.inputDados}
+            disabled
+          />
+          {/* <label htmlFor="cidade" className={styles.cidade}>
             Cidade
           </label>
           <select
@@ -84,7 +93,7 @@ const FormularioReserva = ({cidades, getCidades}) => {
                 {cidade.nome}
               </option>
             ))}
-          </select>
+          </select> */}
         </div>
       </form>
     </>

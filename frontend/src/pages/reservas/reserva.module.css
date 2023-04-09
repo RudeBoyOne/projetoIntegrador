@@ -9,13 +9,23 @@
   grid-column-gap: 2rem;
   grid-row-gap: 1rem;
   height: auto;
-  margin: 8rem auto 0;
+  margin: 4rem auto 0;
   align-items: start;
   justify-content: center;
   max-width: 1440px;
 }
 .formulario {
   grid-area: form;
+}
+
+.titleReserva{
+  margin: 8rem auto 2rem;
+  max-width: 1440px;
+  font-weight: var(--font-regular);
+  font-size: var(--h2-font-size);
+  color: var(--text-color-dark-cyan);
+  letter-spacing: 1px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .calendar {

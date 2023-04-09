@@ -1,20 +1,14 @@
-import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from './Routes/Routes';
-import { AuthProvider } from './providers/AuthContext';
-import { ProductProvider } from './providers/ProductContext';
-import { CidadeProvider } from './providers/CidadeContext';
+
 import './index.css';
 
 function App() {
   return (
     <div className="App">
-      <AuthProvider>
-        <ProductProvider>
-          <CidadeProvider>
-            <AppRoutes />
-          </CidadeProvider>
-        </ProductProvider>
-      </AuthProvider>
+      {/* <BrowserRouter> */}
+        <AppRoutes />
+      {/* </BrowserRouter> */}
     </div>
   );
 }

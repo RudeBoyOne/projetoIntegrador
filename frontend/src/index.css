@@ -1,5 +1,5 @@
 :root {
-  --header-height: 5rem;
+  --header-height: 6rem;
 
   --title-color: #0d141c;
   --text-color: #0b141e;
@@ -20,6 +20,7 @@
   --small-font-size: 0.875rem;
   --smaller-font-size: 0.75rem;
 
+  --font-light: 200;
   --font-regular: 300;
   --font-medium: 400;
   --font-semibold: 600;
@@ -76,7 +77,6 @@ input::placeholder {
   display: none;
 }
 
-
 /*=============== BUTTON ===============*/
 .button {
   display: inline-block;
@@ -97,17 +97,19 @@ input::placeholder {
   display: inline-block;
   background-color: var(--bg-dark-cyan);
   color: var(--white-color);
-  padding: 0.875rem 1.5rem;
+  padding: 0.875rem 2rem;
   border-radius: 0.25rem;
   font-size: var(--normal-font-size);
+  cursor: pointer;
+  outline: none;
+  border: none;
   transition: 0.3s ease-in-out;
 }
 
 .button-dark:hover {
-  background-color: var(--bg-light-cyan);
-  color: var(--text-color-dark-cyan);
+  background-color: var(--text-color-dark-cyan);
+  color: var(--bg-light-cyan);
 }
-
 
 /*=============== SCROLL BAR ===============*/
 ::-webkit-scrollbar {
@@ -167,7 +169,7 @@ input::placeholder {
 @media screen and (min-width: 576px) {
 }
 
-@media screen and (max-width: 1039px ) {
+@media screen and (max-width: 1039px) {
   .navMenu {
     position: fixed;
     left: -100%;
@@ -206,7 +208,6 @@ input::placeholder {
 
 /* For large devices */
 @media screen and (min-width: 1040px) {
-
   .navMenu {
     display: flex;
     flex-direction: column;
@@ -217,7 +218,7 @@ input::placeholder {
   .navMenuList {
     display: flex;
     flex-direction: column;
-    align-items: space-between!important;
+    align-items: space-between !important;
     height: var(--header-height);
     margin: 0 auto;
     padding-right: 7rem;

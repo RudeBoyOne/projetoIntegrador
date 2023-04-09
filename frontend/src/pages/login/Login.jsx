@@ -13,7 +13,8 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 import styles from './login.module.css';
 
 function LoginPage() {
-  const { userData, fillUserDataState } = useContext(AuthContext);
+  const { userData, fillUserDataState, isLoggin, setIsLoggin } =
+    useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [formError, setFormError] = useState('');
@@ -43,11 +44,13 @@ function LoginPage() {
           email: email,
           senha: senha,
         });
-           console.log(response.data)
+
         fillUserDataState({
           token: response.data.token,
           email: response.data.email,
-          nomeESobrenome: response.data.nomeESobrenome
+          nomeESobrenome: response.data.nomeESobrenome,
+          id: response.data.id,
+          roles: response.data.roles,
         });
 
         toast('Login efetuado com sucesso.', {
@@ -62,15 +65,13 @@ function LoginPage() {
         }, 2500);
       }
     } catch (error) {
-      toast.error('Erro ao fazer login, tente navamente', {
+      toast.error('Erro ao fazer login, tente novamente', {
         autoClose: 2500,
         position: 'top-right',
         theme: 'colored',
       });
     }
   }
-
- 
 
   // const handleRememberMeChange = (event) => {
   //   setRememberMe(event.target.checked);
@@ -102,12 +103,11 @@ function LoginPage() {
                 placeholder="Digite sua senha"
                 value={senha}
                 onChange={(event) => setSenha(event.target.value)}
-                />
+              />
               <div
                 className={styles.icon}
                 onClick={() => setViewPassword(!viewPassword)}
-              >
-              </div>
+              ></div>
             </div>
             <div className={styles.formGroup}>
               <div className={styles.checkbox}>

@@ -75,24 +75,13 @@ const Product = () => {
     getCidades();
   }, []);
 
-   const bookingDetail = () => {
-     const token = userData?.token;
-
-     if (token) {
-      navigate(`/reservas/${id}`);
-    } else {
-       setTimeout(() => {
-         navigate('/login');
-      }, 1000);
-
-       toast('Para fazer uma reserva você precisa estar logado.', {
-         type: 'error',
-        autoClose: 2500,
-        position: 'top-center',
-        theme: 'colored',
-       });
-    }
-  };
+  function handleSelectCidade(event) {
+    const cidadeIdSelecionada = parseInt(event.target.value);
+    const cidadeSelecionada = cidades.find(
+      (cidade) => cidade.id === cidadeIdSelecionada
+    );
+    setCidadeSelecionada(cidadeSelecionada);
+  }
 
   return (
     <>
@@ -106,10 +95,7 @@ const Product = () => {
           <Pdp_local
             local={produtoSelecionado?.cidade}
             cidades={cidades}
-            // cidadeSelecionada={setCidadeSelecionada}
-            onCidadeSelecionada={getCidadeSelecionada}
-            // onSelectCidade={selectCidade}
-            // detalheReserva={detalheReserva}
+            onSelectCidade={handleSelectCidade}
           />
           <div>
             <Booking

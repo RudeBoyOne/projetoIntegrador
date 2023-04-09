@@ -6,11 +6,11 @@ import { CidadeContext } from '../../providers/CidadeContext';
 export default function Pdp_local({
   local,
   cidades,
-  onCidadeSelecionada
-  // cidadeSelecionada,
-  // getCidadeSelecionada,
+  onCidadeSelecionada,
+  onSelectCidade
+ 
 }) {
-  const { cidadeSelecionada } = useContext(CidadeContext);
+  
 
   return (
     <div className={styles.pdp_local_c}>
@@ -25,8 +25,8 @@ export default function Pdp_local({
           <select
             title="cidades"
             name="cidades"
-            onChange={onCidadeSelecionada}
-            value={cidadeSelecionada}
+            onChange={onSelectCidade}
+            // value={cidadeSelecionada}
             className={styles.inputDados}
           >
             <option value="" disable="true" className={styles.optionHide}>
