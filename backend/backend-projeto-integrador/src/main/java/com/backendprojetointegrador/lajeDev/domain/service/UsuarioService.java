@@ -41,6 +41,10 @@ public class UsuarioService {
         return usuarioExiste;
     }
 
+    public List<Usuario> listarTodosUsuarios() {
+        return usuarioRepository.findAll();
+    }
+
     public Optional<Usuario> buscarUsuario(Long idUsuario) {
         return usuarioRepository.findById(idUsuario);
     }
