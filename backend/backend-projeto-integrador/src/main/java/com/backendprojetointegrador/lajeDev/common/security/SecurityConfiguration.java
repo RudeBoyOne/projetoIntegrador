@@ -47,6 +47,9 @@ public class SecurityConfiguration {
                             .requestMatchers(HttpMethod.PATCH, "/usuarios/**")
                                 .hasAnyRole("ADMIN")
 
+                            .requestMatchers(HttpMethod.GET, "/usuarios")
+                                .hasAnyRole("ADMIN")
+
                             .requestMatchers(HttpMethod.POST, "/login")
                                 .permitAll()
 

@@ -3,6 +3,7 @@ package com.backendprojetointegrador.lajeDev.api.controller;
 import com.backendprojetointegrador.lajeDev.api.assembler.UsuarioAssembler;
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.RolesInput;
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.UsuarioInput;
+import com.backendprojetointegrador.lajeDev.api.dtos.outputs.UsuarioOutput;
 import com.backendprojetointegrador.lajeDev.domain.model.Usuario;
 import com.backendprojetointegrador.lajeDev.domain.repository.IRoleRepository;
 import com.backendprojetointegrador.lajeDev.domain.service.UsuarioService;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -53,6 +55,13 @@ public class UsuarioController {
         }
 
         return ResponseEntity.badRequest().body("Usuário com id: " + idUsuario + " não existe!");
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UsuarioOutput>> listar() {
+        List<UsuarioOutput> usuarioOutputs = usuarioAssembler
+                .toCollectionOutput(usuarioService.listarTodosUsuarios());
+        return ResponseEntity.ok(usuarioOutputs);
     }
 
     @DeleteMapping("{idUsuario}")
