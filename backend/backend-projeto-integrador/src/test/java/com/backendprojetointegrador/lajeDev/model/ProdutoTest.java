@@ -1,6 +1,9 @@
 package com.backendprojetointegrador.lajeDev.model;
 
-import com.backendprojetointegrador.lajeDev.domain.model.*;
+import com.backendprojetointegrador.lajeDev.domain.model.Caracteristica;
+import com.backendprojetointegrador.lajeDev.domain.model.Categoria;
+import com.backendprojetointegrador.lajeDev.domain.model.Cidade;
+import com.backendprojetointegrador.lajeDev.domain.model.Produto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,14 +36,14 @@ public class ProdutoTest {
         List<Caracteristica> caracteristicas = Arrays.asList(caracteristicaOne, caracteristicaTwo);
         produto.setCaracteristicas(caracteristicas);
 
-        Imagem imagemOne = new Imagem();
+/*        Imagem imagemOne = new Imagem();
         imagemOne.setTitulo("Nivus Azul de frente");
         imagemOne.setUrl("wfgojwshfvbiwouejvbwieubvw");
         Imagem imagemTwo = new Imagem();
         imagemTwo.setTitulo("Nivus Vermelho de lado");
         imagemTwo.setUrl("wfgojwshfvbiwouejvbwieubvw");
         List<Imagem> imagens = Arrays.asList(imagemOne, imagemTwo);
-        produto.setImagens(imagens);
+        produto.setImagens(imagens);*/
 
         Categoria categoria = new Categoria();
         categoria.setQualificacao("SUV");

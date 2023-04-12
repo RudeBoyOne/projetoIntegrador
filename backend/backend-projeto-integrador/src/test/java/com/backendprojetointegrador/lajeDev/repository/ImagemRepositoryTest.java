@@ -23,8 +23,10 @@ public class ImagemRepositoryTest {
     @BeforeAll
     void arrangeImagem() {
         imagem = new Imagem();
+/*
         imagem.setTitulo("BMW luxo");
         imagem.setUrl("wslfgjkhdsfhjsdklfnoghjpwerignkwrmgiopjwjgwrjgw");
+*/
         imagemSave = imagemRepository.save(imagem);
     }
 
@@ -37,13 +39,15 @@ public class ImagemRepositoryTest {
     @Test
     @Order(2)
     void updateImagemTest() {
+/*
         imagem.setTitulo("Ferrari Vermelha");
         imagem.setUrl("snmfgklsdmfgeopsgjwiopjtwemtl;wem,l;w");
         imagem.setId(imagemSave.getId());
+*/
         imagemSave = imagemRepository.save(imagem);
         assertNotNull(imagemSave.getId());
         assertEquals(1, imagemSave.getId());
-        assertEquals("Ferrari Vermelha", imagemSave.getTitulo());
+        assertEquals("Ferrari Vermelha", imagemSave.getName());
         assertEquals("snmfgklsdmfgeopsgjwiopjtwemtl;wem,l;w", imagemSave.getUrl());
     }
 

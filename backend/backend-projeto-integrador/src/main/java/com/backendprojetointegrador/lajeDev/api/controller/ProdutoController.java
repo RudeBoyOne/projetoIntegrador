@@ -5,7 +5,11 @@ import com.backendprojetointegrador.lajeDev.api.assembler.ProdutoAssembler;
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.ProdutoInput;
 import com.backendprojetointegrador.lajeDev.api.dtos.outputs.ProdutoOutput;
 import com.backendprojetointegrador.lajeDev.domain.model.*;
-import com.backendprojetointegrador.lajeDev.domain.service.*;
+import com.backendprojetointegrador.lajeDev.domain.service.CaracteristicaService;
+import com.backendprojetointegrador.lajeDev.domain.service.CategoriaService;
+import com.backendprojetointegrador.lajeDev.domain.service.CidadeService;
+import com.backendprojetointegrador.lajeDev.domain.service.ProdutoService;
+import com.backendprojetointegrador.lajeDev.domain.service.imagem.ImagemService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -36,7 +40,7 @@ public class ProdutoController {
                 .listarDeterminandasCaracteristicas(produtoInput.getCaracteristicas());
         produtoToSave.setCaracteristicas(caracteristicas);
 
-        List<Imagem> imagens = imagemService.criaObjetosImagens(produtoInput.getImagens(), imagemAssembler);
+        List<Imagem> imagens = imagemService.listaDeterminadasImagens(produtoInput.getImagens());
         produtoToSave.setImagens(imagens);
 
         Categoria categoria = categoriaService.buscarCategoria(produtoInput.getCategoria());
@@ -59,7 +63,7 @@ public class ProdutoController {
                     .listarDeterminandasCaracteristicas(produtoInput.getCaracteristicas());
             produtoToSave.setCaracteristicas(caracteristicas);
 
-            List<Imagem> imagens = imagemService.criaObjetosImagens(produtoInput.getImagens(), imagemAssembler);
+            List<Imagem> imagens = imagemService.listaDeterminadasImagens(produtoInput.getImagens());
             produtoToSave.setImagens(imagens);
 
             Categoria categoria = categoriaService.buscarCategoria(produtoInput.getCategoria());
