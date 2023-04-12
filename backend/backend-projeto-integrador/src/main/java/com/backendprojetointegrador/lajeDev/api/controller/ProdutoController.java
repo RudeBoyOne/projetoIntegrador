@@ -40,8 +40,10 @@ public class ProdutoController {
                 .listarDeterminandasCaracteristicas(produtoInput.getCaracteristicas());
         produtoToSave.setCaracteristicas(caracteristicas);
 
-        List<Imagem> imagens = imagemService.listaDeterminadasImagens(produtoInput.getImagens());
-        produtoToSave.setImagens(imagens);
+        if(produtoInput.getImagens() != null){
+            List<Imagem> imagens = imagemService.listaDeterminadasImagens(produtoInput.getImagens());
+            produtoToSave.setImagens(imagens);
+        }
 
         Categoria categoria = categoriaService.buscarCategoria(produtoInput.getCategoria());
         produtoToSave.setCategoria(categoria);

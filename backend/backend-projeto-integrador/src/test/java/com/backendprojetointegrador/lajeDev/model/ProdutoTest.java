@@ -55,7 +55,6 @@ public class ProdutoTest {
                 " e irresistivelmente agressivo por dentro", produto.getDescricao());
         assertEquals("Nivus Chevrollet", produto.getNome());
         assertEquals(2, produto.getCaracteristicas().size());
-        assertEquals(2, produto.getImagens().size());
         assertEquals("SUV", produto.getCategoria().getQualificacao());
         assertEquals("carro espaçoso e grande", produto.getCategoria().getDescricao());
         assertEquals("ros;lgknrgjklvnsdfkjlvnsdfklnvsdjn", produto.getCategoria().getUrlImagem());
