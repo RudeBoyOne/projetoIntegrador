@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import logo from '../../images/Carango-logo-h.png';
+// import logo from '../../images/Carango-logo-h.png';
 import { AuthContext } from '../../providers/AuthContext'; //exemplo //
 
 import styles from './header.module.css';
