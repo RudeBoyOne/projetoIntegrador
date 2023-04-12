@@ -10,10 +10,12 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
+@ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -51,15 +53,6 @@ public class ProdutoRepositotyTest {
         cidade.setPais("Brasil");
         cidadeSave = cidadeRepository.save(cidade);
         produto.setCidade(cidadeSave);
-
-/*        Imagem imagemOne = new Imagem();
-        imagemOne.setTitulo("Nivus Azul de frente");
-        imagemOne.setUrl("wfgojwshfvbiwouejvbwieubvw");
-        Imagem imagemTwo = new Imagem();
-        imagemTwo.setTitulo("Nivus Vermelho de lado");
-        imagemTwo.setUrl("wfgojwshfvbiwouejvbwieubvw");
-        List<Imagem> imagens = Arrays.asList(imagemOne, imagemTwo);
-        produto.setImagens(imagens);*/
 
         produtoSave = produtoRepository.save(produto);
     }

@@ -36,15 +36,6 @@ public class ProdutoTest {
         List<Caracteristica> caracteristicas = Arrays.asList(caracteristicaOne, caracteristicaTwo);
         produto.setCaracteristicas(caracteristicas);
 
-/*        Imagem imagemOne = new Imagem();
-        imagemOne.setTitulo("Nivus Azul de frente");
-        imagemOne.setUrl("wfgojwshfvbiwouejvbwieubvw");
-        Imagem imagemTwo = new Imagem();
-        imagemTwo.setTitulo("Nivus Vermelho de lado");
-        imagemTwo.setUrl("wfgojwshfvbiwouejvbwieubvw");
-        List<Imagem> imagens = Arrays.asList(imagemOne, imagemTwo);
-        produto.setImagens(imagens);*/
-
         Categoria categoria = new Categoria();
         categoria.setQualificacao("SUV");
         categoria.setDescricao("carro espaçoso e grande");

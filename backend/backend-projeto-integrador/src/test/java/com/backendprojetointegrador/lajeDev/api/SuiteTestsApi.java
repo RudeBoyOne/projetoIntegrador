@@ -7,7 +7,9 @@ import com.backendprojetointegrador.lajeDev.api.testsIntegration.ProdutoTestInte
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+import org.springframework.test.context.ActiveProfiles;
 
+@ActiveProfiles("test")
 @RunWith(Suite.class)
 @SuiteClasses({
         CaracterisitcaTestIntegrationApi.class,
