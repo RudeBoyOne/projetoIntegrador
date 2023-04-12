@@ -1,3 +1,9 @@
+.dashContainer {
+  margin: 8rem auto;
+  max-width: 1440px;
+  max-height: 100%;
+}
+
 .dashNavigation {
   margin: 8rem auto 4rem;
   max-width: 1440px;
@@ -6,7 +12,7 @@
 .dashNavList {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  padding: 1.5rem 2rem;
+  padding: 1rem;
   background-color: var(--bg-dark-cyan);
   color: #fff;
   border-radius: 0.5rem;
@@ -17,10 +23,130 @@
 .dashNavItem {
   display: flex;
   justify-self: center;
+  align-items: center;
+  padding: 1rem 3rem;
+  border-radius: 0.5rem;
+  outline: none;
+  border: none;
+  color: #fff;
+  font-size: var(--normal-font-size);
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-dark-cyan);
   cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.dashNavItem:hover {
+  background-color: var(--text-color-dark-cyan);
 }
 
 .dashIcon {
   font-size: var(--h2-font-size);
   margin-right: 0.5rem;
+}
+
+.dashScreens {
+  max-width: 1440px;
+  margin: 2rem 0;
+  padding: 2rem 4rem;
+  background-color: var(--bg-light-cyan);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+}
+
+.dashCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  gap: 1rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.dashCard {
+  width: auto;
+  background-color: var(--bg-light-cyan);
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashCardTitle {
+  font-size: var(--h3-font-size);
+  font-weight: var(--font-semibold);
+  margin-bottom: 1rem;
+  color: var(--text-color-dark-cyan);
+}
+
+.dashCardText {
+  font-size: var(--normal-font-size);
+  color: var(--text-color-dark-cyan);
+  margin-bottom: 1rem;
+}
+
+.dashCardIcon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  color: var(--text-color-dark-cyan);
+}
+
+.dashCardButton {
+  background-color: var(--bg-dark-cyan);
+  color: #fff;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dashCardButton:hover {
+  background-color: var(--text-color-dark-cyan);
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 576px) {
+  .dashNavList {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+  }
+  .dashCards {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: auto;
+    margin: 1rem;
+  }
+}
+
+/* For medium devices */
+@media screen and (min-width: 576px) {
+  .dashNavList {
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1rem;
+  }
+  .dashCards {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: auto;
+    margin: 1rem;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1040px) {
+  .dashCards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: auto;
+    margin: 1rem;
+  }
 }

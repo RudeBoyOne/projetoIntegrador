@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { addDays, set } from 'date-fns';
+import moment from 'moment';
 
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
@@ -106,18 +107,18 @@ function Home() {
     setCidadeSelecionada(event.target.value);
   }
 
-  console.log(cidadeSelecionada);
-  async function filtroPorCidadeEData(cidadeSelecionada) {
+  const novaDataInicial = dataInicial.split('/').join('-');
+  const novaDataFinal = dataFinal.split('/').join('-');
+
+
+  async function filtroPorCidadeEData(novaDataInicial, novaDataFinal, cidadeSelecionada) {
+    console.log('teste');
     try {
-      if (cidadeSelecionada) {
-        const response = await api.get(
-          `/produtos/listarPorCidadeEDatas/${cidadeSelecionada.id}?dateStart=${dataInicial}&dateEnd=${dataFinal}`
-        );
-        setListaCarrosByCidadeData(response.data);
-        console.log(listaCarrosByCidadeData);
-      } else {
-        setListaCarrosByCidadeData(carros);
-      }
+      const response = await api.get(
+        `/produtos/listarPorCidadeEDatas/${cidadeSelecionada}?dateStart=${novaDataInicial}&dateEnd=${novaDataFinal}`
+      );
+      setListaCarrosByCidadeData(response.data);
+      console.log(listaCarrosByCidadeData);
     } catch (error) {
       console.error(error.response.data);
     }
@@ -179,7 +180,7 @@ function Home() {
             : carros}
         </div>
       </div>
-      
+
       <Footer />
     </div>
   );

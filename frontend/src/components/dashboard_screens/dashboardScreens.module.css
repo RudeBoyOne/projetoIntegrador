@@ -1,0 +1,233 @@
+.dashScreens {
+  max-width: 1440px;
+  margin: 2rem 0;
+  padding: 2rem 4rem;
+  background-color: var(--bg-light-cyan);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+}
+
+.reservaTable {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  border-collapse: collapse;
+  width: auto;
+  margin: 2rem 0;
+  color: var(--text-color);
+}
+
+.reservaTable th {
+  width: 200px;
+  padding: 0 1rem;
+}
+
+.reservaDataTable {
+  display: block;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+.reservaDataTable td {
+  width: 200px;
+}
+
+.caracteristicaTable {
+  text-align: left;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.caracteristicaDataTable {
+  text-align: left;
+  margin: 0.5rem 0;
+}
+
+.cidadeTable {
+  text-align: left;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.frotaTable {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.dashTableTr th {
+  text-align: center;
+  padding-right: 1rem;
+}
+
+.frotaDataTable td {
+  padding: 1rem 1rem 0 0;
+}
+
+.boxCaracteristica {
+  display: flex;
+  margin: 2rem 0;
+}
+
+.dashContainerTitle {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 2rem;
+}
+
+.dashContainerTitle p {
+  font-size: var(--h2-font-size);
+  color: var(--text-color-dark-cyan);
+  font-weight: var(--font-semibold);
+}
+
+.inputCaracteristica1,
+.inputCaracteristica2 {
+  border: 1px solid var(--border-color);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.inputCaracteristica1 {
+  margin-right: 1rem;
+  max-width: 300px;
+}
+.inputCaracteristica2 {
+  margin-left: 1rem;
+  max-width: auto;
+}
+
+.containerCidade {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.boxCidade,
+.boxCarro,
+.boxReserva {
+  display: flex;
+  margin: 1.5rem 1rem 1rem 0;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+}
+
+.inputCidade1,
+.inputCidade2 {
+  border: 1px solid var(--border-color);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.inputCidade1 {
+  margin-right: 0.5rem;
+  max-width: 200px;
+}
+.inputCidade2 {
+  margin-left: 0.5rem;
+  max-width: 150px;
+}
+
+.boxCarro {
+  display: flex;
+  justify-content: space-between;
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: 2rem;
+}
+
+.inputCarroNome,
+.inputCarroVin,
+.inputCarroCidade,
+.inputCarroCategoria,
+.inputCarroDescricao,
+.inputReservaNome,
+.inputReservaSobrenome,
+.inputReservaCarro,
+.inputReservaHora,
+.inputReservaInicio,
+.inputReservaFinal {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 0.5rem;
+  border: 1px solid var(--border-color);
+  color: var(--text-color-dark-cyan);
+  outline: none;
+}
+
+.inputCarroNome,
+.inputCarroVin,
+.inputCarroCidade {
+  width: 200px;
+}
+
+.inputCarroCategoria {
+  width: 100px;
+}
+
+.inputCarroDescricao {
+  width: 500px;
+}
+
+.btnIncluirCarro {
+  background-color: var(--bg-dark-cyan);
+  color: #fff;
+  font-size: var(--small-font-size);
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btnIncluirCarro:hover {
+  background-color: var(--text-color-dark-cyan);
+}
+
+.btnBottom {
+  display: flex;
+  justify-content: flex-end;
+  margin: 2rem 0;
+}
+
+.dashIncluirCaracteristica {
+  margin-top: 2rem;
+  float: left;
+  background-color: var(--bg-light-cyan);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 2rem;
+}
+
+.dashIncluirCaracteristica p {
+  padding: 0 1rem 1rem 1.5rem;
+}
+
+.userTable {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.userDataTable td {
+  padding: 1rem 1rem 0 0;
+  text-align: center;
+}
+
+.tableSelect {
+  font-family: 'Poppins', sans-serif;
+  width: 100px;
+  padding: 0.25rem;
+  border: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 0.25rem;
+  outline: none;
+}
+
+.tableIcon {
+  font-size: var(--h3-font-size);
+  color: rgb(225, 72, 72);
+  cursor: pointer;
+}

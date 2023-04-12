@@ -7,18 +7,25 @@
   justify-content: space-between;
   align-items: center;
   height: var(--header-height);
-  padding: 2rem 2rem;
   z-index: var(--z-fixed);
   background-color: var(--white-color);
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 }
 
-.headerLogo {
+.headerContainer {
+  display: flex;
+  /* justify-content: space-evenly; */
+  /* position: relative; */
+  max-width: 1440px;
+}
+
+/* .headerLogo {
+  position: relative;
   font-size: var(--h2-font-size);
   font-weight: var(--font-semibold);
   color: var(--title-color);
   transition: all 0.3s ease;
-}
+} */
 
 .logo {
   max-width: 200px;
@@ -46,7 +53,6 @@
 
 .navList {
   display: flex;
-  /* flex-direction: row; */
   align-items: center;
   gap: 2rem;
 }
@@ -77,11 +83,11 @@
 }
 
 .navContainer {
+  max-width: 1440px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin: 0 auto;
-  width: 1440px;
 }
 
 .navMenuList {
@@ -103,7 +109,7 @@
   margin: 0 0.5rem;
 }
 
-.navName p:first-child{
+.navName p:first-child {
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
@@ -124,8 +130,6 @@
   position: relative;
 }
 
-
-
 .dropdownMenu {
   position: absolute;
   display: flex;
@@ -139,18 +143,19 @@
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1rem 0;
-  width: 175px;
+  width: 180px;
   height: auto;
   list-style: none;
 }
 
 .dropdownMenu li {
   display: flex;
- align-items: center;
- justify-content: flex-start;
-  
+  align-items: center;
+  justify-content: flex-start;
+
   padding: 0 1rem 0 0.5rem;
-  font-size: var(--regular-font-size);
+  font-size: var(--small-font-size);
+  color: var(--bg-dark-cyan);
   cursor: pointer;
 }
 
@@ -160,6 +165,17 @@
 
 .menuIcon {
   margin-right: 0.5rem;
+}
+
+.menuLink{
+  color: var(--bg-dark-cyan);
+}
+
+.btnToggle {
+  position: fixed;
+  display: flex;
+  justify-content: end;
+  float: right;
 }
 
 /*=============== BREAKPOINTS ===============*/
@@ -241,8 +257,9 @@
 
   .navContainer {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    justify-content: space-between;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    position: relative;
     align-items: center;
     margin: 0 auto;
     width: 1440px;
