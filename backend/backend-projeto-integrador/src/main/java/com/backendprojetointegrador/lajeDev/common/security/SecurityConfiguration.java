@@ -59,6 +59,9 @@ public class SecurityConfiguration {
                             .requestMatchers(HttpMethod.POST ,"/reservas/**")
                                 .hasAnyRole("CLIENT")
 
+                            .requestMatchers(HttpMethod.POST, "/upload/**")
+                                .permitAll()
+
                             .requestMatchers(HttpMethod.GET, "/**")
                                 .permitAll()
 

@@ -41,14 +41,14 @@ public class ProdutoTestIntegrationApi {
         produtoInput.setCidade(1L);
         produtoInput.setCategoria(1L);
 
-        ImagemInput imagemOne = new ImagemInput();
+/*        ImagemInput imagemOne = new ImagemInput();
         imagemOne.setTitulo("Nivus Azul de frente");
-        imagemOne.setUrl("wfgojwshfvbiwouejvbwieubvw");
+        //imagemOne.setUrl("wfgojwshfvbiwouejvbwieubvw");
         ImagemInput imagemTwo = new ImagemInput();
         imagemTwo.setTitulo("Nivus Vermelho de lado");
-        imagemTwo.setUrl("wfgojwshfvbiwouejvbwieubvw");
+        //imagemTwo.setUrl("wfgojwshfvbiwouejvbwieubvw");
         List<ImagemInput> imagens = Arrays.asList(imagemOne, imagemTwo);
-        produtoInput.setImagens(imagens);
+        produtoInput.setImagens(imagens);*/
 
         produtoInput.setCaracteristicas(Arrays.asList(1L));
 

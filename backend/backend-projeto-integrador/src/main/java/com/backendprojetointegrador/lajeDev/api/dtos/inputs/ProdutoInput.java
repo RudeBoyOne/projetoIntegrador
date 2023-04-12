@@ -25,7 +25,7 @@ public class ProdutoInput {
     @NotEmpty
     private List<Long> caracteristicas;
     @Valid
-    private List<ImagemInput> imagens;
+    private List<Long> imagens;
     @NotNull
     private Long categoria;
     @NotNull

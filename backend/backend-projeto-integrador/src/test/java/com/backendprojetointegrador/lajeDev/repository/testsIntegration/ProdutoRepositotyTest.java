@@ -2,7 +2,6 @@ package com.backendprojetointegrador.lajeDev.repository.testsIntegration;
 
 import com.backendprojetointegrador.lajeDev.domain.model.Categoria;
 import com.backendprojetointegrador.lajeDev.domain.model.Cidade;
-import com.backendprojetointegrador.lajeDev.domain.model.Imagem;
 import com.backendprojetointegrador.lajeDev.domain.model.Produto;
 import com.backendprojetointegrador.lajeDev.domain.repository.ICategoriaRepository;
 import com.backendprojetointegrador.lajeDev.domain.repository.ICidadeRepository;
@@ -11,9 +10,6 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -56,14 +52,14 @@ public class ProdutoRepositotyTest {
         cidadeSave = cidadeRepository.save(cidade);
         produto.setCidade(cidadeSave);
 
-        Imagem imagemOne = new Imagem();
+/*        Imagem imagemOne = new Imagem();
         imagemOne.setTitulo("Nivus Azul de frente");
         imagemOne.setUrl("wfgojwshfvbiwouejvbwieubvw");
         Imagem imagemTwo = new Imagem();
         imagemTwo.setTitulo("Nivus Vermelho de lado");
         imagemTwo.setUrl("wfgojwshfvbiwouejvbwieubvw");
         List<Imagem> imagens = Arrays.asList(imagemOne, imagemTwo);
-        produto.setImagens(imagens);
+        produto.setImagens(imagens);*/
 
         produtoSave = produtoRepository.save(produto);
     }
