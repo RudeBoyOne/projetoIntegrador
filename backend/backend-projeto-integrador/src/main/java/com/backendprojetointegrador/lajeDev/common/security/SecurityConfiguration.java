@@ -56,11 +56,11 @@ public class SecurityConfiguration {
                             .requestMatchers(HttpMethod.POST, "/produtos/**")
                                 .hasAnyRole("ADMIN", "USER")
 
+                            .requestMatchers(HttpMethod.POST, "/upload/**")
+                                .hasAnyRole("ADMIN", "USER")
+
                             .requestMatchers(HttpMethod.POST ,"/reservas/**")
                                 .hasAnyRole("CLIENT")
-
-                            .requestMatchers(HttpMethod.POST, "/upload/**")
-                                .permitAll()
 
                             .requestMatchers(HttpMethod.GET, "/**")
                                 .permitAll()
