@@ -2,9 +2,13 @@ package com.backendprojetointegrador.lajeDev.api.testsIntegration;
 
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.ImagemInput;
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.ProdutoInput;
+import com.backendprojetointegrador.lajeDev.domain.model.Imagem;
+import com.backendprojetointegrador.lajeDev.domain.repository.IImagemRepository;
+import com.backendprojetointegrador.lajeDev.domain.service.imagem.ImagemService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import lombok.AllArgsConstructor;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,17 +17,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
+@ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
@@ -40,8 +47,7 @@ public class ProdutoTestIntegrationApi {
         produtoInput.setDescricao("carro lindo e elegante");
         produtoInput.setCidade(1L);
         produtoInput.setCategoria(1L);
-
-
+        produtoInput.setVin("nfklhjduti7845pdf");
         produtoInput.setCaracteristicas(Arrays.asList(1L));
 
         ObjectWriter writer = new ObjectMapper()

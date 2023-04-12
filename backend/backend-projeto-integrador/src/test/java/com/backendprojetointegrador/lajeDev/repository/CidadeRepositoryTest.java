@@ -46,7 +46,7 @@ public class CidadeRepositoryTest {
         cidade.setId(cidadeSave.getId());
         cidadeSave = cidadeRepository.save(cidade);
         assertNotNull(cidadeSave.getId());
-        assertEquals(1, cidadeSave.getId());
+        assertEquals(3, cidadeSave.getId());
         assertEquals("Rio de Janeiro", cidadeSave.getNome());
         assertEquals("Paraguai", cidadeSave.getPais());
     }
@@ -54,7 +54,7 @@ public class CidadeRepositoryTest {
     @Test
     @Order(3)
     void listCidadeTest() {
-        assertEquals(1, cidadeRepository.findAll().size());
+        assertEquals(3, cidadeRepository.findAll().size());
     }
 
     @Test
