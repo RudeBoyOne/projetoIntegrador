@@ -1,5 +1,5 @@
 .bookingTitleContainer{
-  margin-left: 3rem;
+  margin-left: 2rem;
 }
 
 .bookingTitle {
@@ -9,22 +9,19 @@
 }
 
 .booking {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 1rem;
-  align-items: start;
+  display: flex;
   justify-content: center;
-  /* grid-template-columns: [calendar] 2fr [button] 1fr; */
   max-height: 100%;
   margin: 1rem ;
 }
 
 .boxBooking {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-items: flex-start;
+  justify-items: center;
   padding: 2rem 1rem;
-  margin: 2rem 0.5rem;
+  margin: 1rem 0.5rem;
   width: 100%;
   height: auto;
   border-radius: 0.5rem;
@@ -37,7 +34,7 @@
   padding: 0.5rem;
   margin: 1rem 0;
   background-color: var(--bg-dark-cyan);
-  color: var(--text-color-light-cyan);
+  color: var(--white-color);
   font-size: var(--normal-font-size);
   font-weight: var(--font-medium);
   border-radius: 0.25rem;
@@ -54,8 +51,10 @@
 
 .textBoxBoking {
   display: flex;
-  flex-direction: column;
-  align-items: start;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin-bottom: 1rem;
 }
 
 

@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { ProgressBar } from 'react-loader-spinner';
 
 import { CidadeContext } from '../../providers/CidadeContext';
 
@@ -20,9 +21,9 @@ const BlocoReservas = ({
   onCriarReserva,
   mostrarModal,
   setMostrarModal,
+  loading,
 }) => {
   const { cidadeSelecionada } = useContext(CidadeContext);
-
 
   return (
     <>
@@ -80,9 +81,23 @@ const BlocoReservas = ({
           <div className={styles.divider}></div>
 
           <button className={styles.buttonReservation} onClick={onCriarReserva}>
-            Confirmar reserva
+            {loading ? (
+              <ProgressBar
+                height="50"
+                width="150"
+                margin="0"
+                ariaLabel="progress-bar-loading"
+                wrapperStyle={{}}
+                wrapperClass="progress-bar-wrapper"
+                borderColor="#fff"
+                barColor="#0c456e"
+                className="loader"
+              />
+            ) : (
+              'Criar Reserva'
+            )}
           </button>
-        
+          {mostrarModal && <ReservaSucesso />}
         </div>
       </div>
     </>

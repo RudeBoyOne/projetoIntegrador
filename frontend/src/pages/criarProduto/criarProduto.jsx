@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import api from '../../services/api';
 
@@ -33,9 +34,14 @@ const CriarProduto = () => {
     descricao: '',
   });
   const [caracteristicaCarro, setCaracteristicaCarro] = useState({});
-  const [imagens, setImagens] = useState(
-    Array(5).fill({ titulo: '', url: '' })
-  );
+  // const [imagens, setImagens] = useState(
+  //   Array(5).fill({ titulo: '', url: '' })
+  // );
+  const [imagens, setImagens] = useState([]);
+  const [idImagem, setIdImagem] = useState('');
+  const [urlUpload, setUrlUpload] = useState('');
+  const [imageURLs, setImageURLs] = useState([]);
+  const [imagensIds, setImagensIds] = useState([]);
 
   const navigate = { useNavigate };
 
@@ -124,7 +130,8 @@ const CriarProduto = () => {
 
   function handleIncluirCarro(e) {
     e.preventDefault();
-    incluirCarro();
+    uploadImagens();
+    // incluirCarro();
   }
 
   function limparFormulario() {
@@ -139,6 +146,98 @@ const CriarProduto = () => {
     setCaracteristicaSelecionada([]);
     setImagens(Array(5).fill({ titulo: '', url: '' }));
   }
+
+  async function handleImageChange(event) {
+    const files = event.target.files;
+
+    setImagens(files);
+
+    console.log(imagens);
+
+    // const imagensArray = Array.from(files).map((file) => ({
+    //   name: file.name,
+    //   type: file.type,
+    //   size: file.size,
+    // }));
+    // setImagens(imagensArray);
+  }
+
+  const uploadImagens = async () => {
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${userData.token}`,
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const body = {
+      name: '',
+      contentType: '',
+      contentLength: '',
+    };
+
+    // for (var i = 0; i < imagens.length; i++) {
+    body.name = imagens[0].name;
+    body.contentType = imagens[0].type;
+    body.contentLength = imagens[0].size;
+
+    //   console.log(body);
+
+    try {
+      const response = await api.post('/upload/imagens', body, headers);
+      const data = response.data;
+      console.log(data);
+      setImagensIds(...imagensIds, response.data.imagemId);
+
+      setUrlUpload(data.uploadSignedUrl);
+      console.log(imagensIds);
+      console.log(urlUpload);
+      putImages(data.uploadSignedUrl, imagens[0]);
+    } catch (error) {
+      console.error(error.response);
+    }
+  };
+
+  const putImages = async (url, file) => {
+    try {
+      // const upload = await api.putForm(url, file);
+      // const upload = await axios.create(url, file);
+
+      var myHeaders = new Headers({
+        'Content-Type': file.type,
+      });
+
+      var myInit = {
+        method: 'PUT',
+        headers: myHeaders,
+        // mode: 'cors',
+        // cache: 'default',
+      };
+
+      var myRequest = new Request(url, file, myInit);
+
+      fetch(myRequest).then(function (response) {
+        const resp = response.blob();
+        console.log(resp);
+      });
+    } catch (error) {
+      console.error(error.response.data);
+    }
+  };
+
+  console.log(imagens);
+
+  const onDrop = async (files) => {
+    setImagens(files);
+
+    const urls = files.map((file) => URL.createObjectURL(file));
+    setImageURLs(urls);
+
+    const [ids, uploadUrls] = await handleImageChange(files);
+    setIdImagem(ids);
+    setUrlUpload(uploadUrls);
+    await incluirCarro();
+  };
 
   async function incluirCarro() {
     const caracteristicasSelecionadasIds = Object.entries(
@@ -159,7 +258,7 @@ const CriarProduto = () => {
       descricao: propriedadesCarro.descricao,
       vin: propriedadesCarro.vin,
       caracteristicas: caracteristicasSelecionadasIds,
-      imagens: imagens,
+      imagens: imagensIds,
       categoria: propriedadesCarro.categoria,
       cidade: propriedadesCarro.cidade,
     });
@@ -291,7 +390,16 @@ const CriarProduto = () => {
                 mínimo 5 imagens.
               </small>
             </p>
-            {imagens.map((imagem, index) => (
+
+            <div>
+              <input
+                type="file"
+                name="imagens"
+                onChange={handleImageChange}
+                multiple
+              />
+            </div>
+            {/* {imagens.map((imagem, index) => (
               <div key={index} className={styles.inputImage}>
                 <input
                   type="text"
@@ -308,7 +416,7 @@ const CriarProduto = () => {
                   className={styles.inputUrlImage}
                 />
               </div>
-            ))}
+            ))} */}
             {/* {inputs.map((input, index) => (
               <div key={index}>
                 <input

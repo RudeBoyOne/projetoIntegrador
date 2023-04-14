@@ -5,28 +5,25 @@ import { CidadeContext } from '../../providers/CidadeContext';
 import Calendar from '../calendar/calendar';
 
 const Booking = ({ produtoSelecionado, bookingDetail }) => {
-  const  cidadeSelecionada  = useContext(CidadeContext);
+  const { cidadeSelecionada } = useContext(CidadeContext);
   const [value, onChange] = useState(new Date());
   const [date, setDate] = useState(new Date());
 
+  console.log(cidadeSelecionada);
   return (
     <>
       <div className={styles.bookingTitleContainer}>
-        <h2 className={styles.bookingTitle}>Período da reserva</h2>
-        <p>Selecione o período para iniciar a reserva.</p>
+        <h2 className={styles.bookingTitle}>Reserve este veículo</h2>
+        <p>Clique no botão abaixo para iniciar a sua reserva.</p>
       </div>
       <div className={styles.booking}>
-        <div className={styles.dataRent}>
-          <Calendar onChange={setDate} value={date} />
-        </div>
         <div className={styles.boxBooking}>
           {/* <p className={styles.bookingTitle}>
             Adicione a data para reservar o seu carro e obter os preços exatos.
           </p> */}
           <div className={styles.textBoxBoking}>
-            <p>Retirada:</p>
-            <p>Devolução:</p>
-            {/* <p>{cidadeSelecionada}</p> */}
+            <p>Agência escolhida:</p>
+            <p>{cidadeSelecionada.nome}</p>
           </div>
           <button
             onClick={() => bookingDetail(produtoSelecionado)}

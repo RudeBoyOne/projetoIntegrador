@@ -1,7 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addDays } from 'date-fns';
-
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
 
 import BlocoReservas from '../../components/bloco_reserva/BlocoReservas';
 import Header from '../../components/header/Header';
@@ -28,7 +29,6 @@ const Reservas = () => {
   const { userData } = useContext(AuthContext);
   const { detalheProduto } = useContext(ProductContext);
   const { cidadeSelecionada } = useContext(CidadeContext);
-  const [mostrarModal, setMostrarModal] = useState(false);
   const [cidades, setCidades] = useState([]);
   const [selectedTime, setSelectedTime] = useState('');
   const [dataInicial, setDataInicial] = useState('');
@@ -40,6 +40,8 @@ const Reservas = () => {
       key: 'selection',
     },
   ]);
+  const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -88,30 +90,27 @@ const Reservas = () => {
     });
 
     try {
+      setLoading(true);
       await api.post('/reservas', body, headers).then((response) => {
-        setMostrarModal(true);
-        toast('Sua reserva foi criada com sucesso.', {
-          type: 'success',
-          autoClose: 2500,
-          position: 'top-right',
-          theme: 'colored',
-        });
+        // toast('Sua reserva foi criada com sucesso.', {
+        //   type: 'success',
+        //   autoClose: 2500,
+        //   position: 'top-right',
+        //   theme: 'colored',
+        // });
+
+        setTimeout(() => {
+          setShowModal(true);
+          setLoading(false);
+        }, 2000);
       });
     } catch (error) {
       if (error.response.data !== '') {
-        // toast.error(error.response.data.titulo, {
-        //   autoClose: 4500,
-        //   position: 'top-center',
-        //   theme: 'colored',
-        // });
-        toast.error(
-          'Veículo já esta reservado no período selecionado. Tente uma data diferente.',
-          {
-            autoClose: 4500,
-            position: 'top-center',
-            theme: 'colored',
-          }
-        );
+        toast.error(error.response.data.titulo, {
+          autoClose: 4500,
+          position: 'top-center',
+          theme: 'colored',
+        });
       } else {
         toast.error('Você não tem permissão para realizar uma reserva', {
           autoClose: 4500,
@@ -123,14 +122,17 @@ const Reservas = () => {
     }
   }
 
+  function handleCloseModal() {
+    setShowModal(false);
+  }
+
   return (
     <>
       <Header />
       <div className={styles.titleReserva}>
-      <p>Falta pouco para concluir a sua reserva</p>
+        <p>Falta pouco para concluir a sua reserva</p>
       </div>
       <div className={styles.containerReserva}>
-        
         <div className={styles.blocoReserva}>
           <BlocoReservas
             detalheProduto={detalheProduto}
@@ -140,8 +142,7 @@ const Reservas = () => {
             dataFinal={dataFinal}
             onCriarReserva={criarReserva}
             userData={userData}
-            // mostrarModal={mostrarModal}
-            // setMostrarModal={setMostrarModal}
+            loading={loading}
           />
         </div>
 
@@ -163,11 +164,15 @@ const Reservas = () => {
       </div>
 
       <AppPolicy />
-      <Footer />
+      <ReservaSucesso
+        showModal={showModal}
+        onCloseModal={handleCloseModal}
+        overLayClassName={styles['modal-overlay']}
+        className={styles['modal-content']}
+        style={{ overlay: { zIndex: 99 } }}
+      />
       <ToastContainer />
-      {mostrarModal && (
-        <ReservaSucesso onClose={() => setMostrarModal(false)} />
-      )}
+      <Footer />
     </>
   );
 };

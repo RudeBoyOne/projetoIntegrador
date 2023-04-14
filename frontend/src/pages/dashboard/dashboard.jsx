@@ -16,18 +16,17 @@ import {
   IoTicketOutline,
 } from 'react-icons/io5';
 import styles from './dashboard.module.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Dashboard = () => {
   const [screens, setScreens] = useState({
-   
     caracteristicas: false,
     cidades: false,
     frota: false,
     reservas: true,
     usuarios: false,
   });
-
-  
 
   function toggleBtnScreen(button) {
     setScreens({
@@ -141,13 +140,14 @@ const Dashboard = () => {
           </ul>
         </div>
         <div>
-          {screens.caracteristicas && <Caracteristicas key="caracteristicas" />}
-          {screens.cidades && <Cidades key="cidades" />}
-          {screens.frota && <Frota key="frota" />}
-          {screens.reservas && <Reservas key="reservas" />}
-          {screens.usuarios && <Users key="usuarios" />}
+          {screens.caracteristicas && <Caracteristicas key={Caracteristicas} />}
+          {screens.cidades && <Cidades key={Cidades} />}
+          {screens.frota && <Frota key={Frota} />}
+          {screens.reservas && <Reservas key={Reservas} />}
+          {screens.usuarios && <Users key={Users} />}
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
