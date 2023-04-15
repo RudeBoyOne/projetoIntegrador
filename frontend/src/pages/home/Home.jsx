@@ -58,6 +58,7 @@ function Home() {
     try {
       const response = await api.get('/produtos');
       setCarros(response.data);
+      console.log(response.data);
       setCarrosFiltrados(response.data);
     } catch (error) {
       console.log(error);

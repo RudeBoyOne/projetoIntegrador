@@ -6,6 +6,7 @@ import styles from './card.module.css';
 
 const Card = (props) => {
   const { id, categoria, nome, descricao, imagens } = props;
+  console.log(imagens);
 
   const navigate = useNavigate();
 

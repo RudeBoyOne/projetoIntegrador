@@ -98,6 +98,10 @@ const CriarProduto = () => {
     };
   }
 
+  function removeSpaces() {
+    const vinSemEspaco = propriedadesCarro.vin.trim();
+  }
+
   function getImages(event, index, propriedade) {
     const target = event.target;
     const value = target.value;
@@ -131,7 +135,8 @@ const CriarProduto = () => {
   function handleIncluirCarro(e) {
     e.preventDefault();
     uploadImagens();
-    // incluirCarro();
+    incluirCarro();
+    // exibirMiniaturas(imagensInput, miniaturasDiv);
   }
 
   function limparFormulario() {
@@ -151,16 +156,8 @@ const CriarProduto = () => {
     const files = event.target.files;
 
     setImagens(files);
-
-    console.log(imagens);
-
-    // const imagensArray = Array.from(files).map((file) => ({
-    //   name: file.name,
-    //   type: file.type,
-    //   size: file.size,
-    // }));
-    // setImagens(imagensArray);
   }
+  console.log(imagens);
 
   const uploadImagens = async () => {
     const headers = {
@@ -176,68 +173,55 @@ const CriarProduto = () => {
       contentLength: '',
     };
 
-    // for (var i = 0; i < imagens.length; i++) {
-    body.name = imagens[0].name;
-    body.contentType = imagens[0].type;
-    body.contentLength = imagens[0].size;
-
-    //   console.log(body);
-
-    try {
-      const response = await api.post('/upload/imagens', body, headers);
-      const data = response.data;
-      console.log(data);
-      setImagensIds(...imagensIds, response.data.imagemId);
-
-      setUrlUpload(data.uploadSignedUrl);
-      console.log(imagensIds);
-      console.log(urlUpload);
-      putImages(data.uploadSignedUrl, imagens[0]);
-    } catch (error) {
-      console.error(error.response);
-    }
+    Promise.all(
+      imagens.map(async (imagem, index) => {
+        body.name = imagem.name;
+        body.contentType = imagem.type;
+        body.contentLength = imagem.size;
+        try {
+          const response = await api.post('/upload/imagens', body, headers);
+          const data = response.data;
+          console.log(data);
+          setImagensIds(...imagensIds, response.data.imagemId);
+          console.log(imagensIds);
+          putImages(data.uploadSignedUrl, imagem);
+        } catch (error) {
+          console.error(error.response);
+        }
+      })
+    );
   };
 
-  const putImages = async (url, file) => {
-    try {
-      // const upload = await api.putForm(url, file);
-      // const upload = await axios.create(url, file);
-
-      var myHeaders = new Headers({
-        'Content-Type': file.type,
-      });
-
-      var myInit = {
-        method: 'PUT',
-        headers: myHeaders,
-        // mode: 'cors',
-        // cache: 'default',
-      };
-
-      var myRequest = new Request(url, file, myInit);
-
-      fetch(myRequest).then(function (response) {
-        const resp = response.blob();
-        console.log(resp);
-      });
-    } catch (error) {
-      console.error(error.response.data);
-    }
+  const putImages = (url, file) => {
+    fetch(url, {
+      method: 'PUT',
+      body: file,
+    }).then((response) => {
+      console.log(response);
+    });
   };
 
-  console.log(imagens);
+  const imagensInput = document.getElementById('imagens');
+  const miniaturasDiv = document.getElementById('miniaturas');
 
-  const onDrop = async (files) => {
-    setImagens(files);
+  function exibirMiniaturas(imagensInput, miniaturasDiv) {
+    imagensInput.addEventListener('change', (e) => {
+      const files = e.target.files;
+      console.log(files);
 
-    const urls = files.map((file) => URL.createObjectURL(file));
-    setImageURLs(urls);
+      for (let i = 0; i < files.lenght; i++) {
+        const file = files[i];
 
-    const [ids, uploadUrls] = await handleImageChange(files);
-    setIdImagem(ids);
-    setUrlUpload(uploadUrls);
-    await incluirCarro();
-  };
+        const img = document.createElement('img');
+
+        img.src = URL.createObjectURL(file);
+        img.width = 80;
+        img.height = 80;
+
+        miniaturasDiv.appendChild(img);
+      }
+    });
+  }
 
   async function incluirCarro() {
     const caracteristicasSelecionadasIds = Object.entries(
@@ -262,6 +246,8 @@ const CriarProduto = () => {
       categoria: propriedadesCarro.categoria,
       cidade: propriedadesCarro.cidade,
     });
+
+    console.log(body);
 
     try {
       if (
@@ -291,7 +277,7 @@ const CriarProduto = () => {
         });
       }
     } catch (error) {
-      toast.error(error.response.data.titulo, {
+      toast.error(error.response, {
         autoClose: 2500,
         position: 'top-right',
         theme: 'colored',
@@ -394,48 +380,13 @@ const CriarProduto = () => {
             <div>
               <input
                 type="file"
+                id="imagens"
                 name="imagens"
                 onChange={handleImageChange}
                 multiple
               />
+              <div id="miniaturas"></div>
             </div>
-            {/* {imagens.map((imagem, index) => (
-              <div key={index} className={styles.inputImage}>
-                <input
-                  type="text"
-                  placeholder="Título da imagem"
-                  value={imagem.titulo}
-                  onChange={(event) => getImages(event, index, 'titulo')}
-                  className={styles.inputUrlImage}
-                />
-                <input
-                  type="text"
-                  placeholder="Url da imagem"
-                  value={imagem.url}
-                  onChange={(event) => getImages(event, index, 'url')}
-                  className={styles.inputUrlImage}
-                />
-              </div>
-            ))} */}
-            {/* {inputs.map((input, index) => (
-              <div key={index}>
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(event) => handleChange(event, index)}
-                  className={styles.inputUrlImage}
-                />
-                {index === inputs.length - 1 && (
-                  <button
-                    type="button"
-                    onClick={adicionarInput}
-                    className={styles.inputPlusIcon}
-                  >
-                    +
-                  </button>
-                )}
-              </div>
-            ))} */}
           </div>
 
           <div className={styles.formContainer}>
