@@ -14,6 +14,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './criarProduto.module.css';
 import { FiPlus } from 'react-icons/fi';
+import { error } from 'jquery';
 
 const CriarProduto = () => {
   const { userData } = useContext(AuthContext);
@@ -135,8 +136,6 @@ const CriarProduto = () => {
   function handleIncluirCarro(e) {
     e.preventDefault();
     uploadImagens();
-    incluirCarro();
-    // exibirMiniaturas(imagensInput, miniaturasDiv);
   }
 
   function limparFormulario() {
@@ -152,14 +151,13 @@ const CriarProduto = () => {
     setImagens(Array(5).fill({ titulo: '', url: '' }));
   }
 
-  async function handleImageChange(event) {
-    const files = event.target.files;
-
-    setImagens(files);
+  function handleImageChange(event) {
+    setImagens(event.target.files);
   }
-  console.log(imagens);
 
-  const uploadImagens = async () => {
+
+  const uploadImagens = () => {
+    const idImagens = []
     const headers = {
       headers: {
         Authorization: `Bearer ${userData.token}`,
@@ -167,39 +165,38 @@ const CriarProduto = () => {
       },
     };
 
-    const body = {
+    const bodyImage = {
       name: '',
       contentType: '',
       contentLength: '',
     };
 
     Promise.all(
-      imagens.map(async (imagem, index) => {
-        body.name = imagem.name;
-        body.contentType = imagem.type;
-        body.contentLength = imagem.size;
-        try {
-          const response = await api.post('/upload/imagens', body, headers);
-          const data = response.data;
-          console.log(data);
-          setImagensIds(...imagensIds, response.data.imagemId);
-          console.log(imagensIds);
-          putImages(data.uploadSignedUrl, imagem);
-        } catch (error) {
-          console.error(error.response);
-        }
+      Object.keys(imagens).map(async (index) => {
+        bodyImage.name = imagens[index].name;
+        bodyImage.contentType = imagens[index].type;
+        bodyImage.contentLength = imagens[index].size;
+
+          await api.post('/upload/imagens', bodyImage, headers)
+          .then((response) => {
+            const data = response.data;
+            idImagens.push(data.imagemId);
+            if(response.status == 200) {
+              fetch(data.uploadSignedUrl, {
+                method: 'PUT',
+                body: imagens[index],
+              })
+            }
+          });
       })
-    );
+    ).then(() => {
+      incluirCarro(idImagens)
+    }).catch(error => {
+      console.log(error);
+    })
   };
 
-  const putImages = (url, file) => {
-    fetch(url, {
-      method: 'PUT',
-      body: file,
-    }).then((response) => {
-      console.log(response);
-    });
-  };
+
 
   const imagensInput = document.getElementById('imagens');
   const miniaturasDiv = document.getElementById('miniaturas');
@@ -223,7 +220,8 @@ const CriarProduto = () => {
     });
   }
 
-  async function incluirCarro() {
+  async function incluirCarro(idImagens) {
+
     const caracteristicasSelecionadasIds = Object.entries(
       caracteristicaSelecionada
     )
@@ -237,19 +235,16 @@ const CriarProduto = () => {
       },
     };
 
-    const body = JSON.stringify({
-      nome: propriedadesCarro.nome,
-      descricao: propriedadesCarro.descricao,
-      vin: propriedadesCarro.vin,
-      caracteristicas: caracteristicasSelecionadasIds,
-      imagens: imagensIds,
-      categoria: propriedadesCarro.categoria,
-      cidade: propriedadesCarro.cidade,
-    });
-
-    console.log(body);
-
-    try {
+      const body = JSON.stringify({
+        nome: propriedadesCarro.nome,
+        descricao: propriedadesCarro.descricao,
+        vin: propriedadesCarro.vin,
+        caracteristicas: caracteristicasSelecionadasIds,
+        imagens: idImagens,
+        categoria: propriedadesCarro.categoria,
+        cidade: propriedadesCarro.cidade,
+      });
+        
       if (
         !propriedadesCarro.nome ||
         !propriedadesCarro.descricao ||
@@ -258,32 +253,33 @@ const CriarProduto = () => {
         !imagens ||
         !propriedadesCarro.categoria ||
         !propriedadesCarro.cidade
-      ) {
-        toast.error('Todos os campos são de preenchimento obrigatório.', {
-          autoClose: 2500,
-          position: 'top-right',
-          theme: 'colored',
-        });
-      } else {
-        await api.post('/produtos', body, headers).then((response) => {
-          toast('Veículo incluído com sucesso.', {
-            type: 'success',
+        ) {
+          toast.error('Todos os campos são de preenchimento obrigatório.', {
             autoClose: 2500,
             position: 'top-right',
             theme: 'colored',
           });
-          limparFormulario();
-          navigate('/criarproduto');
-        });
+        } else {
+          try {
+            await api.post('/produtos', body, headers).then((response) => {
+              toast('Veículo incluído com sucesso.', {
+                type: 'success',
+                autoClose: 2500,
+                position: 'top-right',
+                theme: 'colored',
+              });
+              limparFormulario();
+              navigate('/criarproduto');
+            });
+          } catch (error) {
+            toast.error(error.response, {
+              autoClose: 2500,
+              position: 'top-right',
+              theme: 'colored',
+            });
+            console.log(error);
+          }
       }
-    } catch (error) {
-      toast.error(error.response, {
-        autoClose: 2500,
-        position: 'top-right',
-        theme: 'colored',
-      });
-      console.log(error);
-    }
   }
 
   return (
