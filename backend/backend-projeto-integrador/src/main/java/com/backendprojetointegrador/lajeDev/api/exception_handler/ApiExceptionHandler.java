@@ -14,7 +14,6 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -47,7 +46,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(RecursoJaExistenteException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    //@ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Object> handleRecursoJaExistente(RecursoJaExistenteException ex, WebRequest request){
         HttpStatus status = HttpStatus.BAD_REQUEST;
         Problema problema = new Problema();
@@ -58,7 +57,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(RecursoNaoEncontrado.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    //@ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleRecursoNaoEncontrado(RecursoNaoEncontrado ex, WebRequest request){
         HttpStatus status = HttpStatus.NOT_FOUND;
         Problema problema = new Problema();

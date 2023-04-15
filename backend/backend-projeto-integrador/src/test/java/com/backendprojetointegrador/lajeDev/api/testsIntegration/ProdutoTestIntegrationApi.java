@@ -1,14 +1,9 @@
 package com.backendprojetointegrador.lajeDev.api.testsIntegration;
 
-import com.backendprojetointegrador.lajeDev.api.dtos.inputs.ImagemInput;
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.ProdutoInput;
-import com.backendprojetointegrador.lajeDev.domain.model.Imagem;
-import com.backendprojetointegrador.lajeDev.domain.repository.IImagemRepository;
-import com.backendprojetointegrador.lajeDev.domain.service.imagem.ImagemService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import lombok.AllArgsConstructor;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,9 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.time.ZonedDateTime;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
