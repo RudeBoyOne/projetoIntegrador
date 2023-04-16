@@ -5,6 +5,11 @@ import com.backendprojetointegrador.lajeDev.api.dtos.inputs.Login;
 import com.backendprojetointegrador.lajeDev.api.dtos.outputs.LoginOutput;
 import com.backendprojetointegrador.lajeDev.domain.model.Usuario;
 import com.backendprojetointegrador.lajeDev.domain.service.security.TokenService;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +24,21 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/login")
+@Tag(name = "Login", description = "endpoint de login para os usuários da aplicação")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final RoleAssembler roleAssembler;
     private final TokenService tokenService;
 
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = LoginOutput.class)) }),
+            @ApiResponse(responseCode = "400", description = "Bad Request",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Usuário não existe!",
+                    content = @Content(mediaType = "application/json")) })
     @PostMapping
     public ResponseEntity<LoginOutput> login(@RequestBody @Valid Login login) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
