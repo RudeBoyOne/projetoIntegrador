@@ -9,8 +9,12 @@ import SearchBar from '../../components/search/Search';
 import CardCategory from '../../components/category/Category';
 import Card from '../../components/card/Card';
 import CarrosList from './CarrosList';
+import CarrosListCidadeData from './CarrosListCidData';
 
 import api from '../../services/api';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import styles from './home.module.css';
 import { FiArrowRight } from 'react-icons/fi';
 
@@ -24,7 +28,7 @@ function Home() {
   const [listaCarrosByCat, setListaCarrosByCat] = useState([]);
   const [dataInicial, setDataInicial] = useState('');
   const [dataFinal, setDataFinal] = useState('');
-  const [listaCarrosByCidadeData, setListaCarrosByCidadeData] = useState('');
+  const [listaCarrosByCidadeData, setListaCarrosByCidadeData] = useState([]);
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -32,6 +36,8 @@ function Home() {
       key: 'selection',
     },
   ]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getCidades();
@@ -95,32 +101,111 @@ function Home() {
     }
   }
 
-  useEffect(() => {
-    if (range && range[0] && range[0].startDate && range[0].endDate) {
-      setDataInicial(range[0].startDate.toLocaleDateString('ja-JP'));
-      setDataFinal(range[0].endDate.toLocaleDateString('ja-JP'));
-    }
-  }, [range]);
-
   function handleSelecionarCidade(event) {
     setCidadeSelecionada(event.target.value);
   }
 
-  console.log(cidadeSelecionada);
-  async function filtroPorCidadeEData(cidadeSelecionada) {
-    try {
-      if (cidadeSelecionada) {
-        const response = await api.get(
-          `/produtos/listarPorCidadeEDatas/${cidadeSelecionada.id}?dateStart=${dataInicial}&dateEnd=${dataFinal}`
-        );
-        setListaCarrosByCidadeData(response.data);
-        console.log(listaCarrosByCidadeData);
+  useEffect(() => {
+    if (range && range[0] && range[0].startDate && range[0].endDate) {
+      const newInitialDate = range[0].startDate.toLocaleDateString('ja-JP');
+      const newFinalDate = range[0].endDate.toLocaleDateString('ja-JP');
+      if (newInitialDate && newFinalDate) {
+        setDataInicial(newInitialDate);
+        setDataFinal(newFinalDate);
       } else {
-        setListaCarrosByCidadeData(carros);
+        console.error('As datas estão nulas ou indefinidas.');
       }
-    } catch (error) {
-      console.error(error.response.data);
     }
+  }, [range, dataInicial, dataFinal]);
+
+  const novaDataInicial = dataInicial
+    .split('/')
+    .map((item) => item.padStart(2, '0'))
+    .join('-');
+  const novaDataFinal = dataFinal
+    .split('/')
+    .map((item) => item.padStart(2, '0'))
+    .join('-');
+
+  const validarData = (data) => {
+    const regexData = /^\d{4}-\d{2}-\d{2}$/;
+    return regexData.test(data);
+  };
+
+  const filtroPorCidadeEData = async () => {
+    if (!validarData(novaDataInicial) || !validarData(novaDataFinal)) {
+      toast.error('Por favor, selecione um período válido.', {
+        autoClose: 2500,
+        position: 'top-center',
+        theme: 'colored',
+      });
+      return;
+    }
+    try {
+      await api
+        .get(
+          `/produtos/listarPorCidadeEDatas/${cidadeSelecionada}?dateStart=${novaDataInicial}&dateEnd=${novaDataFinal}`
+        )
+        .then((response) => {
+          setListaCarrosByCidadeData(response.data);
+        });
+    } catch (error) {
+      toast.error('Não foi possível realizar a busca, tente novamente!', {
+        autoClose: 2500,
+        position: 'top-center',
+        theme: 'colored',
+      });
+      console.error(error);
+    }
+  };
+
+  const handleSearchForm = (event) => {
+    event.preventDefault();
+    filtroPorCidadeEData();
+  };
+
+  let cards;
+
+  if (listaCarrosByCidadeData !== undefined) {
+    cards = listaCarrosByCidadeData.map((carro) => (
+      <>
+        <div>
+          <h3 className={styles.categoryTitle}>O resultado da sua pesquisa</h3>
+          <div className={styles.cards}>
+            <Card
+              key={carro?.id}
+              id={carro?.id}
+              categoria={carro?.categoria}
+              nome={carro?.nome}
+              imagens={carro?.imagens}
+              descricao={carro?.descricao}
+            />
+          </div>
+        </div>
+      </>
+    ));
+  } else if (carrosFiltrados.length !== 0) {
+    cards = carrosFiltrados.map((carro) => (
+      <Card
+        key={carro?.id}
+        id={carro?.id}
+        categoria={carro?.categoria}
+        nome={carro?.nome}
+        imagens={carro?.imagens}
+        descricao={carro?.descricao}
+      />
+    ));
+  } else {
+    cards = carros.map((carro) => (
+      <Card
+        key={carro?.id}
+        id={carro?.id}
+        categoria={carro?.categoria}
+        nome={carro?.nome}
+        imagens={carro?.imagens}
+        descricao={carro?.descricao}
+      />
+    ));
   }
 
   return (
@@ -130,7 +215,7 @@ function Home() {
         <SearchBar
           cidades={cidades}
           filtroPorCidades={filtroPorCidades}
-          onFiltroPorCidadeEData={filtroPorCidadeEData}
+          onFiltroPorCidadeEData={handleSearchForm}
           range={range}
           setRange={setRange}
           onSelecionarCidade={handleSelecionarCidade}
@@ -154,32 +239,37 @@ function Home() {
       <div className={styles.cardContainer}>
         {listaCarrosByCat.length > 0 ? (
           <div>
-            <CarrosList listaCarrosByCat={listaCarrosByCat} />
+            <CarrosList
+              listaCarrosByCat={listaCarrosByCat}
+              categoriaSelecionada={categoriaSelecionada}
+            />
           </div>
         ) : (
           <></>
         )}
 
-        <h3 className={styles.cardTitle}>
-          <FiArrowRight className={styles.categoryTitleIcon} /> Conheça a Nossa
-          Frota
-        </h3>
-        <div className={styles.cards}>
-          {carrosFiltrados !== ''
-            ? carrosFiltrados.map((carro) => (
-                <Card
-                  key={carro?.id}
-                  id={carro?.id}
-                  categoria={carro?.categoria}
-                  nome={carro?.nome}
-                  imagens={carro?.imagens}
-                  descricao={carro?.descricao}
-                />
-              ))
-            : carros}
+        <div className={styles.cards}>{cards}</div>
+
+        <div>
+          <h3 className={styles.cardTitle}>
+            <FiArrowRight className={styles.categoryTitleIcon} /> Conheça nossa
+            Frota
+          </h3>
+          <div className={styles.cards}>
+            {carros.map((carro) => (
+              <Card
+                key={carro?.id}
+                id={carro?.id}
+                categoria={carro?.categoria}
+                nome={carro?.nome}
+                imagens={carro?.imagens}
+                descricao={carro?.descricao}
+              />
+            ))}
+          </div>
         </div>
       </div>
-      
+      <ToastContainer />
       <Footer />
     </div>
   );

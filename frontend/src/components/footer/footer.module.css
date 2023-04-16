@@ -1,20 +1,24 @@
 .footer {
   width: 100%;
   background-color: var(--bg-dark-cyan);
-  margin-top: 5rem;
+  margin-top: 1rem;
 }
 
 .nav {
+  max-width: 1440px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: var(--white-color);
-  padding: 3rem;
+  padding: 1rem;
 }
 
 .copy {
   font-size: var(--smaller-font-size);
   color: var(--white-color);
+  text-align: center;
+  padding-bottom: 2rem;
 }
 
 .listMidias {
@@ -32,6 +36,10 @@
 
 .linkIcon:hover {
   transform: translateY(-0.5rem);
+}
+
+.logoFooter{
+  width: 150px;
 }
 
 /*=============== BREAKPOINTS ===============*/

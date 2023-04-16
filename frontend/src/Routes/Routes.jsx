@@ -8,6 +8,8 @@ import Product from '../pages/product/product';
 import Reservas from '../pages/reservas/Reservas';
 import CriarProduto from '../pages/criarProduto/criarProduto';
 import Dashboard from '../pages/dashboard/dashboard';
+import CarrosListCidadeData from '../pages/home/CarrosListCidData';
+
 
 import AuthProvider, { AuthContext } from '../providers/AuthContext';
 import { ProductProvider } from '../providers/ProductContext';
@@ -29,6 +31,11 @@ const AppRoutes = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/criarconta" element={<CriarConta />} />
             <Route path="/produtos/:id" element={<Product />} />
+            <Route
+              path="/pesquisaporcidadedata"
+              element={<CarrosListCidadeData />}
+            />
+
             <Route
               path="/reservas/:id"
               element={

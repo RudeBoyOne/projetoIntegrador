@@ -15,17 +15,23 @@ const Card = (props) => {
 
   return (
     <div>
-      <div key={id} className={styles.cardContainer}>
+      <div key={id} className={styles.card}>
         <div className={styles.cardItem}>
           <h3 className={styles.subtitle}>{categoria.qualificacao}</h3>
           <h2 className={styles.title}>{nome}</h2>
-          {imagens[0]?.url !== undefined ? (
-            <div className={styles.image}>
-              <img src={imagens[0]?.url} alt={imagens.titulo} />
-            </div>
-          ) : (
-            <></>
-          )}
+          <div className={styles.imageDiv}>
+            {imagens[0]?.url !== undefined ? (
+              <div>
+                <img
+                  src={imagens[4]?.url}
+                  alt={imagens.titulo}
+                  className={styles.image}
+                />
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
         <div className={styles.cardItem}>
           <p className={styles.description}>{descricao}</p>

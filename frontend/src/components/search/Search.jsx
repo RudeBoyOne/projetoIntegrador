@@ -46,7 +46,7 @@ const SearchBar = ({
 
   return (
     <div className={styles.boxSearch}>
-      <form className={styles.search}>
+      <form className={styles.search} onSubmit={onFiltroPorCidadeEData}>
         <div className={styles.inputCidade}>
           <FiMapPin className={styles.inputIcon} />
           <select
