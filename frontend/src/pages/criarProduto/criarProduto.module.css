@@ -1,7 +1,6 @@
 .criarProdutoContainer {
   max-width: 1440px;
   margin: 10rem auto;
-  
 }
 
 .criarProdutoTitle {
@@ -13,21 +12,20 @@
   border-bottom: 1px solid var(--border-color);
 }
 
-.criarProdutoForm{
+.criarProdutoForm {
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 2rem;
   margin: 3rem 0 2rem;
 }
 
-.bottomContainer{
+.bottomContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
 }
 
-
-.formContainer{
+.formContainer {
   border-radius: 0.5rem;
   background-color: var(--bg-light-cyan);
   border: 1px solid var(--border-color);
@@ -103,13 +101,13 @@
   margin: 1rem 0;
 }
 
-.inputImage{
+.inputImage {
   display: flex;
   column-gap: 1rem;
 }
 
 .novaCaracteristica {
-  display:grid;
+  display: grid;
   grid-template-columns: 1fr 2fr;
   align-items: center;
   justify-content: center;
@@ -117,7 +115,7 @@
 }
 
 .btnNovaCaracteristica {
-  display:flex;
+  display: flex;
   padding: 0.5rem 0.75rem;
   height: 2rem;
   width: 10rem;
@@ -134,14 +132,13 @@
   background-color: var(--text-color-dark-cyan);
 }
 
-.inputNovaCaracteristicaContainer{
+.inputNovaCaracteristicaContainer {
   display: flex;
   margin-left: 1.5rem;
   /* align-items:flex-start; */
 }
 
-
-.btnCriarNovaCaracteristica{
+.btnCriarNovaCaracteristica {
   padding: 0.5rem 0.5rem;
   height: 2rem;
   width: 4rem;
@@ -195,4 +192,146 @@
 .btnFormObservacoes {
   display: flex;
   flex-direction: column;
+}
+
+.imgContainer {
+  display: inline-block;
+}
+
+.imgInput {
+  border: 1px solid var(--border-color);
+  display: inline-block;
+  margin: 1rem 0;
+  width: 300px;
+  padding: 0.25rem;
+  border: none;
+  cursor: pointer;
+}
+
+.imgMiniaturas {
+  margin: 2rem 1rem;
+}
+
+.imgMiniaturas img {
+  width: 200px;
+  padding: 0 1rem;
+  border-radius: 0.5rem;
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 576px) {
+  .criarProdutoContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 8rem 1rem 4rem;
+  }
+
+  .criarProdutoForm {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .imgMiniaturas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0.5rem;
+  }
+  .imgMiniaturas img {
+    width: 150px;
+    padding: 0.5rem;
+  }
+  .formObservacoes {
+    display: block;
+  }
+  .btnFormObservacoes {
+    margin-top: 1rem;
+  }
+  .bottomContainer {
+    display: flex;
+    width: 100%;
+  }
+  .novaCaracteristica {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+  }
+  .novaCaracteristica button {
+    margin-bottom: 1rem;
+  }
+}
+
+/* For medium devices */
+@media screen and (min-width: 576px) {
+  .criarProdutoContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 8rem 1rem 4rem;
+  }
+
+  .criarProdutoForm {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .imgMiniaturas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0.5rem;
+  }
+  .imgMiniaturas img {
+    width: 150px;
+    padding: 0.5rem;
+  }
+  .formObservacoes {
+    display: block;
+  }
+  .btnFormObservacoes {
+    margin-top: 1rem;
+  }
+  .bottomContainer {
+    display: flex;
+    width: auto;
+  }
+  .novaCaracteristica {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+  }
+  .novaCaracteristica button {
+    margin-bottom: 1rem;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1040px) {
+  .criarProdutoContainer {
+    max-width: 1440px;
+    margin: 10rem auto;
+  }
+
+  .criarProdutoForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .imgMiniaturas img {
+    width: 200px;
+    padding: 0.5rem;
+  }
+
+  .bottomContainer {
+    display: grid;
+    width: auto;
+  }
+
+  .novaCaracteristica {
+    display: flex;
+    margin: 1rem 0;
+  }
 }

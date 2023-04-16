@@ -190,8 +190,9 @@ input::placeholder {
     display: block;
     position: absolute;
     right: 1.3rem;
-    bottom: 1rem;
-    font-size: 1.5rem;
+    bottom: 1.25rem;
+    font-size: 2rem;
+    float: right;
     cursor: pointer;
     color: var(--text-color-dark-cyan);
   }

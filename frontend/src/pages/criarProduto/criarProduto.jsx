@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 import api from '../../services/api';
 
@@ -8,13 +7,15 @@ import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import NovaCaracteristica from '../../components/nova_caracteristica/novaCaracteristica';
 import Back_button from '../../components/back_button/back_button';
+import ImagePreview from '../../components/image_preview/imagePreview';
+import LoadingComponent from '../../components/loading/loading';
+import { loadingContext } from '../../providers/loading';
 import { AuthContext } from '../../providers/AuthContext';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './criarProduto.module.css';
 import { FiPlus } from 'react-icons/fi';
-import { error } from 'jquery';
 
 const CriarProduto = () => {
   const { userData } = useContext(AuthContext);
@@ -39,10 +40,12 @@ const CriarProduto = () => {
   //   Array(5).fill({ titulo: '', url: '' })
   // );
   const [imagens, setImagens] = useState([]);
-  const [idImagem, setIdImagem] = useState('');
-  const [urlUpload, setUrlUpload] = useState('');
-  const [imageURLs, setImageURLs] = useState([]);
-  const [imagensIds, setImagensIds] = useState([]);
+  const [files, setFiles] = useState([]);
+  const { loading, setLoading } = useContext(loadingContext);
+  // const [idImagem, setIdImagem] = useState('');
+  // const [urlUpload, setUrlUpload] = useState('');
+  // const [imageURLs, setImageURLs] = useState([]);
+  // const [imagensIds, setImagensIds] = useState([]);
 
   const navigate = { useNavigate };
 
@@ -85,6 +88,10 @@ const CriarProduto = () => {
     setPropriedadesCarro({ ...propriedadesCarro, [name]: value });
   }
 
+  function removeSpacos() {
+    const vin = propriedadesCarro.vin.trim();
+  }
+
   function getCaracteristicaCarro(nomeCheckbox) {
     return function (event) {
       const checked = event.target.checked;
@@ -97,25 +104,6 @@ const CriarProduto = () => {
         [event.target.value]: checked,
       }));
     };
-  }
-
-  function removeSpaces() {
-    const vinSemEspaco = propriedadesCarro.vin.trim();
-  }
-
-  function getImages(event, index, propriedade) {
-    const target = event.target;
-    const value = target.value;
-
-    setImagens(
-      imagens.map((imagem, i) => {
-        if (i === index) {
-          return { ...imagem, [propriedade]: value };
-        } else {
-          return imagem;
-        }
-      })
-    );
   }
 
   function adicionarInput() {
@@ -148,16 +136,16 @@ const CriarProduto = () => {
     });
     setCaracteristicaCarro({});
     setCaracteristicaSelecionada([]);
-    setImagens(Array(5).fill({ titulo: '', url: '' }));
+    setImagens([]);
   }
 
   function handleImageChange(event) {
     setImagens(event.target.files);
+    exibirMiniaturas();
   }
 
-
   const uploadImagens = () => {
-    const idImagens = []
+    const idImagens = [];
     const headers = {
       headers: {
         Authorization: `Bearer ${userData.token}`,
@@ -177,51 +165,43 @@ const CriarProduto = () => {
         bodyImage.contentType = imagens[index].type;
         bodyImage.contentLength = imagens[index].size;
 
-          await api.post('/upload/imagens', bodyImage, headers)
+        await api
+          .post('/upload/imagens', bodyImage, headers)
           .then((response) => {
             const data = response.data;
             idImagens.push(data.imagemId);
-            if(response.status == 200) {
+            if (response.status == 200) {
               fetch(data.uploadSignedUrl, {
                 method: 'PUT',
                 body: imagens[index],
-              })
+              });
             }
           });
       })
-    ).then(() => {
-      incluirCarro(idImagens)
-    }).catch(error => {
-      console.log(error);
-    })
+    )
+      .then(() => {
+        incluirCarro(idImagens);
+      })
+      .catch((error) => {
+        toast.error(error.response, {
+          autoClose: 2500,
+          position: 'top-right',
+          theme: 'colored',
+        });
+      });
   };
 
-
-
-  const imagensInput = document.getElementById('imagens');
-  const miniaturasDiv = document.getElementById('miniaturas');
-
-  function exibirMiniaturas(imagensInput, miniaturasDiv) {
-    imagensInput.addEventListener('change', (e) => {
-      const files = e.target.files;
-      console.log(files);
-
-      for (let i = 0; i < files.lenght; i++) {
-        const file = files[i];
-
-        const img = document.createElement('img');
-
-        img.src = URL.createObjectURL(file);
-        img.width = 80;
-        img.height = 80;
-
-        miniaturasDiv.appendChild(img);
-      }
-    });
-  }
+  const exibirMiniaturas = () => {
+    setFiles([]);
+    setLoading(true);
+    const selectedFiles = imagens;
+    console.log(selectedFiles);
+    const filesArray = Array.from(selectedFiles);
+    setFiles(filesArray);
+    setLoading(false);
+  };
 
   async function incluirCarro(idImagens) {
-
     const caracteristicasSelecionadasIds = Object.entries(
       caracteristicaSelecionada
     )
@@ -235,51 +215,51 @@ const CriarProduto = () => {
       },
     };
 
-      const body = JSON.stringify({
-        nome: propriedadesCarro.nome,
-        descricao: propriedadesCarro.descricao,
-        vin: propriedadesCarro.vin,
-        caracteristicas: caracteristicasSelecionadasIds,
-        imagens: idImagens,
-        categoria: propriedadesCarro.categoria,
-        cidade: propriedadesCarro.cidade,
+    const body = JSON.stringify({
+      nome: propriedadesCarro.nome,
+      descricao: propriedadesCarro.descricao,
+      vin: propriedadesCarro.vin,
+      caracteristicas: caracteristicasSelecionadasIds,
+      imagens: idImagens,
+      categoria: propriedadesCarro.categoria,
+      cidade: propriedadesCarro.cidade,
+    });
+
+    if (
+      !propriedadesCarro.nome ||
+      !propriedadesCarro.descricao ||
+      !propriedadesCarro.vin ||
+      !caracteristicasSelecionadasIds ||
+      !imagens ||
+      !propriedadesCarro.categoria ||
+      !propriedadesCarro.cidade
+    ) {
+      toast.error('Todos os campos são de preenchimento obrigatório.', {
+        autoClose: 2500,
+        position: 'top-right',
+        theme: 'colored',
       });
-        
-      if (
-        !propriedadesCarro.nome ||
-        !propriedadesCarro.descricao ||
-        !propriedadesCarro.vin ||
-        !caracteristicasSelecionadasIds ||
-        !imagens ||
-        !propriedadesCarro.categoria ||
-        !propriedadesCarro.cidade
-        ) {
-          toast.error('Todos os campos são de preenchimento obrigatório.', {
+    } else {
+      try {
+        await api.post('/produtos', body, headers).then((response) => {
+          toast('Veículo incluído com sucesso.', {
+            type: 'success',
             autoClose: 2500,
             position: 'top-right',
             theme: 'colored',
           });
-        } else {
-          try {
-            await api.post('/produtos', body, headers).then((response) => {
-              toast('Veículo incluído com sucesso.', {
-                type: 'success',
-                autoClose: 2500,
-                position: 'top-right',
-                theme: 'colored',
-              });
-              limparFormulario();
-              navigate('/criarproduto');
-            });
-          } catch (error) {
-            toast.error(error.response, {
-              autoClose: 2500,
-              position: 'top-right',
-              theme: 'colored',
-            });
-            console.log(error);
-          }
+          limparFormulario();
+          navigate('/criarproduto');
+        });
+      } catch (error) {
+        toast.error(error.response, {
+          autoClose: 2500,
+          position: 'top-right',
+          theme: 'colored',
+        });
+        console.log(error);
       }
+    }
   }
 
   return (
@@ -367,21 +347,23 @@ const CriarProduto = () => {
           <div className={styles.formContainer}>
             <h3>Imagens</h3>
             <p>
-              <small>
-                Cole a URL das imagens do veículo que está cadastrando. No
-                mínimo 5 imagens.
-              </small>
+              <small>Selecione no máximo 5 imagens.</small>
             </p>
 
-            <div>
+            <div className={styles.imgContainer}>
               <input
                 type="file"
                 id="imagens"
                 name="imagens"
                 onChange={handleImageChange}
                 multiple
+                className={styles.imgInput}
               />
-              <div id="miniaturas"></div>
+              <div id="miniaturas" className={styles.imgMiniaturas}>
+                {files.map((file) => (
+                  <ImagePreview key={file.name} file={file} />
+                ))}
+              </div>
             </div>
           </div>
 
@@ -451,6 +433,7 @@ const CriarProduto = () => {
           </div>
         </div>
       </div>
+      <LoadingComponent loading={loading} />
       <ToastContainer />
       <Footer />
     </div>

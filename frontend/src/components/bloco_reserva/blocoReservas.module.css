@@ -58,6 +58,10 @@
 }
 
 .buttonReservation {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 1rem;
   background-color: var(--bg-dark-cyan);
   color: var(--white-color);
@@ -76,8 +80,10 @@
 }
 
 .loader {
-  margin: 0;
-  padding: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* ===========RESPONSIVE TABLET=========== */

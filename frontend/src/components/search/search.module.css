@@ -160,6 +160,17 @@
     max-width: 150px;
     align-self: flex-end;
   }
+
+  .inputDate, .searchInput {
+    width: 220px; 
+  }
+
+  .calendarPicker {
+    position: absolute;
+    top: calc(30% - 30px);
+    left: 5rem;
+    width: 300px;
+  }
 }
 
 
@@ -187,6 +198,17 @@
     max-width: 150px;
     align-self: flex-end;
   }
+
+  .inputDate, .searchInput {
+    width: 220px; 
+  }
+
+  .calendarPicker {
+    position: absolute;
+    top: calc(32% - 30px);
+    left: 10rem;
+    width: 420px;
+  }
 }
 
 @media screen and (min-width: 765px) {
@@ -209,7 +231,7 @@
 
   .calendarPicker {
     position: absolute;
-    top: calc(19% - 30px);
+    top: calc(23% - 33px);
     left: 20rem;
     width: 425px;
   }
@@ -256,7 +278,7 @@
 
   .calendarPicker {
     position: absolute;
-    top: calc(20% - 28px);
+    top: calc(20% - 10px);
     left: 54rem;
     width: 500px;
   }

@@ -1,7 +1,7 @@
 .footer {
   width: 100%;
   background-color: var(--bg-dark-cyan);
-  margin-top: 5rem;
+  margin-top: 1rem;
 }
 
 .nav {
@@ -11,7 +11,7 @@
   justify-content: space-between;
   align-items: center;
   color: var(--white-color);
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .copy {
@@ -39,7 +39,7 @@
 }
 
 .logoFooter{
-  width: 125px;
+  width: 150px;
 }
 
 /*=============== BREAKPOINTS ===============*/

@@ -233,7 +233,7 @@
 }
 
 .dashCadastrarCidadeContainer p {
-  margin: 4rem 0 2rem 0.5rem ;
+  margin: 4rem 0 2rem 0.5rem;
   font-size: var(--h3-font-size);
   color: var(--bg-dark-cyan);
   border-bottom: 1px solid var(--border-color);
@@ -242,15 +242,12 @@
 .dashBoxCadastrarCidade {
   background-color: var(--bg-light-cyan);
   width: auto;
-  padding: 1rem ;
+  padding: 1rem;
   border-radius: 0.5rem;
   border: 1px solid var(--border-color);
 }
 
-
-
-
-.dashCadastrarCidade{
+.dashCadastrarCidade {
   display: flex;
   align-items: center;
   margin: 2rem 3rem 2rem 3.5rem;
@@ -259,7 +256,7 @@
 .dashCadastrarCidade input {
   width: 300px;
   margin-right: 1rem;
-  padding: .3rem 0.5rem;
+  padding: 0.3rem 0.5rem;
   outline: none;
 }
 
@@ -271,9 +268,174 @@
   border: none;
   border-radius: 0.25rem;
   cursor: pointer;
-  transition: all .25s ease;
+  transition: all 0.25s ease;
 }
 
 .dashCadastrarCidade button:hover {
   background-color: var(--text-color-dark-cyan);
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 576px) {
+  .dashScreens {
+    max-width: 100%;
+    margin: 1rem 0;
+    padding: 1rem;
+  }
+
+  .dashContainerTitle p {
+    font-size: var(--h3-font-size);
+  }
+
+  .reservaTable {
+    width: auto;
+    margin: 1rem 0;
+  }
+
+  .reservaTable th {
+    width: 100px;
+    padding: 0 0.5rem;
+    font-size: var(--small-font-size);
+  }
+
+  .reservaDataTable {
+    display: block;
+    margin: 0.5rem 0;
+    text-align: center;
+  }
+
+  .reservaDataTable td {
+    width: 100px;
+    font-size: var(--smaller-font-size);
+  }
+
+  .containerCidade {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .dashCadastrarCidade {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+  }
+
+  .dashCadastrarCidade input {
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .dashCadastrarCidade button {
+    width: 40%;
+    margin-top: 1rem;
+  }
+
+  .userTable {
+    width: 100%;
+    margin: 1rem 0;
+  }
+
+  .userTable th {
+    font-size: var(--small-font-size);
+  }
+
+  .userDataTable td {
+    padding: 1rem 0.5rem 0 0;
+    text-align: center;
+    word-break: break-all;
+    font-size: var(--small-font-size);
+  }
+}
+
+/* For medium devices */
+@media screen and (min-width: 576px) {
+  .dashContainerTitle p {
+    font-size: var(--h3-font-size);
+  }
+  .dashScreens {
+    max-width: 100%;
+    margin: 1rem 0;
+    padding: 1rem;
+  }
+
+  .reservaTable {
+    width: auto;
+    margin: 1rem 0;
+  }
+
+  .reservaTable th {
+    width: 150px;
+    padding: 0 0.5rem;
+    font-size: var(--small-font-size);
+  }
+
+  .reservaDataTable {
+    display: block;
+    margin: 0.5rem 0;
+    text-align: center;
+  }
+
+  .reservaDataTable td {
+    width: 150px;
+    font-size: var(--smaller-font-size);
+  }
+
+  .containerCidade {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .dashCadastrarCidade {
+    display: flex;
+    margin: 2rem 1rem 2rem 2rem;
+  }
+
+  .dashCadastrarCidade input {
+    width: 50%;
+    margin-right: 1rem;
+    padding: 0.3rem 0.5rem;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1040px) {
+  .dashScreens {
+    max-width: 100%;
+    margin: 1rem 0;
+    padding: 1rem;
+  }
+
+  .reservaTable {
+    width: auto;
+    margin: 1rem 0;
+  }
+
+  .reservaTable th {
+    width: 200px;
+    padding: 0 1rem;
+    font-size: var(--small-font-size);
+  }
+
+  .reservaDataTable {
+    display: block;
+    margin: 1rem 0;
+    text-align: center;
+  }
+
+  .reservaDataTable td {
+    width: 200px;
+    font-size: var(--smaller-font-size);
+  }
+
+  .dashBoxCadastrarCidade {
+    width: 50%;
+  }
+  .dashCadastrarCidade {
+    display: flex;
+    margin: 2rem 1rem 2rem 2rem;
+  }
 }

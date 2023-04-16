@@ -139,7 +139,7 @@ const Dashboard = () => {
             </li>
           </ul>
         </div>
-        <div>
+        <div className={styles.dashCards}>
           {screens.caracteristicas && <Caracteristicas key={Caracteristicas} />}
           {screens.cidades && <Cidades key={Cidades} />}
           {screens.frota && <Frota key={Frota} />}

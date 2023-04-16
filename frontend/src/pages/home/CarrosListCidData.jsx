@@ -3,14 +3,14 @@ import Card from '../../components/card/Card';
 
 import styles from './home.module.css';
 
-const CarrosList = ({ listaCarrosByCat, categoriaSelecionada }) => {
-  console.log(categoriaSelecionada);
+const CarrosListCidadeData = ({ listaCarrosByCidadeData, categoriaSelecionada }) => {
+  console.log(listaCarrosByCidadeData);
   return (
     <div>
       <h3>Carros disponíveis na Categoria Selecionada</h3>
       <div className={styles.cardCategoryList}>
-        {listaCarrosByCat !== ''
-          ? listaCarrosByCat.map((carro) => (
+        {listaCarrosByCidadeData !== ''
+          ? listaCarrosByCidadeData.map((carro) => (
               <Card
                 key={carro?.id}
                 id={carro?.id}
@@ -26,4 +26,4 @@ const CarrosList = ({ listaCarrosByCat, categoriaSelecionada }) => {
   );
 };
 
-export default CarrosList;
+export default CarrosListCidadeData;

@@ -4,7 +4,6 @@ import Card from '../../components/card/Card';
 import styles from './home.module.css';
 
 const CarrosList = ({ listaCarrosByCat, categoriaSelecionada }) => {
-  console.log(categoriaSelecionada);
   return (
     <div>
       <h3>Carros disponíveis na Categoria Selecionada</h3>

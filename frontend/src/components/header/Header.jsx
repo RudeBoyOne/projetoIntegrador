@@ -63,7 +63,7 @@ const Header = () => {
               onClick={() => setIsActive(!isActive)}
             />
             <div className={styles.navContainer}>
-              <div className={styles.headerLogo}></div>
+              
               <div className={styles.navMenuList}>
                 <ul className="">
                   <li>
@@ -80,12 +80,6 @@ const Header = () => {
                         </div>
                         {isLogin && showMenuProfile && (
                           <ul className={styles.dropdownMenu}>
-                            <li>
-                              <Link to="/meuperfil" className={styles.menuLink}>
-                                <FiUser className={styles.menuIcon} />
-                                Meu Perfil
-                              </Link>
-                            </li>
                             {userData.roles &&
                             userData.roles.some(
                               (role) => role.nome === 'ADMIN'
@@ -160,11 +154,11 @@ const Header = () => {
               </div>
             </div>
           </nav>
+          <ToastContainer />
+        </div>
           <div className="btnToggle" onClick={() => setIsActive(!isActive)}>
             <FaBars />
           </div>
-          <ToastContainer />
-        </div>
       </div>
     </>
   );

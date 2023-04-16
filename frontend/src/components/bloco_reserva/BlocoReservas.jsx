@@ -1,13 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ProgressBar } from 'react-loader-spinner';
+import { Oval } from 'react-loader-spinner';
 
 import { CidadeContext } from '../../providers/CidadeContext';
 
-import Pdp_header from '../pdp_header/pdp_header';
 import styles from './blocoReservas.module.css';
-import Pdp_local from '../pdp_local/pdp_local';
-import Pdp_gallery from '../pdp_gallery/pdp_gallery';
 import Description from '../description/Description';
 import ReservaSucesso from '../reserva_sucesso/ReservaSucesso';
 
@@ -82,16 +79,18 @@ const BlocoReservas = ({
 
           <button className={styles.buttonReservation} onClick={onCriarReserva}>
             {loading ? (
-              <ProgressBar
-                height="50"
-                width="150"
-                margin="0"
-                ariaLabel="progress-bar-loading"
+              <Oval
+                height={40}
+                width={40}
+                color="#fff"
                 wrapperStyle={{}}
-                wrapperClass="progress-bar-wrapper"
-                borderColor="#fff"
-                barColor="#0c456e"
-                className="loader"
+                wrapperClass=""
+                visible={true}
+                ariaLabel="oval-loading"
+                secondaryColor="#fff"
+                strokeWidth={2}
+                strokeWidthSecondary={2}
+                className={styles.loader}
               />
             ) : (
               'Criar Reserva'

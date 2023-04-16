@@ -87,8 +87,8 @@
 /* For medium devices */
 @media screen and (min-width: 576px) {
   .cards {
-    margin: 2rem 0;
-    max-width: 768px;
+    margin: 2rem;
+    max-width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -99,14 +99,10 @@
     margin: 7rem 1rem;
   }
 
-  .cardContainer {
-    max-width: auto;
-    height: auto;
-    position: relative;
-    margin: 0 auto;
-    margin-top: 1rem;
-    color: var(--text-color-dark-cyan);
+  .categoryList {
+    width: 100%;
   }
+
 }
 
 /* For large devices */
@@ -121,5 +117,6 @@
 
   .category {
     margin: 2rem auto 3rem;
+    
   }
 }

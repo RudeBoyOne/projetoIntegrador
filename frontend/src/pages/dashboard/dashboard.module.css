@@ -111,9 +111,16 @@
 /*=============== BREAKPOINTS ===============*/
 /* For small devices */
 @media screen and (max-width: 576px) {
+  .dashNavigation {
+    margin: 8rem auto 4rem;
+    max-width: 100%;
+  }
+
   .dashNavList {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    flex-wrap: wrap;
+    align-items: start;
     margin: 1rem;
   }
   .dashCards {
@@ -126,6 +133,10 @@
 
 /* For medium devices */
 @media screen and (min-width: 576px) {
+  .dashContainer {
+    margin: 8rem auto;
+    max-height: 100%;
+  }
   .dashNavList {
     display: flex;
     /* flex-direction: column; */
@@ -134,18 +145,19 @@
     margin: 1rem;
   }
   .dashCards {
-    display: grid;
-    grid-template-columns: 1fr;
-    width: auto;
-    margin: 1rem;
-  }
+      display: grid;
+      grid-template-columns: 1fr;
+      width: auto;
+      margin: 1rem;
+    };
+  
 }
 
 /* For large devices */
 @media screen and (min-width: 1040px) {
   .dashCards {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     width: auto;
     margin: 1rem;
   }

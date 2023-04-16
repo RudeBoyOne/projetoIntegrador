@@ -38,7 +38,7 @@
 }
 
 .modal-content {
-  width: 67%;
+  width: 60%;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -47,8 +47,14 @@
 }
 .btn_fechar {
   position: absolute;
-  top: -66px;
+  top: -40px;
   right: 0;
+  padding: 0.5rem;
+  background-color: var(--bg-dark-cyan);
+  color: var(--text-color-light-cyan);
+  border: none;
+  border-radius: 0.2rem;
+  cursor:pointer;
 }
 .btn_ver_mais {
   margin-top: 0;

@@ -92,17 +92,10 @@ const Reservas = () => {
     try {
       setLoading(true);
       await api.post('/reservas', body, headers).then((response) => {
-        // toast('Sua reserva foi criada com sucesso.', {
-        //   type: 'success',
-        //   autoClose: 2500,
-        //   position: 'top-right',
-        //   theme: 'colored',
-        // });
-
         setTimeout(() => {
           setShowModal(true);
           setLoading(false);
-        }, 2000);
+        }, 1500);
       });
     } catch (error) {
       if (error.response.data !== '') {

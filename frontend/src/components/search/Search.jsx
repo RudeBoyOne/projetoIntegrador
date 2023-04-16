@@ -103,7 +103,7 @@ const SearchBar = ({
         <button
           title="btnSearch"
           type="submit"
-          // onClick={onFiltroPorCidadeEData}
+          onClick={onFiltroPorCidadeEData}
           className={styles.searchBtn}
         >
           <FiSearch /> <span className={styles.btnText}>Buscar</span>

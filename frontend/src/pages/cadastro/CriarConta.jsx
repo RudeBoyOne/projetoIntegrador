@@ -68,7 +68,6 @@ function CriarConta() {
     }
   }
 
-
   return (
     <>
       <Header />
@@ -120,7 +119,11 @@ function CriarConta() {
                 onChange={(event) => setSenha(event.target.value)}
               />
             </div>
-            <button className={styles.btnCriarConta} type="submit">Criar conta</button>
+            <div>
+              <button className={styles.btnCriarConta} type="submit">
+                Criar conta
+              </button>
+            </div>
           </form>
           <div className={styles.loginLink}>
             Já possui uma conta? <Link to="/Login">Faça o login</Link>

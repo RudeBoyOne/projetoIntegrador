@@ -9,6 +9,7 @@ import SearchBar from '../../components/search/Search';
 import CardCategory from '../../components/category/Category';
 import Card from '../../components/card/Card';
 import CarrosList from './CarrosList';
+import CarrosListCidadeData from './CarrosListCidData';
 
 import api from '../../services/api';
 
@@ -58,7 +59,6 @@ function Home() {
     try {
       const response = await api.get('/produtos');
       setCarros(response.data);
-      console.log(response.data);
       setCarrosFiltrados(response.data);
     } catch (error) {
       console.log(error);
@@ -170,6 +170,7 @@ function Home() {
     cards = listaCarrosByCidadeData.map((carro) => (
       <>
         <div>
+          <h3 className={styles.categoryTitle}>O resultado da sua pesquisa</h3>
           <div className={styles.cards}>
             <Card
               key={carro?.id}
