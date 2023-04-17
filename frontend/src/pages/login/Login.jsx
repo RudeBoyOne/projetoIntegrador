@@ -73,10 +73,6 @@ function LoginPage() {
     }
   }
 
-  // const handleRememberMeChange = (event) => {
-  //   setRememberMe(event.target.checked);
-  // };
-
   return (
     <>
       <Header />
@@ -111,16 +107,6 @@ function LoginPage() {
             </div>
             <div className={styles.formGroup}>
               <div className={styles.checkbox}>
-                {/* <label className={styles.formControl}>
-                  <input
-                  className={styles.formCheckbox}
-                  type="checkbox"
-                  checked={true}
-                  name="checkbox"
-                  onChange={handleRememberMeChange}
-                  />
-                  Lembrar-me
-                </label> */}
                 <a href="#">Esqueci a senha</a>
               </div>
 
@@ -133,7 +119,7 @@ function LoginPage() {
               <div className={styles.registerLink}>
                 <span>
                   Ainda não tem uma conta?{' '}
-                  <Link to="/Register">Criar conta</Link>
+                  <Link to="/criarconta">Criar conta</Link>
                 </span>
               </div>
             </div>
