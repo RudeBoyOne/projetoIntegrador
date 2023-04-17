@@ -64,7 +64,6 @@
   column-gap: 1rem;
   margin: 1rem 0;
   font-size: var(--small-font-size);
-  /* border-bottom: 1px solid var(--border-color); */
 }
 
 .checkboxForm {
@@ -135,7 +134,6 @@
 .inputNovaCaracteristicaContainer {
   display: flex;
   margin-left: 1.5rem;
-  /* align-items:flex-start; */
 }
 
 .btnCriarNovaCaracteristica {

@@ -101,7 +101,6 @@
 .calendarPicker {
   position: absolute;
   top: calc(20% - 15px);
-  /* left: 0; */
   width: 500px;
   font-size: var(--small-font-size);
   border-radius: 5px;
