@@ -23,7 +23,7 @@ const Card = (props) => {
             {imagens[0]?.url !== undefined ? (
               <div>
                 <img
-                  src={imagens[4]?.url}
+                  src={imagens[0]?.url}
                   alt={imagens.titulo}
                   className={styles.image}
                 />

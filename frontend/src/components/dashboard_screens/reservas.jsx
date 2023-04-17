@@ -12,6 +12,11 @@ const Reservas = () => {
       const response = await api.get('/reservas');
       setReservas(response.data);
     } catch (error) {
+      toast.error(error.response, {
+        autoClose: 2500,
+        position: 'top-right',
+        theme: 'colored',
+      });
       console.error(error);
     }
   }

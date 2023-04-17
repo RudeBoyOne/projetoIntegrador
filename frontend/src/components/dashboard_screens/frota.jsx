@@ -13,6 +13,11 @@ const Frota = () => {
       const response = await api.get('/produtos');
       setCarros(response.data);
     } catch (error) {
+      toast.error(error.response, {
+        autoClose: 2500,
+        position: 'top-right',
+        theme: 'colored',
+      });
       console.log(error);
     }
   }

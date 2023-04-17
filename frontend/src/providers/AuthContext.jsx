@@ -78,6 +78,9 @@ const AuthProvider = ({ children }) => {
     }
   }, []);
 
+
+
+
   return (
     <AuthContext.Provider
       value={{
@@ -86,6 +89,7 @@ const AuthProvider = ({ children }) => {
         emptyUserData,
         isLogin,
         setIsLogin,
+        
       }}
     >
       {children}
