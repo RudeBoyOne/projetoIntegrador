@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Home from '../pages/home/Home';
@@ -9,7 +9,7 @@ import Reservas from '../pages/reservas/Reservas';
 import CriarProduto from '../pages/criarProduto/criarProduto';
 import Dashboard from '../pages/dashboard/dashboard';
 import CarrosListCidadeData from '../pages/home/CarrosListCidData';
-
+import MinhasReservas from '../pages/minhasReservas/MinhaReservas';
 
 import AuthProvider, { AuthContext } from '../providers/AuthContext';
 import { ProductProvider } from '../providers/ProductContext';
@@ -57,6 +57,14 @@ const AppRoutes = () => {
               element={
                 <PrivateRoute>
                   <Dashboard />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/minhasreservas"
+              element={
+                <PrivateRoute>
+                  <MinhasReservas />
                 </PrivateRoute>
               }
             />

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { addDays, set } from 'date-fns';
 
 import Header from '../../components/header/Header';
@@ -51,6 +51,11 @@ function Home() {
       const response = await api.get('/cidades');
       setCidades(response.data);
     } catch (error) {
+      toast.error(error.response, {
+        autoClose: 2500,
+        position: 'top-right',
+        theme: 'colored',
+      });
       console.log(error);
     }
   }
@@ -61,6 +66,11 @@ function Home() {
       setCarros(response.data);
       setCarrosFiltrados(response.data);
     } catch (error) {
+      toast.error(error.response, {
+        autoClose: 2500,
+        position: 'top-right',
+        theme: 'colored',
+      });
       console.log(error);
     }
   }
@@ -71,6 +81,11 @@ function Home() {
       setCategorias(response.data);
       setCategoriaSelecionada(response.data);
     } catch (error) {
+      toast.error(error.response, {
+        autoClose: 2500,
+        position: 'top-right',
+        theme: 'colored',
+      });
       console.log(error);
     }
   }
@@ -86,6 +101,14 @@ function Home() {
         setCarrosFiltrados(carros);
       }
     } catch (error) {
+      toast.error(
+        'Não foi possivel realizar a sua pesquisa, tente novamente.',
+        {
+          autoClose: 2500,
+          position: 'top-right',
+          theme: 'colored',
+        }
+      );
       console.log(error);
     }
   }
@@ -97,6 +120,14 @@ function Home() {
       );
       setListaCarrosByCat(response.data);
     } catch (error) {
+      toast.error(
+        'Não foi possivel realizar a sua pesquisa, tente novamente.',
+        {
+          autoClose: 2500,
+          position: 'top-right',
+          theme: 'colored',
+        }
+      );
       console.log(error);
     }
   }
@@ -136,7 +167,7 @@ function Home() {
     if (!validarData(novaDataInicial) || !validarData(novaDataFinal)) {
       toast.error('Por favor, selecione um período válido.', {
         autoClose: 2500,
-        position: 'top-center',
+        position: 'top-right',
         theme: 'colored',
       });
       return;
@@ -152,7 +183,7 @@ function Home() {
     } catch (error) {
       toast.error('Não foi possível realizar a busca, tente novamente!', {
         autoClose: 2500,
-        position: 'top-center',
+        position: 'top-right',
         theme: 'colored',
       });
       console.error(error);
@@ -166,7 +197,7 @@ function Home() {
 
   let cards;
 
-  if (listaCarrosByCidadeData !== undefined) {
+  if (listaCarrosByCidadeData !== 0) {
     cards = listaCarrosByCidadeData.map((carro) => (
       <>
         <div>
@@ -249,7 +280,7 @@ function Home() {
         )}
 
         <div className={styles.cards}>{cards}</div>
-
+        <div className={styles.divider}></div>
         <div>
           <h3 className={styles.cardTitle}>
             <FiArrowRight className={styles.categoryTitleIcon} /> Conheça nossa

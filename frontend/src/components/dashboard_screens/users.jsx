@@ -13,8 +13,6 @@ const Users = () => {
   const [usuarios, setUsuarios] = useState([]);
   const { userData } = useContext(AuthContext);
 
-  console.log(userData.token);
-
   async function getUsuarios() {
     const headers = {
       headers: {
@@ -25,9 +23,13 @@ const Users = () => {
     try {
       await api.get('/usuarios', headers).then((response) => {
         setUsuarios(response.data);
-        console.log(response.data);
       });
     } catch (error) {
+      toast.error(error.response, {
+        autoClose: 2500,
+        position: 'top-right',
+        theme: 'colored',
+      });
       console.log(error);
     }
   }
@@ -35,8 +37,6 @@ const Users = () => {
   useEffect(() => {
     getUsuarios();
   }, []);
-
-  console.log(usuarios);
 
   return (
     <>

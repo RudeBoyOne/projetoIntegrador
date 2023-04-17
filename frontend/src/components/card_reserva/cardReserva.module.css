@@ -1,0 +1,41 @@
+.cardReservaContainer {
+  width: auto;
+  height: auto;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 10px;
+  background-color: var(--bg-light-cyan);
+  border: 1px solid var(--border-color);
+}
+
+.cardReservaContainerTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.cardReservaContainerCarro p {
+  font-size: var(h3-font-size);
+  font-weight: var(--font-semibold);
+  margin-bottom: 1rem;
+}
+.cardReservaContainerCarro img {
+  width: 275px;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.cardReservaContainerData {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+
+.divider {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    margin: 0.25rem 0;
+  }
+  

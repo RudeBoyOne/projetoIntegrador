@@ -13,6 +13,11 @@ const Caracteristicas = () => {
       const response = await api.get('/caracteristicas');
       setCaracteristicas(response.data);
     } catch (error) {
+      toast.error(error.response, {
+        autoClose: 2500,
+        position: 'top-right',
+        theme: 'colored',
+      });
       console.log(error);
     }
   }
@@ -23,41 +28,38 @@ const Caracteristicas = () => {
 
   return (
     <>
-    
-    
-    <div className={styles.dashScreens}>
-      <div className={styles.dashContainerTitle}>
-      <p>Características</p>
+      <div className={styles.dashScreens}>
+        <div className={styles.dashContainerTitle}>
+          <p>Características</p>
+        </div>
+
+        <div>
+          <table id="caracteristicas" className={styles.caracteristicaTable}>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Url</th>
+              </tr>
+              {caracteristicas !== ''
+                ? caracteristicas.map((caracteristica) => (
+                    <>
+                      <tr className={styles.caracteristicaDataTable}>
+                        <td>{caracteristica.nome}</td>
+                        <td>{caracteristica.icone}</td>
+                      </tr>
+                    </>
+                  ))
+                : null}
+            </thead>
+          </table>
+        </div>
       </div>
 
-      <div>
-      <table id="caracteristicas" className={styles.caracteristicaTable}>
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Url</th>
-            </tr>
-            {caracteristicas !== ''
-              ? caracteristicas.map((caracteristica) => (
-                  <>
-                    <tr className={styles.caracteristicaDataTable}>
-                      <td>{caracteristica.nome}</td>
-                      <td>{caracteristica.icone}</td>                   
-                    </tr>
-                  </>
-                ))
-              : null}
-          </thead>
-        </table>
-      </div>
-    </div>
-
-     
       <div className={styles.dashIncluirCaracteristica}>
         <p>Incluir Nova Característica</p>
         <NovaCaracteristica />
       </div>
-      </>
+    </>
   );
 };
 

@@ -36,16 +36,10 @@ const CriarProduto = () => {
     descricao: '',
   });
   const [caracteristicaCarro, setCaracteristicaCarro] = useState({});
-  // const [imagens, setImagens] = useState(
-  //   Array(5).fill({ titulo: '', url: '' })
-  // );
   const [imagens, setImagens] = useState([]);
   const [files, setFiles] = useState([]);
   const { loading, setLoading } = useContext(loadingContext);
-  // const [idImagem, setIdImagem] = useState('');
-  // const [urlUpload, setUrlUpload] = useState('');
-  // const [imageURLs, setImageURLs] = useState([]);
-  // const [imagensIds, setImagensIds] = useState([]);
+ 
 
   const navigate = { useNavigate };
 
