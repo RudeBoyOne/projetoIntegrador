@@ -1,0 +1,138 @@
+.bookingDetailInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 2rem;
+  margin-left: 3rem;
+  width: 30%;
+  height: 20%;
+  border-radius: 10px;
+  background-color: var(--bg-light-cyan);
+  border: 1px solid var(--border-color);
+}
+
+.titleReservaDetail {
+  font-size: var(--h1-font-size);
+  margin-top: 7rem;
+  margin-left: 3rem;
+  
+} 
+
+.image{
+  height: 10rem;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.nomeProduto {
+  margin-top: 8rem;
+  margin-left: -21rem;
+}
+
+.info {
+  width: 83%;
+  margin: 1rem;
+  display: flex;
+  /* flex-direction: column; */
+}
+
+.localInfo {
+  margin: 1rem 1rem;
+
+}
+
+.reservaDescription {
+  margin: 1rem;
+  align-items: justify;
+}
+
+
+.divider {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  margin: 0.5rem 0;
+}
+
+.check {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14.5rem;
+  margin: .5rem 0 .5rem 0;
+
+}
+
+.checkData {
+  
+  /* margin-left: 1.5rem; */
+}
+
+.checkHorario {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10.5rem;
+  margin: .5rem 0 .5rem 0;
+}
+
+
+
+/* ===========RESPONSIVE TABLET=========== */
+
+@media only screen and (max-width: 768px) {
+  .bookingDetailInfo {
+    display: flex;
+    margin: auto;
+    width: 90%;
+    height: auto;
+  }
+  
+  .titleReservaDetail{
+    margin-left: 2.5rem;
+    font-size: var(--h2-font-size)
+  }
+
+  .image{
+    width: 90%;
+    height: auto;
+    margin: 1rem; 
+  }
+
+  .divider {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    margin: auto;
+  }
+
+  .check {
+    display: flex;
+    gap: 4rem;
+    margin-left: 10px;
+    margin: 10px;
+  }
+
+  .checkData {
+    margin-left: 5px;
+  }
+}
+
+/* ===========RESPONSIVE MOBILE=========== */
+@media screen and (max-width: 390px) {
+  .bookingDetailInfo {
+    display: flex;
+    width: 90%;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+  
+  .titleReservaDetail {
+    font-size: var(--h2-font-size);
+    margin-left: 5rem;
+  }
+
+  .image{
+    height: 0;
+    width: 90%;
+    height: auto; 
+  }
+
+}
