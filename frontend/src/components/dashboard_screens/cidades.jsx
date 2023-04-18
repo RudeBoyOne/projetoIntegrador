@@ -34,7 +34,8 @@ const Cidades = () => {
     getCidades();
   }, []);
 
-  async function cadastrarNovaCidade() {
+  async function cadastrarNovaCidade(e) {
+    e.preventDefault();
     const headers = {
       headers: {
         Authorization: `Bearer ${userData.token}`,
@@ -54,7 +55,8 @@ const Cidades = () => {
           position: 'top-right',
           theme: 'colored',
         });
-        navigate('/dashboard');
+        getCidades();
+        limparFormulario();
       });
     } catch (error) {
       toast.error('Ocorreu um erro ao cadastrar Cidade. Tente novamente.', {
@@ -64,7 +66,15 @@ const Cidades = () => {
       });
     }
     console.error(error);
+    setCadastrarCidade('');
+    setCadastrarPais('');
   }
+
+  const limparFormulario = () => {
+    setCadastrarCidade('');
+    setCadastrarPais('');
+    };
+
 
   return (
     <div key={cidades}>
@@ -97,7 +107,7 @@ const Cidades = () => {
         <p>Cadastrar nova cidade</p>
         <div className={styles.dashBoxCadastrarCidade}>
           <form
-            onSubmit={cadastrarNovaCidade}
+            onSubmit={(event) => cadastrarNovaCidade(event)}
             className={styles.dashCadastrarCidade}
           >
             <input

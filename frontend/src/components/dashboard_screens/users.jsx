@@ -63,7 +63,7 @@ const Users = () => {
                         <td>{usuario.email}</td>
                         <td>
                           <select className={styles.tableSelect }>
-                            <option className={styles.tableOption} disabled>Selecione</option>
+                            <option className={styles.tableOption} >Selecione</option>
                             <option className={styles.tableOption}>Client</option>
                             <option>User</option>
                           </select>
