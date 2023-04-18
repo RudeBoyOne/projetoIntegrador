@@ -173,13 +173,21 @@ function Home() {
       return;
     }
     try {
-      await api
-        .get(
-          `/produtos/listarPorCidadeEDatas/${cidadeSelecionada}?dateStart=${novaDataInicial}&dateEnd=${novaDataFinal}`
-        )
-        .then((response) => {
-          setListaCarrosByCidadeData(response.data);
-        });
+      const response = await api.get(
+        `/produtos/listarPorCidadeEDatas/${cidadeSelecionada}?dateStart=${novaDataInicial}&dateEnd=${novaDataFinal}`
+      );
+      if (response.data.length === 0) {
+        toast.warning(
+          'Não há veículos disponíveis na data selecionada. Selecione outro período',
+          {
+            autoClose: 2500,
+            position: 'top-right',
+            theme: 'colored',
+          }
+        );
+        return;
+      }
+      setListaCarrosByCidadeData(response.data);
     } catch (error) {
       toast.error('Não foi possível realizar a busca, tente novamente!', {
         autoClose: 2500,

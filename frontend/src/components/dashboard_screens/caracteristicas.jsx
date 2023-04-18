@@ -57,7 +57,7 @@ const Caracteristicas = () => {
 
       <div className={styles.dashIncluirCaracteristica}>
         <p>Incluir Nova Característica</p>
-        <NovaCaracteristica />
+        <NovaCaracteristica getCaracteristicas={getCaracteristicas} />
       </div>
     </>
   );

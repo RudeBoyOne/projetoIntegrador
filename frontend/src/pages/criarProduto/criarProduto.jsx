@@ -7,7 +7,6 @@ import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import NovaCaracteristica from '../../components/nova_caracteristica/novaCaracteristica';
 import Back_button from '../../components/back_button/back_button';
-import ImagePreview from '../../components/image_preview/imagePreview';
 import LoadingComponent from '../../components/loading/loading';
 import { loadingContext } from '../../providers/loading';
 import { AuthContext } from '../../providers/AuthContext';
@@ -37,9 +36,10 @@ const CriarProduto = () => {
   });
   const [caracteristicaCarro, setCaracteristicaCarro] = useState({});
   const [imagens, setImagens] = useState([]);
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState([
+    { name: '', type: '', size: 0, src: '' },
+  ]);
   const { loading, setLoading } = useContext(loadingContext);
- 
 
   const navigate = { useNavigate };
 
@@ -133,9 +133,8 @@ const CriarProduto = () => {
     setImagens([]);
   }
 
-  function handleImageChange(event) {
+  async function handleImageChange(event) {
     setImagens(event.target.files);
-    exibirMiniaturas();
   }
 
   const uploadImagens = () => {
@@ -185,14 +184,23 @@ const CriarProduto = () => {
       });
   };
 
-  const exibirMiniaturas = () => {
-    setFiles([]);
-    setLoading(true);
-    const selectedFiles = imagens;
-    console.log(selectedFiles);
-    const filesArray = Array.from(selectedFiles);
-    setFiles(filesArray);
-    setLoading(false);
+  const handleImagePreview = (event) => {
+    let files = event.target.files;
+    let filesArr = [];
+    for (let file of files) {
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.addEventListener('load', () => {
+        let fileobj = {
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          src: reader.result,
+        };
+        filesArr.push(fileobj);
+        setFiles([...filesArr]);
+      });
+    }
   };
 
   async function incluirCarro(idImagens) {
@@ -340,24 +348,35 @@ const CriarProduto = () => {
 
           <div className={styles.formContainer}>
             <h3>Imagens</h3>
-            <p>
-              <small>Selecione no máximo 5 imagens.</small>
-            </p>
-
             <div className={styles.imgContainer}>
-              <input
-                type="file"
-                id="imagens"
-                name="imagens"
-                onChange={handleImageChange}
-                multiple
-                className={styles.imgInput}
-              />
-              <div id="miniaturas" className={styles.imgMiniaturas}>
-                {files.map((file) => (
-                  <ImagePreview key={file.name} file={file} />
-                ))}
+              <div className={styles.customFileDropArea}>
+                <input
+                  type="file"
+                  name="imagens"
+                  placeholder="Enter photos"
+                  multiple
+                  id="filephotos"
+                  onChange={(e) => {
+                    handleImageChange(e);
+                    handleImagePreview(e);
+                  }}
+                />
+                <label htmlFor="filephotos">Clique para selecionar as imagens</label>
               </div>
+
+              <div className={styles.customFilePreview}>
+                {files.length > 0 &&
+                  files.map((item, index) => (
+                    <div
+                      className={styles.prevImg}
+                      key={index}
+                      data-imgindex={index}
+                    >
+                      <img src={item.src} alt={item.name} />
+                    </div>
+                  ))}
+              </div>
+
             </div>
           </div>
 
