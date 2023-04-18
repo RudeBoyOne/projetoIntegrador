@@ -140,11 +140,11 @@ const Dashboard = () => {
           </ul>
         </div>
         <div className={styles.dashCards}>
-          {screens.caracteristicas && <Caracteristicas key={Caracteristicas} />}
-          {screens.cidades && <Cidades key={Cidades} />}
-          {screens.frota && <Frota key={Frota} />}
-          {screens.reservas && <Reservas key={Reservas} />}
-          {screens.usuarios && <Users key={Users} />}
+          {screens.caracteristicas && <Caracteristicas/>}
+          {screens.cidades && <Cidades/>}
+          {screens.frota && <Frota/>}
+          {screens.reservas && <Reservas />}
+          {screens.usuarios && <Users />}
         </div>
       </div>
       <ToastContainer />

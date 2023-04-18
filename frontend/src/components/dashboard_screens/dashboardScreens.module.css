@@ -438,4 +438,18 @@
     display: flex;
     margin: 2rem 1rem 2rem 2rem;
   }
+
+  .buttonAdd{
+    margin-left: 4px;
+    padding: 0.5rem 0.5rem;
+    height: 2rem;
+    width: 2rem;
+    background-color: var(--bg-dark-cyan);
+    color: var(--white-color);
+    border-radius: 0.25rem;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
 }
