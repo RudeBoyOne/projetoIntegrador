@@ -45,10 +45,6 @@ const Users = () => {
     }
   }
 
-  // useEffect(() => {
-  //   deletar();
-  // }, []);
-
   async function getUsuarios() {
     const headers = {
       headers: {
