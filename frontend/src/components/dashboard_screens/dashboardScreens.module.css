@@ -230,6 +230,7 @@
   font-size: var(--h3-font-size);
   color: rgb(225, 72, 72);
   cursor: pointer;
+  border: none;
 }
 
 .dashCadastrarCidadeContainer p {

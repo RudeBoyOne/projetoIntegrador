@@ -1,17 +1,53 @@
 import React, { useState, useEffect, useContext } from 'react';
-
 import api from '../../services/api';
 import { AuthContext } from '../../providers/AuthContext';
-
 import { IoTrashOutline } from 'react-icons/io5';
-
 import styles from './dashboardScreens.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
+
 const Users = () => {
   const [usuarios, setUsuarios] = useState([]);
   const { userData } = useContext(AuthContext);
+  const [deletado, setDeletado] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+ 
+  async function deletar(id) {
+    if (!id) {
+      return;
+    }
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${userData.token}`,
+        'Content-Type': 'application/json',
+      },
+    };
+    try {
+      await api.delete(`/usuarios/${id}`, headers);
+      setUsuarios(usuarios.filter((usuario) => usuario.id !== id));
+      setModalIsOpen(false);
+      setDeletado(true);
+      getUsuarios();
+      toast.success('Usuário deletado com sucesso!', {
+        autoClose: 2500,
+        position: 'top-center',
+        theme: 'colored',
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error('Erro ao deletar usuário.', {
+        autoClose: 2500,
+        position: 'top-center',
+        theme: 'colored',
+      });
+    }
+  }
+
+  // useEffect(() => {
+  //   deletar();
+  // }, []);
 
   async function getUsuarios() {
     const headers = {
@@ -55,9 +91,9 @@ const Users = () => {
                 <th>Excluir</th>
               </tr>
               {usuarios !== ''
-                ? usuarios.map((usuario) => (
+                ? usuarios.map((usuario, index) => (
                     <>
-                      <tr className={styles.userDataTable}>
+                      <tr key={`${usuario.nome}-${usuario.sobrenome}-${usuario.email}-${index}`} className={styles.userDataTable}>
                         <td>{usuario.nome}</td>
                         <td>{usuario.sobrenome}</td>
                         <td>{usuario.email}</td>
@@ -68,8 +104,9 @@ const Users = () => {
                             <option>User</option>
                           </select>
                         </td>
-                        <td className={styles.tableIcon}>
-                          <IoTrashOutline />
+                        <td >
+                        <button className={styles.tableIcon} onClick={() => deletar(usuario.id)}><IoTrashOutline/></button>
+                          
                         </td>
                       </tr>
                     </>
