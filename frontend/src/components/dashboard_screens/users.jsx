@@ -1,21 +1,50 @@
 import React, { useState, useEffect, useContext } from 'react';
-
 import api from '../../services/api';
 import { AuthContext } from '../../providers/AuthContext';
-
 import { IoTrashOutline } from 'react-icons/io5';
-
 import styles from './dashboardScreens.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import axios from 'axios';
 
 const Users = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [roles, setRoles] = useState([]);
   const [idRoles, setIdRoles] = useState([]);
   const { userData } = useContext(AuthContext);
+  const [deletado, setDeletado] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+ 
+  async function deletar(id) {
+    if (!id) {
+      return;
+    }
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${userData.token}`,
+        'Content-Type': 'application/json',
+      },
+    };
+    try {
+      await api.delete(`/usuarios/${id}`, headers);
+      setUsuarios(usuarios.filter((usuario) => usuario.id !== id));
+      setModalIsOpen(false);
+      setDeletado(true);
+      getUsuarios();
+      toast.success('Usuário deletado com sucesso!', {
+        autoClose: 2500,
+        position: 'top-center',
+        theme: 'colored',
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error('Erro ao deletar usuário.', {
+        autoClose: 2500,
+        position: 'top-center',
+        theme: 'colored',
+      });
+    }
+  }
 
   async function getRoles() {
     const headers = {
@@ -26,8 +55,8 @@ const Users = () => {
     };
 
     try {
-      await axios.get("http://localhost:8080/usuarios/roles", headers)
-        .then(await function (response) {
+      await api.get("/usuarios/roles", headers)
+        .then(function (response) {
           setRoles(response.data)
         });
     } catch (error) {
@@ -45,7 +74,7 @@ const Users = () => {
       },
     };
     try {
-      await axios.get("http://localhost:8080/usuarios", headers).then((response) => {
+      await api.get("/usuarios", headers).then((response) => {
         const usuariosFiltrados = []
         response.data.forEach(usuario => {
             usuario?.roles.forEach(role => {
@@ -110,7 +139,7 @@ const Users = () => {
 
                       </td>
                       <td className={styles.tableIcon}>
-                        <IoTrashOutline />
+                      <button className={styles.tableIcon} onClick={() => deletar(usuario.id)}><IoTrashOutline/></button>
                       </td>
                     </tr>
                   </>
