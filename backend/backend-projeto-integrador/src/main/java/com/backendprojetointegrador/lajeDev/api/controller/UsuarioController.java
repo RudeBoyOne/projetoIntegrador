@@ -5,6 +5,7 @@ import com.backendprojetointegrador.lajeDev.api.dtos.inputs.RolesInput;
 import com.backendprojetointegrador.lajeDev.api.dtos.inputs.UsuarioInput;
 import com.backendprojetointegrador.lajeDev.api.dtos.outputs.UsuarioOutput;
 import com.backendprojetointegrador.lajeDev.api.exception_handler.Problema;
+import com.backendprojetointegrador.lajeDev.domain.model.Role;
 import com.backendprojetointegrador.lajeDev.domain.model.Usuario;
 import com.backendprojetointegrador.lajeDev.domain.repository.IRoleRepository;
 import com.backendprojetointegrador.lajeDev.domain.service.UsuarioService;
@@ -91,6 +92,11 @@ public class UsuarioController {
         List<UsuarioOutput> usuarioOutputs = usuarioAssembler
                 .toCollectionOutput(usuarioService.listarTodosUsuarios());
         return ResponseEntity.ok(usuarioOutputs);
+    }
+
+    @GetMapping("/roles")
+    public ResponseEntity<List<Role>> listarRoles() {
+        return ResponseEntity.ok(usuarioService.listarRoles());
     }
 
     @Operation(description = "endpoint para adição de funções a usuários dentro da aplicação",

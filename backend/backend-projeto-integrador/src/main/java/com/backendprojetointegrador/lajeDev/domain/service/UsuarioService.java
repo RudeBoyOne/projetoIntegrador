@@ -41,6 +41,10 @@ public class UsuarioService {
         return usuarioExiste;
     }
 
+    public List<Role> listarRoles() {
+        return roleRepository.findAll();
+    }
+
     public List<Usuario> listarTodosUsuarios() {
         return usuarioRepository.findAll();
     }

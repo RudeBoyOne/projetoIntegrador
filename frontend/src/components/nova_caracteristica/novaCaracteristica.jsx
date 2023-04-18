@@ -7,7 +7,7 @@ import styles from './novaCaracteristica.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const NovaCaracteristica = () => {
+const NovaCaracteristica = ({ getCaracteristicas }) => {
   const [nomeCaracteristica, setNomeCaracteristica] = useState('');
   const [urlIcone, setUrlIcone] = useState('');
   const { userData } = useContext(AuthContext);
@@ -19,7 +19,6 @@ const NovaCaracteristica = () => {
   const handleUrlIconeChange = (event) => {
     setUrlIcone(event.target.value);
   };
-
 
   async function incluirCaracteristica() {
     const headers = {
@@ -43,6 +42,8 @@ const NovaCaracteristica = () => {
           position: 'top-right',
           theme: 'colored',
         });
+        getCaracteristicas();
+        limparFormulario();
       });
     } catch (error) {
       toast.error(error.response.data, {
@@ -57,8 +58,14 @@ const NovaCaracteristica = () => {
   function handleSubmit(event) {
     event.preventDefault();
     incluirCaracteristica();
-
   }
+
+  const limparFormulario = () => {
+    setNomeCaracteristica('');
+    setUrlIcone('');
+    };
+
+   
 
   return (
     <div className={styles.inputNovaCaracteristicaContainer}>
@@ -83,11 +90,7 @@ const NovaCaracteristica = () => {
             className={styles.inputNovaCaracteristica}
           />
         </div>
-        <button
-          type="submit"
-          className={styles.btnCriarNovaCaracteristica}
-         
-        >
+        <button type="submit" className={styles.btnCriarNovaCaracteristica}>
           Enviar
         </button>
       </form>
